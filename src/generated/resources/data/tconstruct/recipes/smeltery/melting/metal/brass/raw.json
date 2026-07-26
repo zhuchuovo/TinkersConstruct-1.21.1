@@ -1,0 +1,66 @@
+{
+  "type": "neoforge:conditional",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:raw_materials/brass"
+    }
+  ],
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "mantle:tag_filled",
+          "tag": "c:ingots/zinc"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 90,
+            "rate": "metal",
+            "tag": "c:molten_zinc"
+          }
+        ],
+        "ingredient": {
+          "tag": "c:raw_materials/brass"
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 90,
+          "tag": "c:molten_brass"
+        },
+        "temperature": 605,
+        "time": 80
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "neoforge:true"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 90,
+            "rate": "metal",
+            "tag": "c:molten_copper"
+          }
+        ],
+        "ingredient": {
+          "tag": "c:raw_materials/brass"
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 90,
+          "tag": "c:molten_brass"
+        },
+        "temperature": 605,
+        "time": 80
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "loader": "neoforge:composite",
+  "parent": "block/block",
+  "textures": {
+    "particle": "tconstruct:block/storage/knightslime"
+  },
+  "children": {
+    "metal": {
+      "render_type": "minecraft:solid",
+      "parent": "tconstruct:block/template/cube_all_14",
+      "textures": {
+        "all": "tconstruct:block/storage/knightslime_cobalt"
+      }
+    },
+    "slime": {
+      "render_type": "minecraft:translucent",
+      "parent": "block/cube_all",
+      "textures": {
+        "all": "tconstruct:block/storage/knightslime_slime"
+      }
+    }
+  }
+}
+

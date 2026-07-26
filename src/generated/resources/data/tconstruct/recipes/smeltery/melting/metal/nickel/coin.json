@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:coins/nickel"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:coins/nickel"
+  },
+  "result": {
+    "amount": 30,
+    "tag": "c:molten_nickel"
+  },
+  "temperature": 950,
+  "time": 43
+}

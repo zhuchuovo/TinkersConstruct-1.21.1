@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:swappable_modifier",
+  "allow_crystal": false,
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:ingots/ironwood"
+    }
+  ],
+  "inputs": [
+    {
+      "tag": "c:ingots/ironwood"
+    },
+    {
+      "item": "tconstruct:pattern"
+    },
+    {
+      "tag": "c:ingots/ironwood"
+    }
+  ],
+  "result": {
+    "name": "tconstruct:embellishment",
+    "value": "tconstruct:ironwood"
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/embellishment/wood"
+  },
+  "variant_formatter": "tconstruct:material"
+}

@@ -1,0 +1,11 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:constant_enchantment",
+      "level": 1,
+      "name": "minecraft:depth_strider"
+    }
+  ],
+  "tooltip_display": "always"
+}

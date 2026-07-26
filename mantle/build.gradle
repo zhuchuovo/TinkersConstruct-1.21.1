@@ -1,0 +1,110 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+}
+
+apply plugin: 'net.neoforged.moddev'
+
+group = 'slimeknights.mantle'
+version = "${minecraft_version}-${mantle_version}"
+
+base { archivesName = 'Mantle' }
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+
+repositories {
+    maven { name = 'Aliyun Public'; url = 'https://maven.aliyun.com/repository/public' }
+    maven { name = 'BMCLAPI'; url = 'https://bmclapi2.bangbang93.com/maven' }
+    mavenCentral()
+    maven { name = 'DVS1'; url = 'https://dvs1.progwml6.com/files/maven' }
+    maven { name = 'BlameJared'; url = 'https://maven.blamejared.com/' }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+    exclude '.cache'
+    // Registry tag directories are singular in Minecraft 1.21. The migration
+    // script creates these replacements before resources are packaged.
+    exclude 'data/mantle/tags/blocks/**'
+    exclude 'data/mantle/tags/fluids/**'
+}
+
+// Minecraft 1.21 replaced FinishedRecipe with RecipeOutput. Runtime recipes and
+// the already-generated data remain enabled while the legacy datagen builders
+// are migrated separately.
+sourceSets.main.java {
+    // JEI is an optional integration and its 1.21 recipe-layout API is migrated
+    // after the core Mantle/TConstruct runtime compiles independently.
+    exclude 'slimeknights/mantle/plugin/jei/**'
+    exclude 'slimeknights/mantle/datagen/*Provider.java'
+    exclude 'slimeknights/mantle/recipe/data/**'
+    exclude 'slimeknights/mantle/recipe/cooking/CookingRecipeBuilder.java'
+    exclude 'slimeknights/mantle/recipe/crafting/*Builder.java'
+    exclude 'slimeknights/mantle/recipe/helper/SimpleFinishedRecipe.java'
+}
+
+neoForge {
+    version = project.neo_version
+    parchment {
+        minecraftVersion = project.parchment_minecraft_version
+        mappingsVersion = project.parchment_version
+    }
+    accessTransformers.from 'src/main/resources/META-INF/accesstransformer.cfg'
+    mods {
+        mantle { sourceSet sourceSets.main }
+    }
+}
+
+dependencies {
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+
+    compileOnly 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    def replaceProperties = [
+            version: mantle_version,
+            loader_range: loader_range,
+            minecraft_range: minecraft_range,
+            neo_range: neo_range
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                'Specification-Title': 'Mantle',
+                'Specification-Vendor': 'Slime Knights',
+                'Specification-Version': '1',
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Slime Knights'
+        ])
+    }
+}
+
+tasks.named('sourcesJar', Jar).configure {
+    exclude 'assets/**', 'data/**', 'pack.png', 'pack.mcmeta', 'META-INF/neoforge.mods.toml'
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) { from components.java }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}

@@ -1,0 +1,28 @@
+{
+    "type":  "tconstruct:showcase",
+    "title":  "Modificadores de Defesa",
+    "item":  {
+                 "type":  "neoforge:components",
+                 "items":  "tconstruct:creative_slot",
+                 "components":  {
+                                    "minecraft:custom_data":  {
+                                                                  "slot":  "defense"
+                                                              }
+                                }
+             },
+    "tooltip":  [
+                    "Ícone de Slot de Defesa"
+                ],
+    "text":  [
+                 {
+                     "text":  "Defesa é um tipo de modificador exclusivo para armaduras, aumentando a proteção contra ameaças específicas, como fogo ou repulsão. Eles oferecem outra forma de personalizar armaduras, já que a maioria dos tipos de armadura não possui atributos de material."
+                 },
+                 {
+                     "text":  "Normalmente, as armaduras com um grande número de slots de defesa começam com menos slots de melhoria, o que significa que a funcionalidade é sacrificada em prol da proteção."
+                 },
+                 {
+                     "text":  "No livro \u0027Fundições Poderosas\u0027 também contém uma lista completa de modificadores de defesa disponíveis para ferramentas, assim com a \u0027Enciclopédia do Tinkerando\u0027.",
+                     "paragraph":  true
+                 }
+             ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "mantle:fill_nbt",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "registry": "minecraft:fluid",
+      "tag": "c:potion"
+    }
+  ],
+  "fluid": {
+    "amount": 250,
+    "tag": "c:potion"
+  },
+  "input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": "minecraft:potion"
+}

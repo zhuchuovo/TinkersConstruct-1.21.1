@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:ore_melting",
+  "byproducts": [
+    {
+      "amount": 30,
+      "rate": "metal",
+      "tag": "c:molten_gold"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "neoforge:ores/copper",
+        "neoforge:ore_rates/sparse"
+      ]
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "c:ores/copper"
+      },
+      {
+        "tag": "c:ore_rates/sparse"
+      }
+    ]
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_copper"
+  },
+  "temperature": 500,
+  "time": 75
+}

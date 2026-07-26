@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:armors/leggings/silver"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:armors/leggings/silver"
+  },
+  "result": {
+    "amount": 630,
+    "tag": "c:molten_silver",
+    "unit_size": 10
+  },
+  "temperature": 790,
+  "time": 158
+}

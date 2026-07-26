@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:nuggets/tungsten"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/tungsten"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_tungsten"
+  },
+  "temperature": 950,
+  "time": 22
+}

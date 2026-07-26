@@ -1,0 +1,107 @@
+{
+  "type": "neoforge:conditional",
+  "conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "allow_ingotless_alloys"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "c:ingots/pewter"
+        }
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "neoforge:and",
+          "values": [
+            {
+              "type": "mantle:tag_filled",
+              "tag": "c:ingots/lead"
+            },
+            {
+              "type": "mantle:tag_filled",
+              "tag": "c:ingots/tin"
+            }
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:alloy",
+        "inputs": [
+          {
+            "amount": 270,
+            "tag": "c:molten_tin"
+          },
+          {
+            "amount": 90,
+            "tag": "c:molten_lead"
+          }
+        ],
+        "result": {
+          "amount": 360,
+          "tag": "c:molten_pewter"
+        },
+        "temperature": 400
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "mantle:tag_filled",
+          "tag": "c:ingots/tin"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:alloy",
+        "inputs": [
+          {
+            "amount": 270,
+            "tag": "c:molten_tin"
+          },
+          {
+            "amount": 90,
+            "tag": "c:molten_iron"
+          }
+        ],
+        "result": {
+          "amount": 360,
+          "tag": "c:molten_pewter"
+        },
+        "temperature": 400
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "mantle:tag_filled",
+          "tag": "c:ingots/lead"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:alloy",
+        "inputs": [
+          {
+            "amount": 90,
+            "tag": "c:molten_iron"
+          },
+          {
+            "amount": 90,
+            "tag": "c:molten_lead"
+          }
+        ],
+        "result": {
+          "amount": 180,
+          "tag": "c:molten_pewter"
+        },
+        "temperature": 400
+      }
+    }
+  ]
+}

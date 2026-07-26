@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:coins/gold"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:coins/gold"
+  },
+  "result": {
+    "amount": 30,
+    "tag": "c:molten_gold"
+  },
+  "temperature": 700,
+  "time": 38
+}

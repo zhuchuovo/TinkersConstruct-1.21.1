@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:gears/tin"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:gears/tin"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_tin"
+  },
+  "temperature": 225,
+  "time": 78
+}

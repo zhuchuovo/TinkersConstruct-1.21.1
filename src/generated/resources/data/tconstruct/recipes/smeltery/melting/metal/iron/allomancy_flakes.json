@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "allomancy:iron_flakes"
+    }
+  ],
+  "ingredient": {
+    "item": "allomancy:iron_flakes"
+  },
+  "result": {
+    "amount": 30,
+    "tag": "c:molten_iron"
+  },
+  "temperature": 800,
+  "time": 35
+}

@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "c:nuggets/cobalt"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_cobalt"
+  },
+  "temperature": 950,
+  "time": 22
+}

@@ -1,0 +1,341 @@
+package slimeknights.mantle.client.model.util;
+
+import com.google.common.collect.Sets;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import com.mojang.datafixers.util.Either;
+import com.mojang.math.Transformation;
+import lombok.Getter;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.BlockElement;
+import net.minecraft.client.renderer.block.model.BlockElementFace;
+import net.minecraft.client.renderer.block.model.BlockModel;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.ModelBaker;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelState;
+import net.minecraft.client.resources.model.SimpleBakedModel;
+import net.minecraft.client.resources.model.SimpleBakedModel.Builder;
+import net.minecraft.client.resources.model.UnbakedModel;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.neoforged.neoforge.client.RenderTypeGroup;
+import net.neoforged.neoforge.client.model.IQuadTransformer;
+import net.neoforged.neoforge.client.model.QuadTransformers;
+import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
+import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
+import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
+import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
+import slimeknights.mantle.Mantle;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+/**
+ * Simpler version of {@link BlockModel} for use in an {@link IUnbakedGeometry}, as the owner handles most block model properties
+ */
+@SuppressWarnings("WeakerAccess")
+public class SimpleBlockModel implements IUnbakedGeometry<SimpleBlockModel> {
+  /** Model loader for vanilla block model, mainly intended for use in fallback registration */
+  public static final IGeometryLoader<SimpleBlockModel> LOADER = SimpleBlockModel::deserialize;
+  /** Location used for baking dynamic models, name does not matter so just using a constant */
+  static final ResourceLocation BAKE_LOCATION = Mantle.getResource("dynamic_model_baking");
+
+  /** Parent model location, used to fetch parts and for textures if the owner is not a block model */
+  @Getter
+  @Nullable
+  private ResourceLocation parentLocation;
+  /** Model parts for baked model, if empty uses parent parts */
+  private final List<BlockElement> parts;
+  /** Fallback textures in case the owner does not contain a block model */
+  @Getter
+  private final Map<String,Either<Material, String>> textures;
+  @Getter
+  private BlockModel parent;
+
+  /**
+   * Creates a new simple block model
+   * @param parentLocation  Location of the parent model, if unset has no parent
+   * @param textures        List of textures for iteration, in case the owner is not BlockModel
+   * @param parts           List of parts in the model
+   */
+  public SimpleBlockModel(@Nullable ResourceLocation parentLocation, Map<String,Either<Material,String>> textures, List<BlockElement> parts) {
+    this.parts = parts;
+    this.textures = textures;
+    this.parentLocation = parentLocation;
+  }
+
+  public SimpleBlockModel(SimpleBlockModel base) {
+    this.parts = base.parts;
+    this.textures = base.textures;
+    this.parentLocation = base.parentLocation;
+    this.parent = base.parent;
+  }
+
+
+  /* Properties */
+
+  /**
+   * Gets the elements in this simple block model
+   * @return  Elements in the model
+   */
+  @SuppressWarnings("deprecation")
+  public List<BlockElement> getElements() {
+    return parts.isEmpty() && parent != null ? parent.getElements() : parts;
+  }
+
+  /* Textures */
+
+  @Override
+  public void resolveParents(Function<ResourceLocation,UnbakedModel> modelGetter, IGeometryBakingContext owner) {
+    // no work if no parent or the parent is fetched already
+    if (parent != null || parentLocation == null) {
+      return;
+    }
+
+    // iterate through model parents
+    Set<UnbakedModel> chain = Sets.newLinkedHashSet();
+
+    // load the first model directly
+    parent = getParent(modelGetter, chain, parentLocation, owner.getModelName());
+    // null means no model, so set missing
+    if (parent == null) {
+      parent = getMissing(modelGetter);
+      parentLocation = ModelBakery.MISSING_MODEL_LOCATION;
+    }
+
+    parent.resolveParents(modelGetter);
+  }
+
+  /**
+   * Gets the parent for a model
+   * @param modelGetter  Model getter function
+   * @param chain        Chain of models that are in progress
+   * @param location     Location to fetch
+   * @param name         Name of the model being fetched
+   * @return  Block model instance, null if there was an error
+   */
+  @Nullable
+  private static BlockModel getParent(Function<ResourceLocation,UnbakedModel> modelGetter, Set<UnbakedModel> chain, ResourceLocation location, String name) {
+    // model must exist
+    UnbakedModel unbaked = modelGetter.apply(location);
+    if (unbaked == null) {
+      Mantle.logger.warn("No parent '{}' while loading model '{}'", location, name);
+      return null;
+    }
+    // no loops in chain
+    if (chain.contains(unbaked)) {
+      Mantle.logger.warn("Found 'parent' loop while loading model '{}' in chain: {} -> {}", name, chain.stream().map(Object::toString).collect(Collectors.joining(" -> ")), location);
+      return null;
+    }
+    // model must be block model, this is a serious error in vanilla
+    if (!(unbaked instanceof BlockModel)) {
+      throw new IllegalStateException("BlockModel parent has to be a block model.");
+    }
+    return (BlockModel) unbaked;
+  }
+
+  /**
+   * Gets the missing model, ensuring its the right type
+   * @param modelGetter  Model getter function
+   * @return  Missing model as a {@link BlockModel}
+   */
+  @Nonnull
+  private static BlockModel getMissing(Function<ResourceLocation,UnbakedModel> modelGetter) {
+    UnbakedModel model = modelGetter.apply(ModelBakery.MISSING_MODEL_LOCATION);
+    if (!(model instanceof BlockModel)) {
+      throw new IllegalStateException("Failed to load missing model");
+    }
+    return (BlockModel) model;
+  }
+
+  /* Baking */
+
+  /** Creates a new builder instance from the given context */
+  public static SimpleBakedModel.Builder bakedBuilder(IGeometryBakingContext owner, ItemOverrides overrides) {
+    return new SimpleBakedModel.Builder(owner.useAmbientOcclusion(), owner.useBlockLight(), owner.isGui3d(), owner.getTransforms(), overrides);
+  }
+
+  /**
+   * Bakes a single part of the model into the builder
+   * @param builder          Baked model builder
+   * @param owner            Model owner
+   * @param part             Part to bake
+   * @param spriteGetter     Sprite getter
+   * @param transform        Model transforms
+   * @param quadTransformer  Additional forge transforms
+   * @param location         Model location
+   */
+  public static void bakePart(Builder builder, IGeometryBakingContext owner, BlockElement part, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, IQuadTransformer quadTransformer, ResourceLocation location) {
+    for(Direction direction : part.faces.keySet()) {
+      BlockElementFace face = part.faces.get(direction);
+      // ensure the name is not prefixed (it always is)
+      String texture = face.texture();
+      if (texture.charAt(0) == '#') {
+        texture = texture.substring(1);
+      }
+      // bake the face
+      TextureAtlasSprite sprite = spriteGetter.apply(owner.getMaterial(texture));
+      BakedQuad bakedQuad = BlockModel.bakeFace(part, face, sprite, direction, transform);
+      quadTransformer.processInPlace(bakedQuad);
+      // apply cull face
+      //noinspection ConstantConditions  Its nullable, just annotated wrongly
+      if (face.cullForDirection() == null) {
+        builder.addUnculledFace(bakedQuad);
+      } else {
+        builder.addCulledFace(Direction.rotate(transform.getRotation().getMatrix(), face.cullForDirection()), bakedQuad);
+      }
+    }
+  }
+
+  /** Gets the render type group from the given model context */
+  public static RenderTypeGroup getRenderTypeGroup(IGeometryBakingContext owner) {
+    ResourceLocation renderTypeHint = owner.getRenderTypeHint();
+    return renderTypeHint != null ? owner.getRenderType(renderTypeHint) : RenderTypeGroup.EMPTY;
+  }
+
+  /**
+   * Applies the transformation to the model state for an item layer model.
+   */
+  public static IQuadTransformer applyTransform(ModelState modelState, Transformation transformation) {
+    if (transformation.isIdentity()) {
+      return QuadTransformers.empty();
+    } else {
+      return UnbakedGeometryHelper.applyRootTransform(modelState, transformation);
+    }
+  }
+
+  /**
+   * Bakes a list of block part elements into a model
+   * @param owner         Model configuration
+   * @param elements      Model elements
+   * @param spriteGetter  Sprite getter instance
+   * @param transform     Model transform
+   * @param overrides     Model overrides
+   * @param location      Model bake location
+   * @return  Baked model
+   */
+  public static BakedModel bakeModel(IGeometryBakingContext owner, List<BlockElement> elements, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides, ResourceLocation location) {
+    // iterate parts, adding to the builder
+    TextureAtlasSprite particle = spriteGetter.apply(owner.getMaterial("particle"));
+    SimpleBakedModel.Builder builder = bakedBuilder(owner, overrides).particle(particle);
+    IQuadTransformer quadTransformer = applyTransform(transform, owner.getRootTransform());
+    for(BlockElement part : elements) {
+      bakePart(builder, owner, part, spriteGetter, transform, quadTransformer, location);
+    }
+    return builder.build(getRenderTypeGroup(owner));
+  }
+
+  @Override
+  public BakedModel bake(IGeometryBakingContext owner, ModelBaker baker, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides) {
+    return bakeModel(owner, this.getElements(), spriteGetter, transform, overrides, BAKE_LOCATION);
+  }
+
+  /**
+   * Same as {@link #bakeDynamic(IGeometryBakingContext, ModelState)} but allows swapping the element list. Makes colored block model easier to work with.
+   * @param owner         Model configuration
+   * @param transform     Transform to apply
+   * @return  Baked model
+   */
+  public BakedModel bakeWithElements(IGeometryBakingContext owner, List<BlockElement> elements, ModelState transform) {
+    return bakeModel(owner, elements, Material::sprite, transform, ItemOverrides.EMPTY, BAKE_LOCATION);
+  }
+
+  /**
+   * Same as {@link #bake(IGeometryBakingContext, ModelBaker, Function, ModelState, ItemOverrides, ResourceLocation)}, but passes in sensible defaults for values unneeded in dynamic models
+   * @param owner         Model configuration
+   * @param transform     Transform to apply
+   * @return  Baked model
+   */
+  public BakedModel bakeDynamic(IGeometryBakingContext owner, ModelState transform) {
+    return bakeWithElements(owner, this.getElements(), transform);
+  }
+
+
+  /* Deserializing */
+
+  /**
+   * Deserializes a SimpleBlockModel from JSON
+   * @param json     Json element containing the model
+   * @param context  Json Context
+   * @return  Serialized JSON
+   */
+  public static SimpleBlockModel deserialize(JsonObject json, JsonDeserializationContext context) {
+    // parent, null if missing
+    String parentName = GsonHelper.getAsString(json, "parent", "");
+    ResourceLocation parent = parentName.isEmpty() ? null : ResourceLocation.parse(parentName);
+
+    // textures, empty map if missing
+    Map<String, Either<Material, String>> textureMap;
+    if (json.has("textures")) {
+      ResourceLocation atlas = InventoryMenu.BLOCK_ATLAS;
+      JsonObject textures = GsonHelper.getAsJsonObject(json, "textures");
+      Map<String, Either<Material, String>> builder = new HashMap<>(textures.size());
+      for(Entry<String, JsonElement> entry : textures.entrySet()) {
+        String name = entry.getValue().getAsString();
+        if (name.startsWith("#")) {
+          builder.put(entry.getKey(), Either.right(name.substring(1)));
+        } else {
+          ResourceLocation texture = ResourceLocation.tryParse(name);
+          if (texture == null) {
+            throw new JsonSyntaxException(name + " is not a valid resource location");
+          }
+          builder.put(entry.getKey(), Either.left(new Material(atlas, texture)));
+        }
+      }
+      textureMap = Map.copyOf(builder);
+    } else {
+      textureMap = Map.of();
+    }
+
+    // elements, empty list if missing
+    List<BlockElement> parts;
+    if (json.has("elements")) {
+      parts = getModelElements(context, GsonHelper.getAsJsonArray(json, "elements"), "elements");
+    } else {
+      parts = List.of();
+    }
+    return new SimpleBlockModel(parent, textureMap, parts);
+  }
+
+  /**
+   * Gets a list of models from a JSON array
+   * @param context  Json Context
+   * @param element  Json array
+   * @return  Model list
+   */
+  public static List<BlockElement> getModelElements(JsonDeserializationContext context, JsonElement element, String name) {
+    // if just one element, array is optional
+    if (element.isJsonObject()) {
+      // cast ensures we call List.of(BlockElement) instead of List.of(BlockElement[]) as the type is vague
+      return List.of((BlockElement)context.deserialize(element.getAsJsonObject(), BlockElement.class));
+    }
+    // if an array, get array of elements
+    if (element.isJsonArray()) {
+      JsonArray array = element.getAsJsonArray();
+      List<BlockElement> builder = new ArrayList<>(array.size());
+      for(JsonElement json : array) {
+        builder.add(context.deserialize(json, BlockElement.class));
+      }
+      return List.copyOf(builder);
+    }
+
+    throw new JsonSyntaxException("Missing " + name + ", expected to find a JsonArray or JsonObject");
+  }
+}

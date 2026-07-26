@@ -1,0 +1,34 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:requirements",
+      "display_modifiers": [
+        {
+          "level": 2,
+          "name": "tconstruct:feather_falling"
+        }
+      ],
+      "requirement": {
+        "type": "tconstruct:has_modifier",
+        "check": "all",
+        "level": {
+          "min": 2
+        },
+        "modifier": {
+          "type": "tconstruct:single",
+          "modifier": "tconstruct:feather_falling"
+        }
+      },
+      "translation_key": "modifier.tconstruct.long_fall.requirements"
+    },
+    {
+      "type": "tconstruct:block_damage",
+      "damage_source": {
+        "type": "mantle:tag",
+        "tag": "tconstruct:protection/fall"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

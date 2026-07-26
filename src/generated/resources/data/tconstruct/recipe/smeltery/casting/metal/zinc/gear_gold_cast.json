@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/gear"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:gears/zinc"
+    }
+  ],
+  "cooling_time": 94,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_zinc"
+  },
+  "result": {
+    "tag": "c:gears/zinc"
+  }
+}

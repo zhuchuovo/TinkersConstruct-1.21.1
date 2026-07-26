@@ -1,0 +1,95 @@
+package slimeknights.tconstruct.smeltery.block;
+
+import lombok.Getter;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition.Builder;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import slimeknights.mantle.util.BlockEntityHelper;
+import slimeknights.tconstruct.shared.block.TableBlock;
+import slimeknights.tconstruct.smeltery.block.entity.CastingBlockEntity;
+
+import javax.annotation.Nullable;
+
+public abstract class AbstractCastingBlock extends TableBlock {
+  /** Property for when the casting block has an item inside */
+  public static final BooleanProperty HAS_ITEM = BooleanProperty.create("has_item");
+
+  @Getter
+  private final boolean requireCast;
+  protected AbstractCastingBlock(Properties builder, boolean requireCast) {
+    super(builder);
+    this.requireCast = requireCast;
+    registerDefaultState(defaultBlockState().setValue(HAS_ITEM, false));
+  }
+
+  @Override
+  protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+    super.createBlockStateDefinition(builder);
+    builder.add(HAS_ITEM);
+  }
+
+  @Override
+  @Deprecated
+  @Nullable
+  public MenuProvider getMenuProvider(BlockState pState, Level pLevel, BlockPos pPos) {
+    return null;
+  }
+
+  @Deprecated
+  @Override
+  protected ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult rayTraceResult) {
+    if (player.isShiftKeyDown()) {
+      return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+    BlockEntity te = world.getBlockEntity(pos);
+    if (te instanceof CastingBlockEntity) {
+      ((CastingBlockEntity) te).interact(player, hand);
+      return ItemInteractionResult.SUCCESS;
+    }
+    return super.useItemOn(stack, state, world, pos, player, hand, rayTraceResult);
+  }
+
+  @SuppressWarnings("deprecation")
+  @Deprecated
+  @Override
+  public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+    if (worldIn.isClientSide()) {
+      return;
+    }
+    BlockEntityHelper.get(CastingBlockEntity.class, worldIn, pos).ifPresent(casting -> casting.handleRedstone(worldIn.hasNeighborSignal(pos)));
+  }
+
+  @SuppressWarnings("deprecation")
+  @Deprecated
+  @Override
+  public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource rand) {
+    BlockEntityHelper.get(CastingBlockEntity.class, worldIn, pos).ifPresent(CastingBlockEntity::swap);
+  }
+
+  @Override
+  protected boolean openGui(Player playerEntity, Level world, BlockPos blockPos) {
+    return false;
+  }
+
+  @Override
+  public boolean hasAnalogOutputSignal(BlockState state) {
+    return true;
+  }
+
+  @Override
+  public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+    return BlockEntityHelper.get(CastingBlockEntity.class, worldIn, pos).map(CastingBlockEntity::getAnalogSignal).orElse(0);
+  }
+}

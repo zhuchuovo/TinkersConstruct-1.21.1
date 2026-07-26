@@ -1,0 +1,213 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.141'
+}
+
+group = 'slimeknights.tconstruct'
+version = "${minecraft_version}-${mod_version}"
+
+base {
+    archivesName = 'TinkersConstruct'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+
+repositories {
+    maven { name = 'Aliyun Public'; url = 'https://maven.aliyun.com/repository/public' }
+    maven { name = 'BMCLAPI'; url = 'https://bmclapi2.bangbang93.com/maven' }
+    mavenCentral()
+    maven { name = 'DVS1'; url = 'https://dvs1.progwml6.com/files/maven' }
+    maven { name = 'tterrag'; url = 'https://maven.tterrag.com/' }
+    maven { name = 'BlameJared'; url = 'https://maven.blamejared.com' }
+    maven { name = 'Dogforce Games'; url = 'https://www.dogforce-games.com/maven/' }
+    maven {
+        url = 'https://www.cursemaven.com'
+        content { includeGroup 'curse.maven' }
+    }
+}
+
+sourceSets.main {
+    resources {
+        srcDir 'src/generated/resources'
+        exclude '.cache'
+        exclude 'assets/tconstruct/debug'
+        // Minecraft 1.21 renamed these vanilla data-pack directories. Their
+        // migrated singular copies are produced by the porting scripts.
+        exclude 'data/tconstruct/recipes/**'
+        exclude 'data/tconstruct/advancements/**'
+        exclude 'data/tconstruct/loot_tables/**'
+        // The generated c tags supersede the stale Forge namespace. NeoForge's
+        // global loot modifier index is likewise migrated to data/neoforge.
+        exclude 'data/forge/tags/**'
+        exclude 'data/forge/loot_modifiers/**'
+    }
+    java {
+        // These integrations have no NeoForge 1.21.1 API artifact yet. They are
+        // intentionally isolated while the core port is brought up.
+        exclude 'slimeknights/tconstruct/plugin/jsonthings/**'
+        exclude 'slimeknights/tconstruct/plugin/craftingtweaks/**'
+        exclude 'slimeknights/tconstruct/plugin/DietPlugin.java'
+        exclude 'slimeknights/tconstruct/plugin/DummmmmmyPlugin.java'
+        exclude 'slimeknights/tconstruct/plugin/ImmersiveEngineeringPlugin.java'
+        exclude 'slimeknights/tconstruct/plugin/jei/**'
+        // Runtime-first port: the 1.20 FinishedRecipe/provider tree is kept in
+        // source control but excluded until it is converted to 1.21 RecipeOutput.
+        exclude 'slimeknights/tconstruct/common/data/**'
+        exclude 'slimeknights/tconstruct/fluids/data/**'
+        exclude 'slimeknights/tconstruct/gadgets/data/**'
+        exclude 'slimeknights/tconstruct/library/data/**'
+        // Sprite transformers are also consumed at runtime by the material
+        // texture command, so only isolate the actual client providers.
+        exclude 'slimeknights/tconstruct/library/client/data/AbstractArmorModelProvider.java'
+        exclude 'slimeknights/tconstruct/library/client/data/GenericTextureGenerator.java'
+        exclude 'slimeknights/tconstruct/library/client/data/material/**'
+        exclude 'slimeknights/tconstruct/library/client/data/util/DataGenSpriteReader.java'
+        exclude 'slimeknights/tconstruct/library/client/data/spritetransformer/**'
+        exclude 'slimeknights/tconstruct/library/client/materials/MaterialGeneratorInfo.java'
+        exclude 'slimeknights/tconstruct/shared/client/ClientGeneratePartTexturesCommand.java'
+        exclude 'slimeknights/tconstruct/shared/network/GeneratePartTexturesPacket.java'
+        exclude 'slimeknights/tconstruct/shared/command/subcommand/GeneratePartTexturesCommand.java'
+        exclude 'slimeknights/tconstruct/shared/command/subcommand/GenerateMeltingRecipesCommand.java'
+        exclude 'slimeknights/tconstruct/shared/command/subcommand/GenerateHiddenFluidsCommand.java'
+        exclude 'slimeknights/tconstruct/**/*RecipeBuilder.java'
+        exclude 'slimeknights/tconstruct/tables/recipe/TinkerStationPartSwappingBuilder.java'
+        exclude 'slimeknights/tconstruct/library/recipe/fuel/MeltingFuelBuilder.java'
+        exclude 'slimeknights/tconstruct/library/recipe/material/ShapedMaterialConsumerBuilder.java'
+        exclude 'slimeknights/tconstruct/library/recipe/partbuilder/recycle/*Builder.java'
+        exclude 'slimeknights/tconstruct/library/recipe/material/MaterialsConsumerBuilder.java'
+        exclude 'slimeknights/tconstruct/library/recipe/partbuilder/recycle/PartBuilderToolRecycle.java'
+        exclude 'slimeknights/tconstruct/shared/data/**'
+        exclude 'slimeknights/tconstruct/smeltery/data/**'
+        exclude 'slimeknights/tconstruct/tables/data/**'
+        exclude { details ->
+            if (!details.file.isFile()) return false
+            def path = details.file.path.replace('\\', '/')
+            return path.contains('/slimeknights/tconstruct/tools/data/') &&
+                    !path.endsWith('/tools/data/ModifierIds.java') &&
+                    !path.endsWith('/tools/data/material/MaterialIds.java')
+        }
+        exclude 'slimeknights/tconstruct/world/data/**'
+    }
+}
+
+sourceSets.test.java {
+    // ModDevGradle's unit-test launcher supplies the active mod container in
+    // 1.21; these Forge-era fake loading SPI implementations are obsolete.
+    exclude 'slimeknights/tconstruct/test/TestModContainer.java'
+    exclude 'slimeknights/tconstruct/test/TestModInfo.java'
+}
+
+neoForge {
+    version = project.neo_version
+    parchment {
+        minecraftVersion = project.parchment_minecraft_version
+        mappingsVersion = project.parchment_version
+    }
+    accessTransformers.from 'src/main/resources/META-INF/accesstransformer.cfg'
+
+    runs {
+        client { client() }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', 'tconstruct', '--all',
+                    '--output', file('src/generated/resources/').absolutePath,
+                    '--existing', file('src/main/resources/').absolutePath,
+                    '--existing-mod', 'mantle'
+        }
+        configureEach {
+            gameDirectory = file('run')
+            systemProperty 'forge.logging.markers', 'SCAN,REGISTRIES,CORE'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+    mods {
+        tconstruct { sourceSet sourceSets.main }
+    }
+    unitTest {
+        testedMod = mods.tconstruct
+        enable()
+    }
+}
+
+configurations {
+    localRuntime
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+dependencies {
+    implementation project(':mantle')
+
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+
+    compileOnly 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
+    testCompileOnly 'org.projectlombok:lombok:1.18.42'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
+    testImplementation 'org.mockito:mockito-core:5.15.2'
+    testImplementation 'org.assertj:assertj-core:3.27.3'
+}
+
+test { useJUnitPlatform() }
+
+tasks.named('processResources', ProcessResources).configure {
+    def replaceProperties = [
+            version: mod_version,
+            loader_range: loader_range,
+            minecraft_range: minecraft_range,
+            neo_range: neo_range,
+            mantle_range: mantle_range,
+            jei_range: jei_range
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                'Specification-Title': 'Tinkers Construct',
+                'Specification-Vendor': 'Slime Knights',
+                'Specification-Version': '1',
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Slime Knights'
+        ])
+    }
+}
+
+tasks.named('sourcesJar', Jar).configure {
+    exclude 'assets/**', 'data/**', 'pack.png', 'pack.mcmeta', 'META-INF/neoforge.mods.toml'
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) { from components.java }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+idea.module {
+    downloadJavadoc = true
+    downloadSources = true
+}

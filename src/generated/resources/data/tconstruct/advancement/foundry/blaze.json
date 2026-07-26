@@ -1,0 +1,156 @@
+{
+    "parent":  "tconstruct:foundry/structure",
+    "criteria":  {
+                     "scorched_fuel_gauge":  {
+                                                 "conditions":  {
+                                                                    "items":  [
+                                                                                  {
+                                                                                      "items":  [
+                                                                                                    "tconstruct:scorched_fuel_gauge"
+                                                                                                ],
+                                                                                      "predicates":  {
+                                                                                                         "minecraft:custom_data":  "{tank:{Amount:4000,FluidName:\"tconstruct:blazing_blood\"}}"
+                                                                                                     }
+                                                                                  }
+                                                                              ]
+                                                                },
+                                                 "trigger":  "minecraft:inventory_changed"
+                                             },
+                     "scorched_fuel_tank":  {
+                                                "conditions":  {
+                                                                   "items":  [
+                                                                                 {
+                                                                                     "items":  [
+                                                                                                   "tconstruct:scorched_fuel_tank"
+                                                                                               ],
+                                                                                     "predicates":  {
+                                                                                                        "minecraft:custom_data":  "{tank:{Amount:4000,FluidName:\"tconstruct:blazing_blood\"}}"
+                                                                                                    }
+                                                                                 }
+                                                                             ]
+                                                               },
+                                                "trigger":  "minecraft:inventory_changed"
+                                            },
+                     "scorched_ingot_gauge":  {
+                                                  "conditions":  {
+                                                                     "items":  [
+                                                                                   {
+                                                                                       "items":  [
+                                                                                                     "tconstruct:scorched_ingot_gauge"
+                                                                                                 ],
+                                                                                       "predicates":  {
+                                                                                                          "minecraft:custom_data":  "{tank:{Amount:4320,FluidName:\"tconstruct:blazing_blood\"}}"
+                                                                                                      }
+                                                                                   }
+                                                                               ]
+                                                                 },
+                                                  "trigger":  "minecraft:inventory_changed"
+                                              },
+                     "scorched_ingot_tank":  {
+                                                 "conditions":  {
+                                                                    "items":  [
+                                                                                  {
+                                                                                      "items":  [
+                                                                                                    "tconstruct:scorched_ingot_tank"
+                                                                                                ],
+                                                                                      "predicates":  {
+                                                                                                         "minecraft:custom_data":  "{tank:{Amount:4320,FluidName:\"tconstruct:blazing_blood\"}}"
+                                                                                                     }
+                                                                                  }
+                                                                              ]
+                                                                },
+                                                 "trigger":  "minecraft:inventory_changed"
+                                             },
+                     "seared_fuel_gauge":  {
+                                               "conditions":  {
+                                                                  "items":  [
+                                                                                {
+                                                                                    "items":  [
+                                                                                                  "tconstruct:seared_fuel_gauge"
+                                                                                              ],
+                                                                                    "predicates":  {
+                                                                                                       "minecraft:custom_data":  "{tank:{Amount:4000,FluidName:\"tconstruct:blazing_blood\"}}"
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                              },
+                                               "trigger":  "minecraft:inventory_changed"
+                                           },
+                     "seared_fuel_tank":  {
+                                              "conditions":  {
+                                                                 "items":  [
+                                                                               {
+                                                                                   "items":  [
+                                                                                                 "tconstruct:seared_fuel_tank"
+                                                                                             ],
+                                                                                   "predicates":  {
+                                                                                                      "minecraft:custom_data":  "{tank:{Amount:4000,FluidName:\"tconstruct:blazing_blood\"}}"
+                                                                                                  }
+                                                                               }
+                                                                           ]
+                                                             },
+                                              "trigger":  "minecraft:inventory_changed"
+                                          },
+                     "seared_ingot_gauge":  {
+                                                "conditions":  {
+                                                                   "items":  [
+                                                                                 {
+                                                                                     "items":  [
+                                                                                                   "tconstruct:seared_ingot_gauge"
+                                                                                               ],
+                                                                                     "predicates":  {
+                                                                                                        "minecraft:custom_data":  "{tank:{Amount:4320,FluidName:\"tconstruct:blazing_blood\"}}"
+                                                                                                    }
+                                                                                 }
+                                                                             ]
+                                                               },
+                                                "trigger":  "minecraft:inventory_changed"
+                                            },
+                     "seared_ingot_tank":  {
+                                               "conditions":  {
+                                                                  "items":  [
+                                                                                {
+                                                                                    "items":  [
+                                                                                                  "tconstruct:seared_ingot_tank"
+                                                                                              ],
+                                                                                    "predicates":  {
+                                                                                                       "minecraft:custom_data":  "{tank:{Amount:4320,FluidName:\"tconstruct:blazing_blood\"}}"
+                                                                                                   }
+                                                                                }
+                                                                            ]
+                                                              },
+                                               "trigger":  "minecraft:inventory_changed"
+                                           }
+                 },
+    "display":  {
+                    "announce_to_chat":  true,
+                    "description":  {
+                                        "translate":  "advancements.tconstruct.foundry.blaze.description"
+                                    },
+                    "frame":  "goal",
+                    "hidden":  false,
+                    "icon":  {
+                                 "id":  "tconstruct:scorched_fuel_gauge",
+                                 "components":  {
+                                                    "minecraft:custom_data":  "{tank:{Amount:4000,FluidName:\"tconstruct:blazing_blood\"}}"
+                                                }
+                             },
+                    "show_toast":  true,
+                    "title":  {
+                                  "translate":  "advancements.tconstruct.foundry.blaze.title"
+                              }
+                },
+    "requirements":  [
+                         [
+                             "seared_fuel_tank",
+                             "seared_fuel_gauge",
+                             "seared_ingot_tank",
+                             "seared_ingot_gauge",
+                             "scorched_fuel_tank",
+                             "scorched_fuel_gauge",
+                             "scorched_ingot_tank",
+                             "scorched_ingot_gauge"
+                         ]
+                     ],
+    "sends_telemetry_event":  true
+}

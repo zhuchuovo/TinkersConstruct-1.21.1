@@ -1,0 +1,59 @@
+{
+  "type": "neoforge:conditional",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:storage_blocks/raw_bendalloy"
+    }
+  ],
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "mantle:tag_filled",
+          "tag": "c:ingots/cadmium"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 810,
+            "rate": "metal",
+            "tag": "c:molten_cadmium"
+          }
+        ],
+        "ingredient": {
+          "tag": "c:storage_blocks/raw_bendalloy"
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 810,
+          "tag": "c:molten_bendalloy"
+        },
+        "temperature": 100,
+        "time": 200
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "neoforge:true"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "ingredient": {
+          "tag": "c:storage_blocks/raw_bendalloy"
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 810,
+          "tag": "c:molten_bendalloy"
+        },
+        "temperature": 100,
+        "time": 200
+      }
+    }
+  ]
+}

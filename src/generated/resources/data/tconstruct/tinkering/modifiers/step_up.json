@@ -1,0 +1,18 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "minecraft:generic.step_height",
+      "each_level": 0.5,
+      "operation": "add_value",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ]
+    }
+  ],
+  "tooltip_display": "always"
+}

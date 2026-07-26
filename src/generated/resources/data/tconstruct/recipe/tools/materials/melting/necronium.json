@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material_melting",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:ingots/uranium"
+    }
+  ],
+  "input": "tconstruct:necronium",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_uranium"
+  },
+  "temperature": 830
+}

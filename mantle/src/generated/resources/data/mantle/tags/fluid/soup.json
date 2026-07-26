@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#c:beetroot_soup",
+      "required": false
+    },
+    {
+      "id": "#c:mushroom_stew",
+      "required": false
+    },
+    {
+      "id": "#c:rabbit_stew",
+      "required": false
+    }
+  ]
+}

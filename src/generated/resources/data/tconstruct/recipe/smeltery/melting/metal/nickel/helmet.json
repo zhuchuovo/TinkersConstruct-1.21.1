@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:armors/helmets/nickel"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:armors/helmets/nickel"
+  },
+  "result": {
+    "amount": 450,
+    "tag": "c:molten_nickel",
+    "unit_size": 10
+  },
+  "temperature": 950,
+  "time": 145
+}

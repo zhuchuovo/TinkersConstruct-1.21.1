@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:gears/bronze"
+    }
+  ],
+  "cooling_time": 114,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_bronze"
+  },
+  "result": {
+    "tag": "c:gears/bronze"
+  }
+}

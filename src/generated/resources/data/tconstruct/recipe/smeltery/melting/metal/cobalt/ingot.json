@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "c:ingots/cobalt"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_cobalt"
+  },
+  "temperature": 950,
+  "time": 65
+}

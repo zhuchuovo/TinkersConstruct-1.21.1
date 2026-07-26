@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:armors/boots/nickel"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:armors/boots/nickel"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_nickel",
+    "unit_size": 10
+  },
+  "temperature": 950,
+  "time": 130
+}

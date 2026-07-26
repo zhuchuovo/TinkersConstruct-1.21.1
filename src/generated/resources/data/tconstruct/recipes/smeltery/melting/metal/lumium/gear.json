@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:gears/lumium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:gears/lumium"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_lumium"
+  },
+  "temperature": 1050,
+  "time": 136
+}

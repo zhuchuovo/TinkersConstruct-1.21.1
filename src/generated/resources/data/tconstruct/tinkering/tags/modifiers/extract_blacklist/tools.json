@@ -1,0 +1,10 @@
+{
+  "values": [
+    "tconstruct:embellishment",
+    "tconstruct:dyed",
+    "tconstruct:trim",
+    "tconstruct:rebalanced",
+    "tconstruct:overslime",
+    "#tconstruct:remove_blacklist"
+  ]
+}

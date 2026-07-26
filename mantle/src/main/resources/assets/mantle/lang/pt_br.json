@@ -1,0 +1,61 @@
+{
+  "mantle:tooltip.cooktime": "Tempo de Cozimento: %ds",
+  "config.mantle.extraHeartRenderer": "Ativar Renderização de Corações Extras",
+
+  "command.mantle.view_tag.success": "Valores para a tag %s '%s':",
+
+  "command.mantle.tags_for.success": "Tags de %s para '%s':",
+  "command.mantle.tags_for.not_found": "Valor de registro desconhecido %s: '%s'",
+  "command.mantle.tags_for.no_held_block": "O item na mão não é um bloco",
+  "command.mantle.tags_for.no_held_entity": "O item na mão não é um ovo de invocação",
+  "command.mantle.tags_for.no_held_potion": "O item na mão não é uma poção",
+  "command.mantle.tags_for.no_held_fluid": "Não foi possível obter fluido do item na mão",
+  "command.mantle.tags_for.no_held_enchantment": "O item na mão não está encantado",
+  "command.mantle.tags_for.no_targeted_entity": "Nenhuma entidade ao alcance",
+  "command.mantle.tags_for.no_targeted_block_entity": "Nenhuma entidade de bloco alvo",
+  "command.mantle.tags_for.no_tags": "Sem tags",
+  "command.mantle.book_test.not_found": "Livro desconhecido com ID %s",
+  "command.mantle.book.export.success": "Imagens do livro exportadas para '%s'",
+  "command.mantle.book.export.error_generic": "Falha ao exportar imagens do livro, veja o log para detalhes",
+  "command.mantle.book.export.error_io": "Falha ao criar diretório para imagens do livro '%s'",
+
+  "command.mantle.dump_tag.success": "Tag combinada %s '%s' registrada no log do console",
+  "command.mantle.dump_tag.read_error": "Erro ao ler a tag %s '%s':",
+  "command.mantle.dump_tag.success_log": "Tag combinada %s '%s' salva em '%s'",
+  "command.mantle.dump_all_tags.success": "Todas as tags registradas em '%s'",
+  "command.mantle.dump_all_tags.type_success": "Todas as tags de %s registradas em '%s'",
+
+  "command.mantle.dump_loot_modifiers.success_log": "Modificadores globais de loot registrados no log do console",
+  "command.mantle.dump_loot_modifiers.success_save": "Modificadores globais de loot salvos em '%s'",
+  "command.mantle.dump_loot_modifiers.read_error": "Erro ao ler os modificadores globais de loot",
+
+  "command.mantle.harvest_tiers.success_log": "Tiers de coleta ordenados registrados no log do console",
+  "command.mantle.harvest_tiers.success_save": "Tiers de coleta ordenados salvos em '%s'",
+  "command.mantle.harvest_tiers.success_list": "Tiers de colheita:",
+  "command.mantle.harvest_tiers.tag": "%s: Tag de bloco %s",
+  "command.mantle.harvest_tiers.no_tag": "%s: Sem tag",
+
+  "command.mantle.tag.empty": "Vazio",
+  "command.mantle.registry.not_found": "Registro desconhecido '%s'",
+  "command.mantle.tag.not_found": "Tag %s desconhecida '%s'",
+
+  "command.mantle.tag_preference.empty_tag": "Sem preferência para a tag %s %s",
+  "command.mantle.tag_preference.preference": "Valor preferido para a tag %s %s é %s",
+
+  "gui.mantle.fluid.capacity": "Capacidade: %s mb",
+  "gui.mantle.fluid.contents": "Contém: %s",
+  "gui.mantle.fluid.format": "%s / %s mb %s",
+
+  "gui.mantle.fluid.hold_shift": "Segure §e§oShift§r§7 para ver em baldes",
+  "gui.mantle.fluid.kilobucket": "%s kb",
+  "gui.mantle.fluid.bucket": "%s baldes",
+  "gui.mantle.fluid.millibucket": "%s mb",
+
+  "gui.mantle.fluid.bowl": "%s tigelas",
+  "gui.mantle.fluid.bottle": "%s frascos",
+  "gui.mantle.fluid.drop": "%s gotas",
+  "gui.mantle.fluid.sip": "%s goles",
+
+  "block.mantle.tank.drained": "Drenado %s mb de %s",
+  "block.mantle.tank.filled": "Preenchido %s mb de %s"
+}

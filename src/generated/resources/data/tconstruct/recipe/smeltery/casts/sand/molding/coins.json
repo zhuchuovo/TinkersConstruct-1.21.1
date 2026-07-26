@@ -1,0 +1,16 @@
+{
+  "type": "tconstruct:molding_table",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:coins"
+    }
+  ],
+  "material": {
+    "tag": "tconstruct:casts/sand"
+  },
+  "pattern": {
+    "tag": "c:coins"
+  },
+  "result": "tconstruct:coin_sand_cast"
+}

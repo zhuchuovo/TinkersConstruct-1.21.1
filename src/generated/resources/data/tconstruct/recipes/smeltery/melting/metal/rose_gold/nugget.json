@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "c:nuggets/rose_gold"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_rose_gold"
+  },
+  "temperature": 550,
+  "time": 17
+}

@@ -1,0 +1,25 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "slime": "tconstruct:item/tool/armor/slime/chestplate/slime_broken",
+    "ribcage": "tconstruct:item/tool/armor/slime/chestplate/ribcage_broken"
+  },
+  "modifier_maps": [
+    "tconstruct:slime/chestplate_broken",
+    "tconstruct:slime/chestplate"
+  ],
+  "parts": [
+    {
+      "name": "slime",
+      "index": 1
+    },
+    {
+      "name": "ribcage",
+      "index": 0
+    }
+  ],
+  "first_modifiers": [
+    "tconstruct:trim"
+  ]
+}

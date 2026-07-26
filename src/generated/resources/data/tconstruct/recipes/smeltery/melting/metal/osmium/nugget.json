@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:nuggets/osmium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/osmium"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_osmium"
+  },
+  "temperature": 975,
+  "time": 22
+}

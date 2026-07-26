@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:sheetmetals/lead"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:sheetmetals/lead"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_lead"
+  },
+  "temperature": 330,
+  "time": 43
+}

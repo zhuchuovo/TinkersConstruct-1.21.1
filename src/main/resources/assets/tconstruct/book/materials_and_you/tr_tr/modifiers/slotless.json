@@ -1,0 +1,28 @@
+{
+    "type":  "tconstruct:showcase",
+    "title":  "Yuvasız Değiştiriciler",
+    "item":  {
+                 "type":  "neoforge:components",
+                 "items":  "tconstruct:creative_slot",
+                 "components":  {
+                                    "minecraft:custom_data":  {
+                                                                  "slot":  "slotless"
+                                                              }
+                                }
+             },
+    "tooltip":  [
+                    "Yuvasız İmge"
+                ],
+    "text":  [
+                 {
+                     "text":  "Yuvasız değiştiriciler, öbür bütün değiştiricilerin aksine yuva gerektirmiyorlar. Bu çoğu zaman ya değiştiricinin ödün vermesi gerektiğini ya da etkisinin zayıf olduğu belirtmektedir. "
+                 },
+                 {
+                     "text":  "Göze çarpan yuvasız değiştirici türlerinden biri ek olarak değiştirici yuvaları veren fazladan değiştiricilerdir. Birçok fazladan yükseltme yuvası veren vardır ve bana birazının fazladan yetenek yuvası verdikleri söylendi."
+                 },
+                 {
+                     "text":  "Thruul M\u0027Gon\u0027un Cılız Kallama kitabı, Onarıcılığın Bilgiliği kitabı ile birlikte araçlar için kullanılabilir yuvasız değiştiricilerin tümü sıralanmış biçimde bulunmaktadır.",
+                     "paragraph":  true
+                 }
+             ]
+}

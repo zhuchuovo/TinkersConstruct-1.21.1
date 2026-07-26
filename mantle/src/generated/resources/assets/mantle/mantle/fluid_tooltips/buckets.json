@@ -1,0 +1,8 @@
+{
+  "units": [
+    {
+      "key": "gui.mantle.fluid.bucket",
+      "needed": 1000
+    }
+  ]
+}

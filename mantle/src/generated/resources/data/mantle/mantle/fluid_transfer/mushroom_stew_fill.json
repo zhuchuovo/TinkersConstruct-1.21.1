@@ -1,0 +1,18 @@
+{
+  "type": "mantle:fill_item",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "registry": "minecraft:fluid",
+      "tag": "c:mushroom_stew"
+    }
+  ],
+  "fluid": {
+    "amount": 250,
+    "tag": "c:mushroom_stew"
+  },
+  "input": {
+    "item": "minecraft:bowl"
+  },
+  "result": "minecraft:mushroom_stew"
+}

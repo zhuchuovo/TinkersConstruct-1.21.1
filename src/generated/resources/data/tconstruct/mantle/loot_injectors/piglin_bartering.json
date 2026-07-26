@@ -1,0 +1,64 @@
+{
+  "name": "minecraft:gameplay/piglin_bartering",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "fluid": {
+                "amount": 50,
+                "fluid": "tconstruct:blazing_blood"
+              },
+              "function": "mantle:set_fluid"
+            },
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "tconstruct:scorched_lantern",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "tconstruct:add_tool_data",
+              "materials": [
+                {
+                  "type": "tconstruct:ancient"
+                },
+                {
+                  "type": "tconstruct:ancient"
+                }
+              ]
+            }
+          ],
+          "name": "tconstruct:battlesign",
+          "weight": 5
+        },
+        {
+          "type": "tconstruct:tool_part",
+          "material": {
+            "type": "tconstruct:random",
+            "allow_hidden": true,
+            "material": {
+              "type": "mantle:tag",
+              "tag": "tconstruct:bartered"
+            }
+          },
+          "tag": "tconstruct:parts/bartered",
+          "weight": 8
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

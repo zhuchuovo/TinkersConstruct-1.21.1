@@ -1,0 +1,62 @@
+{
+  "color": "FF00F4DA",
+  "fallbacks": [
+    "vine"
+  ],
+  "generator": {
+    "supported_stats": [
+      "tconstruct:binding",
+      "tconstruct:bowstring",
+      "tconstruct:cuirass",
+      "tconstruct:armor_cuirass",
+      "tconstruct:repair_kit",
+      "tconstruct:maille",
+      "tconstruct:armor_maille",
+      "tconstruct:laces"
+    ],
+    "transformer": {
+      "type": "tconstruct:recolor_sprite",
+      "color_mapping": {
+        "type": "tconstruct:grey_to_color",
+        "palette": [
+          {
+            "color": "FF000000",
+            "grey": 0
+          },
+          {
+            "color": "FF2F5351",
+            "grey": 63
+          },
+          {
+            "color": "FF3B6D6D",
+            "grey": 102
+          },
+          {
+            "color": "FF49807E",
+            "grey": 127
+          },
+          {
+            "color": "FF4F918F",
+            "grey": 140
+          },
+          {
+            "color": "FF63ACAB",
+            "grey": 178
+          },
+          {
+            "color": "FF6DBEBD",
+            "grey": 193
+          },
+          {
+            "color": "FF82D7D5",
+            "grey": 216
+          },
+          {
+            "color": "FFC9F4FE",
+            "grey": 255
+          }
+        ]
+      }
+    }
+  }
+}

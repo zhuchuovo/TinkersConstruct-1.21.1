@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "allomancy:pewter_flakes"
+    }
+  ],
+  "ingredient": {
+    "item": "allomancy:pewter_flakes"
+  },
+  "result": {
+    "amount": 30,
+    "tag": "c:molten_pewter"
+  },
+  "temperature": 400,
+  "time": 27
+}

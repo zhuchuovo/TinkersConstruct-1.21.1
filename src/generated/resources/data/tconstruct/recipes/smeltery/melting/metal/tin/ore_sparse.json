@@ -1,0 +1,85 @@
+{
+  "type": "neoforge:conditional",
+  "conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "neoforge:ores/tin",
+        "neoforge:ore_rates/sparse"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "mantle:tag_filled",
+          "tag": "c:ingots/nickel"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 90,
+            "rate": "metal",
+            "tag": "c:molten_nickel"
+          }
+        ],
+        "ingredient": {
+          "type": "neoforge:intersection",
+          "children": [
+            {
+              "tag": "c:ores/tin"
+            },
+            {
+              "tag": "c:ore_rates/sparse"
+            }
+          ]
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 90,
+          "tag": "c:molten_tin"
+        },
+        "temperature": 225,
+        "time": 59
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "neoforge:true"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 90,
+            "rate": "metal",
+            "tag": "c:molten_copper"
+          }
+        ],
+        "ingredient": {
+          "type": "neoforge:intersection",
+          "children": [
+            {
+              "tag": "c:ores/tin"
+            },
+            {
+              "tag": "c:ore_rates/sparse"
+            }
+          ]
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 90,
+          "tag": "c:molten_tin"
+        },
+        "temperature": 225,
+        "time": 59
+      }
+    }
+  ]
+}

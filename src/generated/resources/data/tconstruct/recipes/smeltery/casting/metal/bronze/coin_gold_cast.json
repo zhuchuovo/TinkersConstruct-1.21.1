@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/coin"
+  },
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:coins/bronze"
+    }
+  ],
+  "cooling_time": 33,
+  "fluid": {
+    "amount": 30,
+    "tag": "c:molten_bronze"
+  },
+  "result": {
+    "tag": "c:coins/bronze"
+  }
+}

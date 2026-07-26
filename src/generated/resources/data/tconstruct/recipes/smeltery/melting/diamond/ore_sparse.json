@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:ore_melting",
+  "byproducts": [
+    {
+      "amount": 45,
+      "fluid": "tconstruct:molten_debris",
+      "rate": "metal"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "neoforge:ores/diamond",
+        "neoforge:ore_rates/sparse"
+      ]
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "c:ores/diamond"
+      },
+      {
+        "tag": "c:ore_rates/sparse"
+      }
+    ]
+  },
+  "rate": "gem",
+  "result": {
+    "amount": 50,
+    "fluid": "tconstruct:molten_diamond"
+  },
+  "temperature": 1450,
+  "time": 118
+}

@@ -1,0 +1,10 @@
+{
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:mob_disguise",
+      "entity": "minecraft:drowned"
+    }
+  ],
+  "tooltip_display": "always"
+}

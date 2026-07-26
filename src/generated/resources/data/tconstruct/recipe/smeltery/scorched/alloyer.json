@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "tconstruct:scorched_brick"
+    },
+    "G": {
+      "type": "tconstruct:no_container",
+      "match": {
+        "type": "neoforge:compound",
+        "children": [
+        {
+          "item": "tconstruct:scorched_ingot_gauge"
+        },
+        {
+          "item": "tconstruct:scorched_fuel_gauge"
+        }
+        ]
+      }
+    }
+  },
+  "pattern": [
+    "BGB",
+    "BBB"
+  ],
+  "result": {
+    "id": "tconstruct:scorched_alloyer"
+  },
+  "show_notification": true
+}

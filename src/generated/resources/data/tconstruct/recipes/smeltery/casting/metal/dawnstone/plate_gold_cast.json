@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/plate"
+  },
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:plates/dawnstone"
+    },
+    {
+      "type": "mantle:tag_filled",
+      "registry": "minecraft:fluid",
+      "tag": "c:molten_dawnstone"
+    }
+  ],
+  "cooling_time": 63,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_dawnstone"
+  },
+  "result": {
+    "tag": "c:plates/dawnstone"
+  }
+}

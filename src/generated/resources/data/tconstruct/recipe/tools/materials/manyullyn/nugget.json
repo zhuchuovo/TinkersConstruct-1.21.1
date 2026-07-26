@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "c:nuggets/manyullyn"
+  },
+  "material": "tconstruct:manyullyn",
+  "needed": 9,
+  "value": 1
+}

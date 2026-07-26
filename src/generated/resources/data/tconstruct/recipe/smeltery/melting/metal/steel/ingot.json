@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "c:ingots/steel"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_steel"
+  },
+  "temperature": 950,
+  "time": 65
+}

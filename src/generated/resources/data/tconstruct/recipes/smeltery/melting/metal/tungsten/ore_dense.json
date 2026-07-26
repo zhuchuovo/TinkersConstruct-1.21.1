@@ -1,0 +1,85 @@
+{
+  "type": "neoforge:conditional",
+  "conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "neoforge:ores/tungsten",
+        "neoforge:ore_rates/dense"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "mantle:tag_filled",
+          "tag": "c:ingots/platinum"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 540,
+            "rate": "metal",
+            "tag": "c:molten_platinum"
+          }
+        ],
+        "ingredient": {
+          "type": "neoforge:intersection",
+          "children": [
+            {
+              "tag": "c:ores/tungsten"
+            },
+            {
+              "tag": "c:ore_rates/dense"
+            }
+          ]
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 540,
+          "tag": "c:molten_tungsten"
+        },
+        "temperature": 950,
+        "time": 292
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "neoforge:true"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 540,
+            "rate": "metal",
+            "tag": "c:molten_gold"
+          }
+        ],
+        "ingredient": {
+          "type": "neoforge:intersection",
+          "children": [
+            {
+              "tag": "c:ores/tungsten"
+            },
+            {
+              "tag": "c:ore_rates/dense"
+            }
+          ]
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 540,
+          "tag": "c:molten_tungsten"
+        },
+        "temperature": 950,
+        "time": 292
+      }
+    }
+  ]
+}

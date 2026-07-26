@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:casting_basin",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:storage_blocks/silver"
+    }
+  ],
+  "cooling_time": 179,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_silver"
+  },
+  "result": {
+    "tag": "c:storage_blocks/silver"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:nuggets/pewter"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/pewter"
+  },
+  "material": "tconstruct:pewter",
+  "needed": 9,
+  "value": 1
+}

@@ -1,0 +1,17 @@
+{
+  "tag": "c:honey",
+  "units": [
+    {
+      "key": "gui.mantle.fluid.bucket",
+      "needed": 1000
+    },
+    {
+      "key": "gui.mantle.fluid.bottle",
+      "needed": 250
+    },
+    {
+      "key": "gui.mantle.fluid.sip",
+      "needed": 50
+    }
+  ]
+}

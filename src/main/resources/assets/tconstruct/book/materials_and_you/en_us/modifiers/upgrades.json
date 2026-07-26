@@ -1,0 +1,28 @@
+{
+    "type":  "tconstruct:showcase",
+    "title":  "Upgrades",
+    "item":  {
+                 "type":  "neoforge:components",
+                 "items":  "tconstruct:creative_slot",
+                 "components":  {
+                                    "minecraft:custom_data":  {
+                                                                  "slot":  "upgrades"
+                                                              }
+                                }
+             },
+    "tooltip":  [
+                    "Upgrade Slot Icon"
+                ],
+    "text":  [
+                 {
+                     "text":  "Upgrades are standard improvements to a tool. They are usually done by applying an item and \u0027rubbing off\u0027 some of its magic qualities, like redstone making tools faster. "
+                 },
+                 {
+                     "text":  "Most tools start with around 3 upgrade slots, though it\u0027s possible to get more slots through other types of modifiers."
+                 },
+                 {
+                     "text":  "Thruul M\u0027Gon\u0027s Puny Smelting has a full list of upgrades available on tools, along with the Encyclopedia of Tinkering.",
+                     "paragraph":  true
+                 }
+             ]
+}

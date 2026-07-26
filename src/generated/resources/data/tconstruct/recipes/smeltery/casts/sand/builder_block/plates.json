@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:item_part_builder",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:plates"
+    }
+  ],
+  "pattern": "tconstruct:plate",
+  "pattern_item": {
+    "tag": "c:sand/colorless"
+  },
+  "result": {
+    "count": 4,
+    "item": "tconstruct:plate_sand_cast"
+  }
+}

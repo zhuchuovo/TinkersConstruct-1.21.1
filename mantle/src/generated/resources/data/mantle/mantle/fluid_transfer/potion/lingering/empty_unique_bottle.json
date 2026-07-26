@@ -1,0 +1,16 @@
+{
+  "type": "mantle:empty_potion",
+  "amount": 250,
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:bottles/lingering"
+    }
+  ],
+  "input": {
+    "item": "minecraft:lingering_potion"
+  },
+  "result": {
+    "tag": "c:bottles/lingering"
+  }
+}

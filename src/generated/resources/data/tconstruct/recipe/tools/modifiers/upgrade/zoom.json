@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "tag": "c:string"
+    },
+    {
+      "item": "minecraft:spyglass"
+    },
+    {
+      "tag": "c:string"
+    }
+  ],
+  "level": 1,
+  "result": "tconstruct:zoom",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "tag": "tconstruct:modifiable/armor/helmets"
+    },
+    {
+      "tag": "tconstruct:modifiable/interactable/charge"
+    }
+  ]
+}

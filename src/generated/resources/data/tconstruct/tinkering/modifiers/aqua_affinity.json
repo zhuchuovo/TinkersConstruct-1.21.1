@@ -1,0 +1,11 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:constant_enchantment",
+      "level": 1,
+      "name": "minecraft:aqua_affinity"
+    }
+  ],
+  "tooltip_display": "always"
+}

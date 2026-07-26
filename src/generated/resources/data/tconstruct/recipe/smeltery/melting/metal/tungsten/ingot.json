@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:ingots/tungsten"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/tungsten"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_tungsten"
+  },
+  "temperature": 950,
+  "time": 65
+}

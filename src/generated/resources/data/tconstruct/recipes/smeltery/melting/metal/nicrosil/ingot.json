@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:ingots/nicrosil"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/nicrosil"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_nicrosil"
+  },
+  "temperature": 1100,
+  "time": 69
+}

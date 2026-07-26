@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "allomancy:tin_flakes"
+    }
+  ],
+  "ingredient": {
+    "item": "allomancy:tin_flakes"
+  },
+  "result": {
+    "amount": 30,
+    "tag": "c:molten_tin"
+  },
+  "temperature": 225,
+  "time": 23
+}

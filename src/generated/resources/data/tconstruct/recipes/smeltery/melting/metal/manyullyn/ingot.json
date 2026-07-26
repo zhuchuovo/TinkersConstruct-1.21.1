@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "c:ingots/manyullyn"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_manyullyn"
+  },
+  "temperature": 1200,
+  "time": 72
+}

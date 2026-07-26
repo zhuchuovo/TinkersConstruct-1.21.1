@@ -1,0 +1,44 @@
+modLoader="javafml"
+loaderVersion="${loader_range}"
+issueTrackerURL="https://github.com/SlimeKnights/TinkersConstruct/issues"
+logoFile="logo.png"
+license="MIT"
+
+[[mods]]
+    modId="tconstruct"
+    version="${version}"
+    displayName="Tinkers' Construct"
+    authors="主厨"
+    enumExtensions="META-INF/enumextensions.json"
+    description='''
+基于匠魂3 3.12.0版本制作的neoforge移植版
+    '''
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/tinkers-construct"
+
+[[dependencies.tconstruct]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.tconstruct]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.tconstruct]]
+    modId="mantle"
+    type="required"
+    versionRange="${mantle_range}"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.tconstruct]]
+    modId="jei"
+    type="optional"
+    versionRange="${jei_range}"
+    ordering="NONE"
+    side="BOTH"

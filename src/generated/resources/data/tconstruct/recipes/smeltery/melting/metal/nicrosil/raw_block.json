@@ -1,0 +1,59 @@
+{
+  "type": "neoforge:conditional",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:storage_blocks/raw_nicrosil"
+    }
+  ],
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "mantle:tag_filled",
+          "tag": "c:ingots/chromium"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 810,
+            "rate": "metal",
+            "tag": "c:molten_chromium"
+          }
+        ],
+        "ingredient": {
+          "tag": "c:storage_blocks/raw_nicrosil"
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 810,
+          "tag": "c:molten_nicrosil"
+        },
+        "temperature": 1100,
+        "time": 416
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "neoforge:true"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "ingredient": {
+          "tag": "c:storage_blocks/raw_nicrosil"
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 810,
+          "tag": "c:molten_nicrosil"
+        },
+        "temperature": 1100,
+        "time": 416
+      }
+    }
+  ]
+}

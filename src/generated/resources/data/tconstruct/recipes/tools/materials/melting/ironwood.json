@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:material_melting",
+  "byproducts": [
+    {
+      "amount": 10,
+      "tag": "c:molten_gold"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:ingots/ironwood"
+    }
+  ],
+  "input": "tconstruct:ironwood",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_iron"
+  },
+  "temperature": 800
+}

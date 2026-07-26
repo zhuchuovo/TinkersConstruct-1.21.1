@@ -1,0 +1,40 @@
+{
+  "type": "neoforge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "ceramics"
+        }
+      ],
+      "recipe": {
+        "type": "ceramics:kiln",
+        "category": "misc",
+        "cookingtime": 100,
+        "experience": 0.3,
+        "ingredient": {
+          "item": "tconstruct:grout"
+        },
+        "result": "tconstruct:seared_brick"
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "neoforge:true"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:blasting",
+        "category": "misc",
+        "cookingtime": 100,
+        "experience": 0.3,
+        "ingredient": {
+          "item": "tconstruct:grout"
+        },
+        "result": "tconstruct:seared_brick"
+      }
+    }
+  ]
+}

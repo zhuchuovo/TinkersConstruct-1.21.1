@@ -1,0 +1,28 @@
+{
+    "type":  "tconstruct:showcase",
+    "title":  "Yükseltmeler",
+    "item":  {
+                 "type":  "neoforge:components",
+                 "items":  "tconstruct:creative_slot",
+                 "components":  {
+                                    "minecraft:custom_data":  {
+                                                                  "slot":  "upgrades"
+                                                              }
+                                }
+             },
+    "tooltip":  [
+                    "Yükseltme Yuvası İmgesi"
+                ],
+    "text":  [
+                 {
+                     "text":  "Yükseltmeler aracın olağan gelişimleridir. Genelde bir eşyayı uygulayarak ve onun bazı büyü niteliklerini \u0027bulaştırarak\u0027 yapılır, örneğin redstone araçları hızlı yapar. "
+                 },
+                 {
+                     "text":  "Çoğu araç 3 yükseltme yuvasıyla başlar ancak öbür değiştiricileri kullanarak daha fazla yuva alabilirsin."
+                 },
+                 {
+                     "text":  "Thruul M\u0027Gon\u0027un Cılız Kallama kitabı, Onarıcılığın Bilgiliği kitabı ile birlikte araçlar için kullanılabilir yükseltmelerin tümü sıralanmış biçimde bulunmaktadır.",
+                     "paragraph":  true
+                 }
+             ]
+}

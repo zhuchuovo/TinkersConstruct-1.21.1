@@ -1,0 +1,182 @@
+package slimeknights.mantle.client.book.transformer;
+
+import com.google.common.collect.Lists;
+import lombok.Getter;
+import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceLocation;
+import slimeknights.mantle.Mantle;
+import slimeknights.mantle.client.book.data.BookData;
+import slimeknights.mantle.client.book.data.PageData;
+import slimeknights.mantle.client.book.data.SectionData;
+import slimeknights.mantle.client.book.data.content.ContentListing;
+import slimeknights.mantle.client.book.data.content.ContentPadding.ContentRightPadding;
+import slimeknights.mantle.client.screen.book.BookScreen;
+import slimeknights.mantle.client.screen.book.TextDataRenderer;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Extended version of {@link ContentListingSectionTransformer} which supports putting entries in subgroups
+ */
+public class ContentGroupingSectionTransformer extends SectionTransformer {
+  private static final ResourceLocation INDEX_EXTRA_DATA = Mantle.getResource("index");
+
+  private final Boolean largeTitle;
+  private final Boolean centerTitle;
+  public ContentGroupingSectionTransformer(String sectionName, @Nullable Boolean largeTitle, @Nullable Boolean centerTitle) {
+    super(sectionName);
+    this.largeTitle = largeTitle;
+    this.centerTitle = centerTitle;
+  }
+
+  public ContentGroupingSectionTransformer(String sectionName) {
+    this(sectionName, null, null);
+  }
+
+  @Override
+  public void transform(BookData book, SectionData data) {
+    String title = book.translate(sectionName);
+    String subtextKey = sectionName + ".subtext";
+    String subText = null;
+    if (book.strings.containsKey(subtextKey)) {
+      subText = book.translate(subtextKey);
+    }
+
+    // start building the listing
+    GroupingBuilder builder = new GroupingBuilder(data, title, subText, largeTitle, centerTitle);
+    data.pages.removeIf(sectionPage -> !processPage(book, builder, sectionPage));
+
+    // create pages for each listing if any exist
+    if (builder.hasEntries()) {
+      // add padding page to keep indexes stretching over two pages together
+      int i = 0;
+      List<ContentListing> finishedListings = builder.getFinishedListings();
+      List<PageData> newPages = new ArrayList<>(finishedListings.size() + 1);
+      if (finishedListings.size() % 2 == 0) {
+        PageData padding = new PageData(true);
+        padding.source = data.source;
+        padding.parent = data;
+        padding.content = new ContentRightPadding();
+        padding.load();
+        // hack: add padding to the previous section so section links start at the index
+        int sectionIndex = data.parent.sections.indexOf(data);
+        if (sectionIndex > 0) {
+          data.parent.sections.get(sectionIndex - 1).pages.add(padding);
+        } else {
+          newPages.add(padding);
+        }
+      }
+
+      // add a page for each finished listing
+      for (ContentListing listing : finishedListings) {
+        PageData listingPage = new PageData(true);
+        listingPage.name = sectionName;
+        listingPage.source = data.source;
+        listingPage.parent = data;
+        listingPage.content = listing;
+        listingPage.load();
+        newPages.add(listingPage);
+      }
+      // add new pages at the start of the section
+      data.pages.addAll(0, newPages);
+    }
+  }
+
+  /** Overridable method to process a single page */
+  protected boolean processPage(BookData book, GroupingBuilder builder, PageData page) {
+    if (!IndexTransformer.isPageHidden(page) && !page.name.equals("hidden")) {
+      builder.addPage(page.getTitle(), page);
+    }
+    return true;
+  }
+
+  /** Builder to create a all content listing pages */
+  public static class GroupingBuilder {
+    private static final int COLUMN_WIDTH = BookScreen.PAGE_WIDTH / 3;
+
+    /** Section containing this grouping */
+    private final SectionData section;
+    /** Number of columns on the page, makes a new page if its 3 */
+    private int columns = 1;
+    /** Number of entries in the current column, when too big a new column starts */
+    private int entriesInColumn = 0;
+    /** Max number of entries in a column */
+    private int maxInColumn;
+    /** Listing that is currently being built */
+    private ContentListing currentListing = new ContentListing();
+    /** All listings to include in the book */
+    @Getter
+    private final List<ContentListing> finishedListings = Lists.newArrayList(currentListing);
+
+    public GroupingBuilder(SectionData section, @Nullable String title, @Nullable String subText, @Nullable Boolean largeTitle, @Nullable Boolean centerTitle) {
+      this.section = section;
+      currentListing.title = title;
+      currentListing.subText = subText;
+      currentListing.setLargeTitle(largeTitle);
+      currentListing.setCenterTitle(centerTitle);
+      maxInColumn = currentListing.getEntriesInColumn(section);
+    }
+
+    /** If true, entries were added */
+    public boolean hasEntries() {
+      return entriesInColumn > 0; // should be sufficient, only 0 when nothing is added
+    }
+
+    /** Gets the number of entries needed to represent the given text. */
+    private int entryCount(String text, boolean bold) {
+      if (bold) {
+        return TextDataRenderer.getLinesForString(text, ChatFormatting.BOLD.toString(), COLUMN_WIDTH, "", section.parent.fontRenderer);
+      } else {
+        return TextDataRenderer.getLinesForString(text, "", COLUMN_WIDTH, "- ", section.parent.fontRenderer);
+      }
+    }
+
+    /** Starts a new column */
+    private void startNewColumn(boolean forceBreak) {
+      // already have 3 columns? start a new one
+      if (columns == 3) {
+        currentListing = new ContentListing();
+        ContentListing firstListing = finishedListings.get(0);
+        currentListing.title = firstListing.title;
+        currentListing.setLargeTitle(firstListing.getLargeTitle());
+        currentListing.setCenterTitle(firstListing.getCenterTitle());
+        maxInColumn = currentListing.getEntriesInColumn(section);
+        finishedListings.add(currentListing);
+        columns = 1;
+      } else {
+        // 1 or 2 columns? force break
+        columns++;
+        if (forceBreak) {
+          currentListing.addColumnBreak();
+        }
+      }
+      entriesInColumn = 0;
+    }
+
+    /** Adds a group to this listing */
+    public void addGroup(String name, @Nullable PageData data) {
+      // if a group already exists, start a new column
+      if (entriesInColumn != 0) {
+        startNewColumn(true);
+      }
+
+      // add the title entry to the column
+      entriesInColumn += entryCount(name, true);
+      currentListing.addEntry(name, data, true);
+    }
+
+    /** Adds a page to the current group in the listing */
+    public void addPage(String name, PageData data) {
+      int needed = entryCount(name, false);
+      // if no space for the number of entries we want to add, start the next column
+      // ensure it's not 0 though, handles a potential edge case where this needs more rows than we support
+      if (entriesInColumn > 0 && entriesInColumn + needed > maxInColumn) {
+        startNewColumn(false);
+      }
+      entriesInColumn += needed;
+      currentListing.addEntry(name, data, false);
+    }
+  }
+}

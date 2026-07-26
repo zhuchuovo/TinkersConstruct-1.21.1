@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:gears/steel"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:gears/steel"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_steel"
+  },
+  "temperature": 950,
+  "time": 130
+}

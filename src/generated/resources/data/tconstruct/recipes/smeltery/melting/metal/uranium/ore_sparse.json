@@ -1,0 +1,85 @@
+{
+  "type": "neoforge:conditional",
+  "conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "neoforge:ores/uranium",
+        "neoforge:ore_rates/sparse"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "mantle:tag_filled",
+          "tag": "c:ingots/lead"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 90,
+            "rate": "metal",
+            "tag": "c:molten_lead"
+          }
+        ],
+        "ingredient": {
+          "type": "neoforge:intersection",
+          "children": [
+            {
+              "tag": "c:ores/uranium"
+            },
+            {
+              "tag": "c:ore_rates/sparse"
+            }
+          ]
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 90,
+          "tag": "c:molten_uranium"
+        },
+        "temperature": 830,
+        "time": 92
+      }
+    },
+    {
+      "conditions": [
+        {
+          "type": "neoforge:true"
+        }
+      ],
+      "recipe": {
+        "type": "tconstruct:ore_melting",
+        "byproducts": [
+          {
+            "amount": 90,
+            "rate": "metal",
+            "tag": "c:molten_copper"
+          }
+        ],
+        "ingredient": {
+          "type": "neoforge:intersection",
+          "children": [
+            {
+              "tag": "c:ores/uranium"
+            },
+            {
+              "tag": "c:ore_rates/sparse"
+            }
+          ]
+        },
+        "rate": "metal",
+        "result": {
+          "amount": 90,
+          "tag": "c:molten_uranium"
+        },
+        "temperature": 830,
+        "time": 92
+      }
+    }
+  ]
+}

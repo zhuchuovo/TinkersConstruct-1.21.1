@@ -1,0 +1,22 @@
+{
+  "type": "mantle:fill_nbt",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "registry": "minecraft:fluid",
+      "tag": "c:potion"
+    },
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:bottles/lingering"
+    }
+  ],
+  "fluid": {
+    "amount": 250,
+    "tag": "c:potion"
+  },
+  "input": {
+    "tag": "c:bottles/lingering"
+  },
+  "result": "minecraft:lingering_potion"
+}

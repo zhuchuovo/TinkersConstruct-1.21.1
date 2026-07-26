@@ -1,0 +1,13 @@
+{
+  "tag": "c:potion",
+  "units": [
+    {
+      "key": "gui.mantle.fluid.bottle",
+      "needed": 250
+    },
+    {
+      "key": "gui.mantle.fluid.sip",
+      "needed": 50
+    }
+  ]
+}

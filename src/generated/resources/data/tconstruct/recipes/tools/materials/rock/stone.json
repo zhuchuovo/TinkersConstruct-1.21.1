@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "c:normal_stone"
+  },
+  "material": "tconstruct:rock#stone",
+  "needed": 1,
+  "value": 1
+}

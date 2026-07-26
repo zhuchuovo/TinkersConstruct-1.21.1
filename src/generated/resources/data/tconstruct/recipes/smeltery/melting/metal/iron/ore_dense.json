@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:ore_melting",
+  "byproducts": [
+    {
+      "amount": 540,
+      "rate": "metal",
+      "tag": "c:molten_steel"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "neoforge:ores/iron",
+        "neoforge:ore_rates/dense"
+      ]
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "c:ores/iron"
+      },
+      {
+        "tag": "c:ore_rates/dense"
+      }
+    ]
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 540,
+    "tag": "c:molten_iron"
+  },
+  "temperature": 800,
+  "time": 271
+}

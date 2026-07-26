@@ -1,0 +1,52 @@
+{
+  "mantle:tooltip.cooktime": "Temps de cuisson : %ds",
+  "config.mantle.extraHeartRenderer": "Activer le rendu des cœurs supplémentaires",
+
+  "command.mantle.view_tag.success": "Valeurs pour l'étiquette %s « %s » :",
+
+  "command.mantle.tags_for.success": "Étiquettes %s pour « %s » :",
+  "command.mantle.tags_for.not_found": "Valeur de registre %s inconnue « %s »",
+  "command.mantle.tags_for.no_held_block": "L'objet tenu n'est pas un bloc",
+  "command.mantle.tags_for.no_held_entity": "L'objet tenu n'est pas un œuf de réapparition",
+  "command.mantle.tags_for.no_held_potion": "L'objet tenu n'est pas une potion",
+  "command.mantle.tags_for.no_held_fluid": "Impossible d'obtenir un fluide à partir de l'objet tenu",
+  "command.mantle.tags_for.no_held_enchantment": "L'objet tenu n'est pas enchanté",
+  "command.mantle.tags_for.no_targeted_entity": "Aucune entité à portée",
+  "command.mantle.tags_for.no_targeted_block_entity": "Aucun bloc entité ciblé",
+  "command.mantle.tags_for.no_tags": "Aucune étiquette",
+  "command.mantle.book_test.not_found": "Livre inconnu avec l'ID %s",
+  "command.mantle.book.export.success": "Images du livre exportées vers « %s »",
+  "command.mantle.book.export.error_generic": "Échec de l'exportation des images du livre, voir les logs pour plus de détails",
+  "command.mantle.book.export.error_io": "Échec de la création du dossier pour les images du livre « %s »",
+
+  "command.mantle.dump_tag.success": "Étiquette %s combinée « %s » imprimée dans les logs de la console",
+  "command.mantle.dump_tag.read_error": "Erreur lors de la lecture de l'étiquette %s « %s » :",
+  "command.mantle.dump_tag.success_log": "Étiquette %s combinée « %s » exportée vers « %s »",
+  "command.mantle.dump_all_tags.success": "Toutes les étiquettes exportées vers « %s »",
+  "command.mantle.dump_all_tags.type_success": "Toutes les étiquettes %s exportées vers « %s »",
+
+  "command.mantle.dump_loot_modifiers.success_log": "Modificateurs de butin globaux combinés imprimés dans les logs de la console",
+  "command.mantle.dump_loot_modifiers.success_save": "Modificateurs de butin globaux combinés exportés vers « %s »",
+  "command.mantle.dump_loot_modifiers.read_error": "Erreur de lecture des modificateurs de butin globaux",
+
+  "command.mantle.harvest_tiers.success_log": "Niveaux de récolte triés imprimés dans les logs de la console",
+  "command.mantle.harvest_tiers.success_save": "Niveaux de récolte triés exportés vers « %s »",
+  "command.mantle.harvest_tiers.success_list": "Niveaux de récolte :",
+  "command.mantle.harvest_tiers.tag": "%s: Étiquette de bloc %s",
+  "command.mantle.harvest_tiers.no_tag": "%s: Aucune étiquette",
+
+  "command.mantle.tag.empty": "Vide",
+  "command.mantle.registry.not_found": "Registre inconnu « %s »",
+  "command.mantle.tag.not_found": "Étiquette %s inconnue « %s »",
+
+  "command.mantle.tag_preference.empty_tag": "Aucune préférence pour l'étiquette %s %s",
+  "command.mantle.tag_preference.preference": "Valeur préférée pour l'étiquette %s %s : %s",
+
+  "gui.mantle.fluid.hold_shift": "Maintenez §e§oShift§r§7 pour les seaux",
+  "gui.mantle.fluid.kilobucket": "%s ks",
+  "gui.mantle.fluid.bucket": "%s s",
+  "gui.mantle.fluid.millibucket": "%s ms",
+
+  "block.mantle.tank.drained": "Vidangé de %s ms %s",
+  "block.mantle.tank.filled": "Rempli de %s ms de %s"
+}

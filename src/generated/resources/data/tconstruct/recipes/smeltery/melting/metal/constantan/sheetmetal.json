@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:sheetmetals/constantan"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:sheetmetals/constantan"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_constantan"
+  },
+  "temperature": 920,
+  "time": 64
+}

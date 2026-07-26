@@ -1,0 +1,14 @@
+{
+  "modifier_id": "tconstruct:revitalizing",
+  "text": [
+    {
+      "text": "宝钻苹果，回归本源。"
+    }
+  ],
+  "effects": [
+    "每级增加1心",
+    "可以逐级强化",
+    "最高5级",
+    "需要1个防御槽"
+  ]
+}

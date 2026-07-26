@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "c:storage_blocks/iron"
+  },
+  "result": {
+    "amount": 810,
+    "tag": "c:molten_iron"
+  },
+  "temperature": 800,
+  "time": 180
+}

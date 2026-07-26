@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:casting_basin",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:storage_blocks/zinc"
+    }
+  ],
+  "cooling_time": 141,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_zinc"
+  },
+  "result": {
+    "tag": "c:storage_blocks/zinc"
+  }
+}

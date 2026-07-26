@@ -1,0 +1,61 @@
+{
+    "title":  "Reparando",
+    "grid_size":  "small",
+    "grid":  [
+                 [
+                     {
+                         "type":  "neoforge:components",
+                         "items":  "tconstruct:pickaxe",
+                         "components":  {
+                                            "minecraft:damage":  70,
+                                            "minecraft:custom_data":  {
+                                                                          "tic_broken":  false,
+                                                                          "tic_display":  true,
+                                                                          "tic_materials":  [
+                                                                                                "tconstruct:ui_render#head",
+                                                                                                "tconstruct:ui_render#handle",
+                                                                                                "tconstruct:ui_render#extra"
+                                                                                            ],
+                                                                          "tic_stats":  {
+                                                                                            "tconstruct:durability":  100
+                                                                                        }
+                                                                      }
+                                        }
+                     },
+                     {
+                         "type":  "neoforge:components",
+                         "items":  "tconstruct:repair_kit",
+                         "components":  {
+                                            "minecraft:custom_data":  {
+                                                                          "tic_display":  true,
+                                                                          "Material":  "tconstruct:ui_render#head"
+                                                                      }
+                                        }
+                     }
+                 ]
+             ],
+    "result":  {
+                   "type":  "neoforge:components",
+                   "items":  "tconstruct:pickaxe",
+                   "components":  {
+                                      "minecraft:damage":  10,
+                                      "minecraft:custom_data":  {
+                                                                    "tic_broken":  false,
+                                                                    "tic_display":  true,
+                                                                    "tic_materials":  [
+                                                                                          "tconstruct:ui_render#head",
+                                                                                          "tconstruct:ui_render#handle",
+                                                                                          "tconstruct:ui_render#extra"
+                                                                                      ],
+                                                                    "tic_stats":  {
+                                                                                      "tconstruct:durability":  100
+                                                                                  }
+                                                                }
+                                  }
+               },
+    "description":  [
+                        {
+                            "text":  "Para reparar ferramentas, basta colocar a ferramenta na Estação do Tinker ou na Bigorna do Tinker com o material da cabeça.  Como alternativa, você pode usar kits de reparo, que funcionam tanto nas mesas de trabalho quanto ao clicar com o botão direito diretamente na ferramenta!"
+                        }
+                    ]
+}

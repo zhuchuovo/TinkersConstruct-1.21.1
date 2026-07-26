@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material_melting",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:ingots/aluminum"
+    }
+  ],
+  "input": "tconstruct:aluminum",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_aluminum"
+  },
+  "temperature": 425
+}

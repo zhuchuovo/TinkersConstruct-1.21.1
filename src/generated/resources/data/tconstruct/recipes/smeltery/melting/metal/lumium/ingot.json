@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:ingots/lumium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/lumium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_lumium"
+  },
+  "temperature": 1050,
+  "time": 68
+}

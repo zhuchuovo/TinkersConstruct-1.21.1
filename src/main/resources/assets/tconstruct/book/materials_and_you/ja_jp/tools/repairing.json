@@ -1,0 +1,62 @@
+{
+    "title":  "修理",
+    "grid_size":  "small",
+    "grid":  [
+                 [
+                     {
+                         "type":  "neoforge:components",
+                         "items":  "tconstruct:pickaxe",
+                         "components":  {
+                                            "minecraft:damage":  70,
+                                            "minecraft:custom_data":  {
+                                                                          "tic_broken":  false,
+                                                                          "tic_display":  true,
+                                                                          "tic_materials":  [
+                                                                                                "tconstruct:ui_render#head",
+                                                                                                "tconstruct:ui_render#handle",
+                                                                                                "tconstruct:ui_render#extra"
+                                                                                            ],
+                                                                          "tic_stats":  {
+                                                                                            "tconstruct:durability":  100
+                                                                                        }
+                                                                      }
+                                        }
+                     },
+                     {
+                         "type":  "neoforge:components",
+                         "items":  "tconstruct:repair_kit",
+                         "components":  {
+                                            "minecraft:custom_data":  {
+                                                                          "tic_display":  true,
+                                                                          "Material":  "tconstruct:ui_render#head"
+                                                                      }
+                                        }
+                     }
+                 ]
+             ],
+    "result":  {
+                   "type":  "neoforge:components",
+                   "items":  "tconstruct:pickaxe",
+                   "components":  {
+                                      "minecraft:damage":  10,
+                                      "minecraft:custom_data":  {
+                                                                    "tic_broken":  false,
+                                                                    "tic_display":  true,
+                                                                    "tic_materials":  [
+                                                                                          "tconstruct:ui_render#head",
+                                                                                          "tconstruct:ui_render#handle",
+                                                                                          "tconstruct:ui_render#extra"
+                                                                                      ],
+                                                                    "tic_stats":  {
+                                                                                      "tconstruct:durability":  100
+                                                                                  }
+                                                                }
+                                  }
+               },
+    "description":  [
+                        {
+                            "text":  "道具を壊したくないのであれば、道具を修理することはとても重要なことです。ティンカー台またはティンカー金床に道具とヘッド部または板部の素材を置くと修理できます。また、作業台でも使えるリペアキットを使うこともできます。",
+                            "paragraph":  true
+                        }
+                    ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "c:storage_blocks/netherite"
+  },
+  "result": {
+    "amount": 810,
+    "tag": "c:molten_netherite"
+  },
+  "temperature": 1250,
+  "time": 221
+}

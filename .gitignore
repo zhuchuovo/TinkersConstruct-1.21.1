@@ -1,0 +1,48 @@
+# Gradle caches and build output
+.gradle/
+**/build/
+
+# Local Minecraft runtime and migration workspace
+/run/
+/.migration/
+/data/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+/out/
+
+# Logs and crash output
+*.log
+*.log.gz
+crash-reports/
+hs_err_pid*
+replay_pid*
+
+# Compiled and packaged files
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Gradle Wrapper is required to build a fresh clone
+!gradle/wrapper/gradle-wrapper.jar
+!mantle/gradle/wrapper/gradle-wrapper.jar
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*~
+
+# Generated resource caches only; generated resources themselves are required
+**/.cache/

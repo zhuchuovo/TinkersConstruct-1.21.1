@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:dusts/enderium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/enderium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_enderium"
+  },
+  "temperature": 1350,
+  "time": 57
+}

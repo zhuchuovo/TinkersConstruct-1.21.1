@@ -1,0 +1,10 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:repair",
+      "each_level": 0.5
+    }
+  ],
+  "tooltip_display": "always"
+}

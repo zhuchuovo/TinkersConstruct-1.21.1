@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:armors/boots/tin"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:armors/boots/tin"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_tin",
+    "unit_size": 10
+  },
+  "temperature": 225,
+  "time": 78
+}

@@ -1,0 +1,28 @@
+{
+    "type":  "tconstruct:showcase",
+    "title":  "Melhorias",
+    "item":  {
+                 "type":  "neoforge:components",
+                 "items":  "tconstruct:creative_slot",
+                 "components":  {
+                                    "minecraft:custom_data":  {
+                                                                  "slot":  "upgrades"
+                                                              }
+                                }
+             },
+    "tooltip":  [
+                    "Ícone de Slot de Melhoria"
+                ],
+    "text":  [
+                 {
+                     "text":  "As melhorias são aprimoramentos essenciais para qualquer ferramenta. Essas Geralmente são feitas aplicando um item e \u0027esfregando\u0027 algumas de suas qualidades mágicas, como por exemplo a redstone tornando as ferramentas mais rápidas."
+                 },
+                 {
+                     "text":  "A maioria das ferramentas começa com cerca de 3 slots de melhoria, embora seja possível obter mais slots por meio de outros tipos de modificadores."
+                 },
+                 {
+                     "text":  "No livro \u0027Fundições Frágeis\u0027 de Thruul M\u0027Gon contém uma lista completa de melhorias disponíveis para ferramentas, juntamente com a \u0027Enciclopédia do Tinkerando\u0027.",
+                     "paragraph":  true
+                 }
+             ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:nuggets/fiery"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/fiery"
+  },
+  "material": "tconstruct:fiery",
+  "needed": 9,
+  "value": 1
+}

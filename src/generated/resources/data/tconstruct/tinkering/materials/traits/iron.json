@@ -1,0 +1,26 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:magnetic"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "tconstruct:projectile_protection"
+      }
+    ],
+    "tconstruct:skull": [
+      {
+        "level": 1,
+        "name": "tconstruct:plague"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:husk_disguise"
+      }
+    ]
+  }
+}

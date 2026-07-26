@@ -1,0 +1,28 @@
+{
+    "type":  "tconstruct:showcase",
+    "title":  "Habilidades",
+    "item":  {
+                 "type":  "neoforge:components",
+                 "items":  "tconstruct:creative_slot",
+                 "components":  {
+                                    "minecraft:custom_data":  {
+                                                                  "slot":  "abilities"
+                                                              }
+                                }
+             },
+    "tooltip":  [
+                    "Ícone do Slot de Habilidade"
+                ],
+    "text":  [
+                 {
+                     "text":  "As habilidades são modificadores poderosos que mudam drasticamente uma ferramenta. Modificadores como \u0027Sedoso\u0027 e \u0027Auto-Fundição\u0027 são notáveis, pois ambos alteram os efeitos da mineração de blocos, enquanto a \u0027Dupla Empunhadura\u0027 torna as ferramentas muito mais fáceis de manusear."
+                 },
+                 {
+                     "text":  "Quase todas as ferramentas começam com um único slot de habilidade e podem receber até 2 adicionais, então escolha as habilidades com sabedoria."
+                 },
+                 {
+                     "text":  "No livro \u0027Fundições Poderosas\u0027 de Thruul M\u0027Gon tem uma lista completa de habilidades disponíveis para as ferramentas, juntamente com a \u0027Enciclopédia do Tinkerando\u0027.",
+                     "paragraph":  true
+                 }
+             ]
+}
