@@ -37,7 +37,6 @@ replay_pid*
 
 # Gradle Wrapper is required to build a fresh clone
 !gradle/wrapper/gradle-wrapper.jar
-!mantle/gradle/wrapper/gradle-wrapper.jar
 
 # OS and editor files
 .DS_Store

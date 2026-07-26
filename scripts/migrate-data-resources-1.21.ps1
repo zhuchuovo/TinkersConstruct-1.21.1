@@ -4,6 +4,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 $workspace = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$mantleWorkspace = [IO.Path]::GetFullPath((Join-Path $workspace "../Mantle-1.21.1"))
+if (-not (Test-Path -LiteralPath $mantleWorkspace -PathType Container)) {
+  throw "Mantle project not found: $mantleWorkspace"
+}
 $data = (Resolve-Path (Join-Path $workspace $DataRoot)).Path
 $namespaceRoot = Split-Path -Parent $data
 
@@ -235,9 +239,9 @@ if (Test-Path -LiteralPath $legacyGlobalLootModifiers) {
   $globalLootModifierCount = @($globalLootModifiers.entries).Count
 }
 
-# Mantle is bundled as a subproject. Its block and fluid tag registry folders
+# Mantle is stored as a sibling Gradle project. Its block and fluid tag registry folders
 # also changed from plural to singular in 1.21.
-$mantleGeneratedResources = Join-Path $workspace "mantle/src/generated/resources"
+$mantleGeneratedResources = Join-Path $mantleWorkspace "src/generated/resources"
 $mantleTagCount = 0
 foreach ($tagType in @(@("blocks", "block"), @("fluids", "fluid"))) {
   $source = Join-Path $mantleGeneratedResources "data/mantle/tags/$($tagType[0])"
@@ -281,7 +285,7 @@ if (Test-Path -LiteralPath $bookRoot) {
 $resourceRoots = @(
   (Join-Path $workspace "src/main/resources"),
   (Join-Path $workspace "src/generated/resources"),
-  (Join-Path $workspace "mantle/src/main/resources"),
+  (Join-Path $mantleWorkspace "src/main/resources"),
   $mantleGeneratedResources
 ) | Where-Object { Test-Path -LiteralPath $_ }
 

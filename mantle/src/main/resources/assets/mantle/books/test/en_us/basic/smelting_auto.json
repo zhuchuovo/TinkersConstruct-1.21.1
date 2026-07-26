@@ -1,9 +1,0 @@
-{
-  "title": "Smelting (auto populated)",
-  "recipe": "minecraft:charcoal",
-  "description": [
-    {
-      "text": "This smelting recipe is automatically populated"
-    }
-  ]
-}
