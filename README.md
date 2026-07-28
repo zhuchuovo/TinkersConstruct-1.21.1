@@ -11,15 +11,11 @@
 - 状态：开发与适配中，部分内容可能尚未完成
 
 ## 项目目录
-
-Mantle 与 Tinkers' Construct 分别存放在同级目录中：
-
-```text
-mcmod/
-├─ Mantle-1.21.1/
-└─ TinkersConstruct-1.21.1/
 ```
-
+TinkersConstruct-1.21.1/
+```
+Mantle-1.21.1
+https://github.com/zhuchuovo/Mantle-1.21.1
 ## 构建
 
 环境要求：JDK 21。进入 TinkersConstruct 项目目录执行：
