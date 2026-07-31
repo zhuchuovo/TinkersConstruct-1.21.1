@@ -5,11 +5,12 @@
                                              "conditions":  {
                                                                 "items":  [
                                                                               {
-                                                                                  "type":  "tconstruct:tool_stack",
-                                                                                  "predicate":  {
-                                                                                                    "type":  "tconstruct:has_material",
-                                                                                                    "material":  "tconstruct:amethyst_bronze"
-                                                                                                }
+                                                                                  "predicates":  {
+                                                                                                     "tconstruct:tool_stack":  {
+                                                                                                                                   "type":  "tconstruct:has_material",
+                                                                                                                                   "material":  "tconstruct:amethyst_bronze"
+                                                                                                                               }
+                                                                                                 }
                                                                               }
                                                                           ]
                                                             },
@@ -19,11 +20,12 @@
                                     "conditions":  {
                                                        "items":  [
                                                                      {
-                                                                         "type":  "tconstruct:tool_stack",
-                                                                         "predicate":  {
-                                                                                           "type":  "tconstruct:has_material",
-                                                                                           "material":  "tconstruct:bamboo"
-                                                                                       }
+                                                                         "predicates":  {
+                                                                                            "tconstruct:tool_stack":  {
+                                                                                                                          "type":  "tconstruct:has_material",
+                                                                                                                          "material":  "tconstruct:bamboo"
+                                                                                                                      }
+                                                                                        }
                                                                      }
                                                                  ]
                                                    },
@@ -33,11 +35,12 @@
                                        "conditions":  {
                                                           "items":  [
                                                                         {
-                                                                            "type":  "tconstruct:tool_stack",
-                                                                            "predicate":  {
-                                                                                              "type":  "tconstruct:has_material",
-                                                                                              "material":  "tconstruct:blazewood"
-                                                                                          }
+                                                                            "predicates":  {
+                                                                                               "tconstruct:tool_stack":  {
+                                                                                                                             "type":  "tconstruct:has_material",
+                                                                                                                             "material":  "tconstruct:blazewood"
+                                                                                                                         }
+                                                                                           }
                                                                         }
                                                                     ]
                                                       },
@@ -47,11 +50,12 @@
                                           "conditions":  {
                                                              "items":  [
                                                                            {
-                                                                               "type":  "tconstruct:tool_stack",
-                                                                               "predicate":  {
-                                                                                                 "type":  "tconstruct:has_material",
-                                                                                                 "material":  "tconstruct:blazing_bone"
-                                                                                             }
+                                                                               "predicates":  {
+                                                                                                  "tconstruct:tool_stack":  {
+                                                                                                                                "type":  "tconstruct:has_material",
+                                                                                                                                "material":  "tconstruct:blazing_bone"
+                                                                                                                            }
+                                                                                              }
                                                                            }
                                                                        ]
                                                          },
@@ -61,11 +65,12 @@
                                   "conditions":  {
                                                      "items":  [
                                                                    {
-                                                                       "type":  "tconstruct:tool_stack",
-                                                                       "predicate":  {
-                                                                                         "type":  "tconstruct:has_material",
-                                                                                         "material":  "tconstruct:bone"
-                                                                                     }
+                                                                       "predicates":  {
+                                                                                          "tconstruct:tool_stack":  {
+                                                                                                                        "type":  "tconstruct:has_material",
+                                                                                                                        "material":  "tconstruct:bone"
+                                                                                                                    }
+                                                                                      }
                                                                    }
                                                                ]
                                                  },
@@ -75,11 +80,12 @@
                                     "conditions":  {
                                                        "items":  [
                                                                      {
-                                                                         "type":  "tconstruct:tool_stack",
-                                                                         "predicate":  {
-                                                                                           "type":  "tconstruct:has_material",
-                                                                                           "material":  "tconstruct:chorus"
-                                                                                       }
+                                                                         "predicates":  {
+                                                                                            "tconstruct:tool_stack":  {
+                                                                                                                          "type":  "tconstruct:has_material",
+                                                                                                                          "material":  "tconstruct:chorus"
+                                                                                                                      }
+                                                                                        }
                                                                      }
                                                                  ]
                                                    },
@@ -89,11 +95,12 @@
                                          "conditions":  {
                                                             "items":  [
                                                                           {
-                                                                              "type":  "tconstruct:tool_stack",
-                                                                              "predicate":  {
-                                                                                                "type":  "tconstruct:has_material",
-                                                                                                "material":  "tconstruct:cinderslime"
-                                                                                            }
+                                                                              "predicates":  {
+                                                                                                 "tconstruct:tool_stack":  {
+                                                                                                                               "type":  "tconstruct:has_material",
+                                                                                                                               "material":  "tconstruct:cinderslime"
+                                                                                                                           }
+                                                                                             }
                                                                           }
                                                                       ]
                                                         },
@@ -103,11 +110,12 @@
                                     "conditions":  {
                                                        "items":  [
                                                                      {
-                                                                         "type":  "tconstruct:tool_stack",
-                                                                         "predicate":  {
-                                                                                           "type":  "tconstruct:has_material",
-                                                                                           "material":  "tconstruct:cobalt"
-                                                                                       }
+                                                                         "predicates":  {
+                                                                                            "tconstruct:tool_stack":  {
+                                                                                                                          "type":  "tconstruct:has_material",
+                                                                                                                          "material":  "tconstruct:cobalt"
+                                                                                                                      }
+                                                                                        }
                                                                      }
                                                                  ]
                                                    },
@@ -117,11 +125,12 @@
                                     "conditions":  {
                                                        "items":  [
                                                                      {
-                                                                         "type":  "tconstruct:tool_stack",
-                                                                         "predicate":  {
-                                                                                           "type":  "tconstruct:has_material",
-                                                                                           "material":  "tconstruct:copper"
-                                                                                       }
+                                                                         "predicates":  {
+                                                                                            "tconstruct:tool_stack":  {
+                                                                                                                          "type":  "tconstruct:has_material",
+                                                                                                                          "material":  "tconstruct:copper"
+                                                                                                                      }
+                                                                                        }
                                                                      }
                                                                  ]
                                                    },
@@ -131,11 +140,12 @@
                                         "conditions":  {
                                                            "items":  [
                                                                          {
-                                                                             "type":  "tconstruct:tool_stack",
-                                                                             "predicate":  {
-                                                                                               "type":  "tconstruct:has_material",
-                                                                                               "material":  "tconstruct:darkthread"
-                                                                                           }
+                                                                             "predicates":  {
+                                                                                                "tconstruct:tool_stack":  {
+                                                                                                                              "type":  "tconstruct:has_material",
+                                                                                                                              "material":  "tconstruct:darkthread"
+                                                                                                                          }
+                                                                                            }
                                                                          }
                                                                      ]
                                                        },
@@ -145,11 +155,12 @@
                                              "conditions":  {
                                                                 "items":  [
                                                                               {
-                                                                                  "type":  "tconstruct:tool_stack",
-                                                                                  "predicate":  {
-                                                                                                    "type":  "tconstruct:has_material",
-                                                                                                    "material":  "tconstruct:enderslime_vine"
-                                                                                                }
+                                                                                  "predicates":  {
+                                                                                                     "tconstruct:tool_stack":  {
+                                                                                                                                   "type":  "tconstruct:has_material",
+                                                                                                                                   "material":  "tconstruct:enderslime_vine"
+                                                                                                                               }
+                                                                                                 }
                                                                               }
                                                                           ]
                                                             },
@@ -159,11 +170,12 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "type":  "tconstruct:tool_stack",
-                                                                        "predicate":  {
-                                                                                          "type":  "tconstruct:has_material",
-                                                                                          "material":  "tconstruct:flint"
-                                                                                      }
+                                                                        "predicates":  {
+                                                                                           "tconstruct:tool_stack":  {
+                                                                                                                         "type":  "tconstruct:has_material",
+                                                                                                                         "material":  "tconstruct:flint"
+                                                                                                                     }
+                                                                                       }
                                                                     }
                                                                 ]
                                                   },
@@ -173,11 +185,12 @@
                                        "conditions":  {
                                                           "items":  [
                                                                         {
-                                                                            "type":  "tconstruct:tool_stack",
-                                                                            "predicate":  {
-                                                                                              "type":  "tconstruct:has_material",
-                                                                                              "material":  "tconstruct:hepatizon"
-                                                                                          }
+                                                                            "predicates":  {
+                                                                                               "tconstruct:tool_stack":  {
+                                                                                                                             "type":  "tconstruct:has_material",
+                                                                                                                             "material":  "tconstruct:hepatizon"
+                                                                                                                         }
+                                                                                           }
                                                                         }
                                                                     ]
                                                       },
@@ -187,11 +200,12 @@
                                        "conditions":  {
                                                           "items":  [
                                                                         {
-                                                                            "type":  "tconstruct:tool_stack",
-                                                                            "predicate":  {
-                                                                                              "type":  "tconstruct:has_material",
-                                                                                              "material":  "tconstruct:ichorskin"
-                                                                                          }
+                                                                            "predicates":  {
+                                                                                               "tconstruct:tool_stack":  {
+                                                                                                                             "type":  "tconstruct:has_material",
+                                                                                                                             "material":  "tconstruct:ichorskin"
+                                                                                                                         }
+                                                                                           }
                                                                         }
                                                                     ]
                                                       },
@@ -201,11 +215,12 @@
                                   "conditions":  {
                                                      "items":  [
                                                                    {
-                                                                       "type":  "tconstruct:tool_stack",
-                                                                       "predicate":  {
-                                                                                         "type":  "tconstruct:has_material",
-                                                                                         "material":  "tconstruct:iron"
-                                                                                     }
+                                                                       "predicates":  {
+                                                                                          "tconstruct:tool_stack":  {
+                                                                                                                        "type":  "tconstruct:has_material",
+                                                                                                                        "material":  "tconstruct:iron"
+                                                                                                                    }
+                                                                                      }
                                                                    }
                                                                ]
                                                  },
@@ -215,11 +230,12 @@
                                           "conditions":  {
                                                              "items":  [
                                                                            {
-                                                                               "type":  "tconstruct:tool_stack",
-                                                                               "predicate":  {
-                                                                                                 "type":  "tconstruct:has_material",
-                                                                                                 "material":  "tconstruct:jeweled_hide"
-                                                                                             }
+                                                                               "predicates":  {
+                                                                                                  "tconstruct:tool_stack":  {
+                                                                                                                                "type":  "tconstruct:has_material",
+                                                                                                                                "material":  "tconstruct:jeweled_hide"
+                                                                                                                            }
+                                                                                              }
                                                                            }
                                                                        ]
                                                          },
@@ -229,11 +245,12 @@
                                          "conditions":  {
                                                             "items":  [
                                                                           {
-                                                                              "type":  "tconstruct:tool_stack",
-                                                                              "predicate":  {
-                                                                                                "type":  "tconstruct:has_material",
-                                                                                                "material":  "tconstruct:knightmetal"
-                                                                                            }
+                                                                              "predicates":  {
+                                                                                                 "tconstruct:tool_stack":  {
+                                                                                                                               "type":  "tconstruct:has_material",
+                                                                                                                               "material":  "tconstruct:knightmetal"
+                                                                                                                           }
+                                                                                             }
                                                                           }
                                                                       ]
                                                         },
@@ -243,11 +260,12 @@
                                          "conditions":  {
                                                             "items":  [
                                                                           {
-                                                                              "type":  "tconstruct:tool_stack",
-                                                                              "predicate":  {
-                                                                                                "type":  "tconstruct:has_material",
-                                                                                                "material":  "tconstruct:knightslime"
-                                                                                            }
+                                                                              "predicates":  {
+                                                                                                 "tconstruct:tool_stack":  {
+                                                                                                                               "type":  "tconstruct:has_material",
+                                                                                                                               "material":  "tconstruct:knightslime"
+                                                                                                                           }
+                                                                                             }
                                                                           }
                                                                       ]
                                                         },
@@ -257,11 +275,12 @@
                                      "conditions":  {
                                                         "items":  [
                                                                       {
-                                                                          "type":  "tconstruct:tool_stack",
-                                                                          "predicate":  {
-                                                                                            "type":  "tconstruct:has_material",
-                                                                                            "material":  "tconstruct:leather"
-                                                                                        }
+                                                                          "predicates":  {
+                                                                                             "tconstruct:tool_stack":  {
+                                                                                                                           "type":  "tconstruct:has_material",
+                                                                                                                           "material":  "tconstruct:leather"
+                                                                                                                       }
+                                                                                         }
                                                                       }
                                                                   ]
                                                     },
@@ -271,11 +290,12 @@
                                        "conditions":  {
                                                           "items":  [
                                                                         {
-                                                                            "type":  "tconstruct:tool_stack",
-                                                                            "predicate":  {
-                                                                                              "type":  "tconstruct:has_material",
-                                                                                              "material":  "tconstruct:manyullyn"
-                                                                                          }
+                                                                            "predicates":  {
+                                                                                               "tconstruct:tool_stack":  {
+                                                                                                                             "type":  "tconstruct:has_material",
+                                                                                                                             "material":  "tconstruct:manyullyn"
+                                                                                                                         }
+                                                                                           }
                                                                         }
                                                                     ]
                                                       },
@@ -285,11 +305,12 @@
                                      "conditions":  {
                                                         "items":  [
                                                                       {
-                                                                          "type":  "tconstruct:tool_stack",
-                                                                          "predicate":  {
-                                                                                            "type":  "tconstruct:has_material",
-                                                                                            "material":  "tconstruct:nahuatl"
-                                                                                        }
+                                                                          "predicates":  {
+                                                                                             "tconstruct:tool_stack":  {
+                                                                                                                           "type":  "tconstruct:has_material",
+                                                                                                                           "material":  "tconstruct:nahuatl"
+                                                                                                                       }
+                                                                                         }
                                                                       }
                                                                   ]
                                                     },
@@ -299,11 +320,12 @@
                                            "conditions":  {
                                                               "items":  [
                                                                             {
-                                                                                "type":  "tconstruct:tool_stack",
-                                                                                "predicate":  {
-                                                                                                  "type":  "tconstruct:has_material",
-                                                                                                  "material":  "tconstruct:necrotic_bone"
-                                                                                              }
+                                                                                "predicates":  {
+                                                                                                   "tconstruct:tool_stack":  {
+                                                                                                                                 "type":  "tconstruct:has_material",
+                                                                                                                                 "material":  "tconstruct:necrotic_bone"
+                                                                                                                             }
+                                                                                               }
                                                                             }
                                                                         ]
                                                           },
@@ -313,11 +335,12 @@
                                       "conditions":  {
                                                          "items":  [
                                                                        {
-                                                                           "type":  "tconstruct:tool_stack",
-                                                                           "predicate":  {
-                                                                                             "type":  "tconstruct:has_material",
-                                                                                             "material":  "tconstruct:pig_iron"
-                                                                                         }
+                                                                           "predicates":  {
+                                                                                              "tconstruct:tool_stack":  {
+                                                                                                                            "type":  "tconstruct:has_material",
+                                                                                                                            "material":  "tconstruct:pig_iron"
+                                                                                                                        }
+                                                                                          }
                                                                        }
                                                                    ]
                                                      },
@@ -327,11 +350,12 @@
                                           "conditions":  {
                                                              "items":  [
                                                                            {
-                                                                               "type":  "tconstruct:tool_stack",
-                                                                               "predicate":  {
-                                                                                                 "type":  "tconstruct:has_material",
-                                                                                                 "material":  "tconstruct:queens_slime"
-                                                                                             }
+                                                                               "predicates":  {
+                                                                                                  "tconstruct:tool_stack":  {
+                                                                                                                                "type":  "tconstruct:has_material",
+                                                                                                                                "material":  "tconstruct:queens_slime"
+                                                                                                                            }
+                                                                                              }
                                                                            }
                                                                        ]
                                                          },
@@ -341,11 +365,12 @@
                                   "conditions":  {
                                                      "items":  [
                                                                    {
-                                                                       "type":  "tconstruct:tool_stack",
-                                                                       "predicate":  {
-                                                                                         "type":  "tconstruct:has_material",
-                                                                                         "material":  "tconstruct:rock"
-                                                                                     }
+                                                                       "predicates":  {
+                                                                                          "tconstruct:tool_stack":  {
+                                                                                                                        "type":  "tconstruct:has_material",
+                                                                                                                        "material":  "tconstruct:rock"
+                                                                                                                    }
+                                                                                      }
                                                                    }
                                                                ]
                                                  },
@@ -355,11 +380,12 @@
                                        "conditions":  {
                                                           "items":  [
                                                                         {
-                                                                            "type":  "tconstruct:tool_stack",
-                                                                            "predicate":  {
-                                                                                              "type":  "tconstruct:has_material",
-                                                                                              "material":  "tconstruct:rose_gold"
-                                                                                          }
+                                                                            "predicates":  {
+                                                                                               "tconstruct:tool_stack":  {
+                                                                                                                             "type":  "tconstruct:has_material",
+                                                                                                                             "material":  "tconstruct:rose_gold"
+                                                                                                                         }
+                                                                                           }
                                                                         }
                                                                     ]
                                                       },
@@ -369,11 +395,12 @@
                                             "conditions":  {
                                                                "items":  [
                                                                              {
-                                                                                 "type":  "tconstruct:tool_stack",
-                                                                                 "predicate":  {
-                                                                                                   "type":  "tconstruct:has_material",
-                                                                                                   "material":  "tconstruct:scorched_stone"
-                                                                                               }
+                                                                                 "predicates":  {
+                                                                                                    "tconstruct:tool_stack":  {
+                                                                                                                                  "type":  "tconstruct:has_material",
+                                                                                                                                  "material":  "tconstruct:scorched_stone"
+                                                                                                                              }
+                                                                                                }
                                                                              }
                                                                          ]
                                                            },
@@ -383,11 +410,12 @@
                                           "conditions":  {
                                                              "items":  [
                                                                            {
-                                                                               "type":  "tconstruct:tool_stack",
-                                                                               "predicate":  {
-                                                                                                 "type":  "tconstruct:has_material",
-                                                                                                 "material":  "tconstruct:seared_stone"
-                                                                                             }
+                                                                               "predicates":  {
+                                                                                                  "tconstruct:tool_stack":  {
+                                                                                                                                "type":  "tconstruct:has_material",
+                                                                                                                                "material":  "tconstruct:seared_stone"
+                                                                                                                            }
+                                                                                              }
                                                                            }
                                                                        ]
                                                          },
@@ -397,11 +425,12 @@
                                            "conditions":  {
                                                               "items":  [
                                                                             {
-                                                                                "type":  "tconstruct:tool_stack",
-                                                                                "predicate":  {
-                                                                                                  "type":  "tconstruct:has_material",
-                                                                                                  "material":  "tconstruct:skyslime_vine"
-                                                                                              }
+                                                                                "predicates":  {
+                                                                                                   "tconstruct:tool_stack":  {
+                                                                                                                                 "type":  "tconstruct:has_material",
+                                                                                                                                 "material":  "tconstruct:skyslime_vine"
+                                                                                                                             }
+                                                                                               }
                                                                             }
                                                                         ]
                                                           },
@@ -411,11 +440,12 @@
                                        "conditions":  {
                                                           "items":  [
                                                                         {
-                                                                            "type":  "tconstruct:tool_stack",
-                                                                            "predicate":  {
-                                                                                              "type":  "tconstruct:has_material",
-                                                                                              "material":  "tconstruct:slimeskin"
-                                                                                          }
+                                                                            "predicates":  {
+                                                                                               "tconstruct:tool_stack":  {
+                                                                                                                             "type":  "tconstruct:has_material",
+                                                                                                                             "material":  "tconstruct:slimeskin"
+                                                                                                                         }
+                                                                                           }
                                                                         }
                                                                     ]
                                                       },
@@ -425,11 +455,12 @@
                                         "conditions":  {
                                                            "items":  [
                                                                          {
-                                                                             "type":  "tconstruct:tool_stack",
-                                                                             "predicate":  {
-                                                                                               "type":  "tconstruct:has_material",
-                                                                                               "material":  "tconstruct:slimesteel"
-                                                                                           }
+                                                                             "predicates":  {
+                                                                                                "tconstruct:tool_stack":  {
+                                                                                                                              "type":  "tconstruct:has_material",
+                                                                                                                              "material":  "tconstruct:slimesteel"
+                                                                                                                          }
+                                                                                            }
                                                                          }
                                                                      ]
                                                        },
@@ -439,11 +470,12 @@
                                        "conditions":  {
                                                           "items":  [
                                                                         {
-                                                                            "type":  "tconstruct:tool_stack",
-                                                                            "predicate":  {
-                                                                                              "type":  "tconstruct:has_material",
-                                                                                              "material":  "tconstruct:slimewood"
-                                                                                          }
+                                                                            "predicates":  {
+                                                                                               "tconstruct:tool_stack":  {
+                                                                                                                             "type":  "tconstruct:has_material",
+                                                                                                                             "material":  "tconstruct:slimewood"
+                                                                                                                         }
+                                                                                           }
                                                                         }
                                                                     ]
                                                       },
@@ -453,11 +485,12 @@
                                     "conditions":  {
                                                        "items":  [
                                                                      {
-                                                                         "type":  "tconstruct:tool_stack",
-                                                                         "predicate":  {
-                                                                                           "type":  "tconstruct:has_material",
-                                                                                           "material":  "tconstruct:string"
-                                                                                       }
+                                                                         "predicates":  {
+                                                                                            "tconstruct:tool_stack":  {
+                                                                                                                          "type":  "tconstruct:has_material",
+                                                                                                                          "material":  "tconstruct:string"
+                                                                                                                      }
+                                                                                        }
                                                                      }
                                                                  ]
                                                    },
@@ -467,11 +500,12 @@
                                            "conditions":  {
                                                               "items":  [
                                                                             {
-                                                                                "type":  "tconstruct:tool_stack",
-                                                                                "predicate":  {
-                                                                                                  "type":  "tconstruct:has_material",
-                                                                                                  "material":  "tconstruct:twisting_vine"
-                                                                                              }
+                                                                                "predicates":  {
+                                                                                                   "tconstruct:tool_stack":  {
+                                                                                                                                 "type":  "tconstruct:has_material",
+                                                                                                                                 "material":  "tconstruct:twisting_vine"
+                                                                                                                             }
+                                                                                               }
                                                                             }
                                                                         ]
                                                           },
@@ -481,11 +515,12 @@
                                   "conditions":  {
                                                      "items":  [
                                                                    {
-                                                                       "type":  "tconstruct:tool_stack",
-                                                                       "predicate":  {
-                                                                                         "type":  "tconstruct:has_material",
-                                                                                         "material":  "tconstruct:vine"
-                                                                                     }
+                                                                       "predicates":  {
+                                                                                          "tconstruct:tool_stack":  {
+                                                                                                                        "type":  "tconstruct:has_material",
+                                                                                                                        "material":  "tconstruct:vine"
+                                                                                                                    }
+                                                                                      }
                                                                    }
                                                                ]
                                                  },
@@ -495,11 +530,12 @@
                                           "conditions":  {
                                                              "items":  [
                                                                            {
-                                                                               "type":  "tconstruct:tool_stack",
-                                                                               "predicate":  {
-                                                                                                 "type":  "tconstruct:has_material",
-                                                                                                 "material":  "tconstruct:weeping_vine"
-                                                                                             }
+                                                                               "predicates":  {
+                                                                                                  "tconstruct:tool_stack":  {
+                                                                                                                                "type":  "tconstruct:has_material",
+                                                                                                                                "material":  "tconstruct:weeping_vine"
+                                                                                                                            }
+                                                                                              }
                                                                            }
                                                                        ]
                                                          },
@@ -509,11 +545,12 @@
                                         "conditions":  {
                                                            "items":  [
                                                                          {
-                                                                             "type":  "tconstruct:tool_stack",
-                                                                             "predicate":  {
-                                                                                               "type":  "tconstruct:has_material",
-                                                                                               "material":  "tconstruct:whitestone"
-                                                                                           }
+                                                                             "predicates":  {
+                                                                                                "tconstruct:tool_stack":  {
+                                                                                                                              "type":  "tconstruct:has_material",
+                                                                                                                              "material":  "tconstruct:whitestone"
+                                                                                                                          }
+                                                                                            }
                                                                          }
                                                                      ]
                                                        },
@@ -523,11 +560,12 @@
                                   "conditions":  {
                                                      "items":  [
                                                                    {
-                                                                       "type":  "tconstruct:tool_stack",
-                                                                       "predicate":  {
-                                                                                         "type":  "tconstruct:has_material",
-                                                                                         "material":  "tconstruct:wood"
-                                                                                     }
+                                                                       "predicates":  {
+                                                                                          "tconstruct:tool_stack":  {
+                                                                                                                        "type":  "tconstruct:has_material",
+                                                                                                                        "material":  "tconstruct:wood"
+                                                                                                                    }
+                                                                                      }
                                                                    }
                                                                ]
                                                  },

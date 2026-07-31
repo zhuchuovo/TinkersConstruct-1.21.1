@@ -2,6 +2,7 @@ package slimeknights.tconstruct.library.recipe.partbuilder;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import slimeknights.mantle.client.SafeClientAccess;
 import slimeknights.mantle.util.RegistryHelper;
@@ -16,6 +17,8 @@ import java.util.List;
  * TODO 1.21: make this no longer extend {@link IPartBuilderRecipe}; copy the needed methods for JEI to this interface.
  */
 public interface IDisplayPartBuilderRecipe extends IPartBuilderRecipe {
+  ResourceLocation getId();
+
   /**
    * Gets the material variant required to craft this recipe.
    * TODO 1.21: make this return {@link slimeknights.tconstruct.library.materials.definition.MaterialVariantId}

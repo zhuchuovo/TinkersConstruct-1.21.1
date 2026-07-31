@@ -5,23 +5,24 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "type":  "tconstruct:tool_stack",
-                                                                        "predicate":  {
-                                                                                          "type":  "mantle:and",
-                                                                                          "predicates":  [
-                                                                                                             {
-                                                                                                                 "type":  "mantle:set",
-                                                                                                                 "items":  [
-                                                                                                                               "tconstruct:slime_helmet"
-                                                                                                                           ]
-                                                                                                             },
-                                                                                                             {
-                                                                                                                 "type":  "tconstruct:has_material",
-                                                                                                                 "index":  0,
-                                                                                                                 "material":  "tconstruct:blaze"
-                                                                                                             }
-                                                                                                         ]
-                                                                                      }
+                                                                        "predicates":  {
+                                                                                           "tconstruct:tool_stack":  {
+                                                                                                                         "type":  "mantle:and",
+                                                                                                                         "predicates":  [
+                                                                                                                                            {
+                                                                                                                                                "type":  "mantle:set",
+                                                                                                                                                "items":  [
+                                                                                                                                                              "tconstruct:slime_helmet"
+                                                                                                                                                          ]
+                                                                                                                                            },
+                                                                                                                                            {
+                                                                                                                                                "type":  "tconstruct:has_material",
+                                                                                                                                                "index":  0,
+                                                                                                                                                "material":  "tconstruct:blaze"
+                                                                                                                                            }
+                                                                                                                                        ]
+                                                                                                                     }
+                                                                                       }
                                                                     }
                                                                 ]
                                                   },
@@ -31,23 +32,24 @@
                                           "conditions":  {
                                                              "items":  [
                                                                            {
-                                                                               "type":  "tconstruct:tool_stack",
-                                                                               "predicate":  {
-                                                                                                 "type":  "mantle:and",
-                                                                                                 "predicates":  [
-                                                                                                                    {
-                                                                                                                        "type":  "mantle:set",
-                                                                                                                        "items":  [
-                                                                                                                                      "tconstruct:slime_helmet"
-                                                                                                                                  ]
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                        "type":  "tconstruct:has_material",
-                                                                                                                        "index":  0,
-                                                                                                                        "material":  "tconstruct:blazing_bone"
-                                                                                                                    }
-                                                                                                                ]
-                                                                                             }
+                                                                               "predicates":  {
+                                                                                                  "tconstruct:tool_stack":  {
+                                                                                                                                "type":  "mantle:and",
+                                                                                                                                "predicates":  [
+                                                                                                                                                   {
+                                                                                                                                                       "type":  "mantle:set",
+                                                                                                                                                       "items":  [
+                                                                                                                                                                     "tconstruct:slime_helmet"
+                                                                                                                                                                 ]
+                                                                                                                                                   },
+                                                                                                                                                   {
+                                                                                                                                                       "type":  "tconstruct:has_material",
+                                                                                                                                                       "index":  0,
+                                                                                                                                                       "material":  "tconstruct:blazing_bone"
+                                                                                                                                                   }
+                                                                                                                                               ]
+                                                                                                                            }
+                                                                                              }
                                                                            }
                                                                        ]
                                                          },
@@ -57,23 +59,24 @@
                                   "conditions":  {
                                                      "items":  [
                                                                    {
-                                                                       "type":  "tconstruct:tool_stack",
-                                                                       "predicate":  {
-                                                                                         "type":  "mantle:and",
-                                                                                         "predicates":  [
-                                                                                                            {
-                                                                                                                "type":  "mantle:set",
-                                                                                                                "items":  [
-                                                                                                                              "tconstruct:slime_helmet"
-                                                                                                                          ]
-                                                                                                            },
-                                                                                                            {
-                                                                                                                "type":  "tconstruct:has_material",
-                                                                                                                "index":  0,
-                                                                                                                "material":  "tconstruct:bone"
-                                                                                                            }
-                                                                                                        ]
-                                                                                     }
+                                                                       "predicates":  {
+                                                                                          "tconstruct:tool_stack":  {
+                                                                                                                        "type":  "mantle:and",
+                                                                                                                        "predicates":  [
+                                                                                                                                           {
+                                                                                                                                               "type":  "mantle:set",
+                                                                                                                                               "items":  [
+                                                                                                                                                             "tconstruct:slime_helmet"
+                                                                                                                                                         ]
+                                                                                                                                           },
+                                                                                                                                           {
+                                                                                                                                               "type":  "tconstruct:has_material",
+                                                                                                                                               "index":  0,
+                                                                                                                                               "material":  "tconstruct:bone"
+                                                                                                                                           }
+                                                                                                                                       ]
+                                                                                                                    }
+                                                                                      }
                                                                    }
                                                                ]
                                                  },
@@ -83,23 +86,24 @@
                                     "conditions":  {
                                                        "items":  [
                                                                      {
-                                                                         "type":  "tconstruct:tool_stack",
-                                                                         "predicate":  {
-                                                                                           "type":  "mantle:and",
-                                                                                           "predicates":  [
-                                                                                                              {
-                                                                                                                  "type":  "mantle:set",
-                                                                                                                  "items":  [
-                                                                                                                                "tconstruct:slime_helmet"
-                                                                                                                            ]
-                                                                                                              },
-                                                                                                              {
-                                                                                                                  "type":  "tconstruct:has_material",
-                                                                                                                  "index":  0,
-                                                                                                                  "material":  "tconstruct:copper"
-                                                                                                              }
-                                                                                                          ]
-                                                                                       }
+                                                                         "predicates":  {
+                                                                                            "tconstruct:tool_stack":  {
+                                                                                                                          "type":  "mantle:and",
+                                                                                                                          "predicates":  [
+                                                                                                                                             {
+                                                                                                                                                 "type":  "mantle:set",
+                                                                                                                                                 "items":  [
+                                                                                                                                                               "tconstruct:slime_helmet"
+                                                                                                                                                           ]
+                                                                                                                                             },
+                                                                                                                                             {
+                                                                                                                                                 "type":  "tconstruct:has_material",
+                                                                                                                                                 "index":  0,
+                                                                                                                                                 "material":  "tconstruct:copper"
+                                                                                                                                             }
+                                                                                                                                         ]
+                                                                                                                      }
+                                                                                        }
                                                                      }
                                                                  ]
                                                    },
@@ -109,23 +113,24 @@
                                         "conditions":  {
                                                            "items":  [
                                                                          {
-                                                                             "type":  "tconstruct:tool_stack",
-                                                                             "predicate":  {
-                                                                                               "type":  "mantle:and",
-                                                                                               "predicates":  [
-                                                                                                                  {
-                                                                                                                      "type":  "mantle:set",
-                                                                                                                      "items":  [
-                                                                                                                                    "tconstruct:slime_helmet"
-                                                                                                                                ]
-                                                                                                                  },
-                                                                                                                  {
-                                                                                                                      "type":  "tconstruct:has_material",
-                                                                                                                      "index":  0,
-                                                                                                                      "material":  "tconstruct:darkthread"
-                                                                                                                  }
-                                                                                                              ]
-                                                                                           }
+                                                                             "predicates":  {
+                                                                                                "tconstruct:tool_stack":  {
+                                                                                                                              "type":  "mantle:and",
+                                                                                                                              "predicates":  [
+                                                                                                                                                 {
+                                                                                                                                                     "type":  "mantle:set",
+                                                                                                                                                     "items":  [
+                                                                                                                                                                   "tconstruct:slime_helmet"
+                                                                                                                                                               ]
+                                                                                                                                                 },
+                                                                                                                                                 {
+                                                                                                                                                     "type":  "tconstruct:has_material",
+                                                                                                                                                     "index":  0,
+                                                                                                                                                     "material":  "tconstruct:darkthread"
+                                                                                                                                                 }
+                                                                                                                                             ]
+                                                                                                                          }
+                                                                                            }
                                                                          }
                                                                      ]
                                                        },
@@ -135,23 +140,24 @@
                                           "conditions":  {
                                                              "items":  [
                                                                            {
-                                                                               "type":  "tconstruct:tool_stack",
-                                                                               "predicate":  {
-                                                                                                 "type":  "mantle:and",
-                                                                                                 "predicates":  [
-                                                                                                                    {
-                                                                                                                        "type":  "mantle:set",
-                                                                                                                        "items":  [
-                                                                                                                                      "tconstruct:slime_helmet"
-                                                                                                                                  ]
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                        "type":  "tconstruct:has_material",
-                                                                                                                        "index":  0,
-                                                                                                                        "material":  "tconstruct:dragon_scale"
-                                                                                                                    }
-                                                                                                                ]
-                                                                                             }
+                                                                               "predicates":  {
+                                                                                                  "tconstruct:tool_stack":  {
+                                                                                                                                "type":  "mantle:and",
+                                                                                                                                "predicates":  [
+                                                                                                                                                   {
+                                                                                                                                                       "type":  "mantle:set",
+                                                                                                                                                       "items":  [
+                                                                                                                                                                     "tconstruct:slime_helmet"
+                                                                                                                                                                 ]
+                                                                                                                                                   },
+                                                                                                                                                   {
+                                                                                                                                                       "type":  "tconstruct:has_material",
+                                                                                                                                                       "index":  0,
+                                                                                                                                                       "material":  "tconstruct:dragon_scale"
+                                                                                                                                                   }
+                                                                                                                                               ]
+                                                                                                                            }
+                                                                                              }
                                                                            }
                                                                        ]
                                                          },
@@ -161,23 +167,24 @@
                                          "conditions":  {
                                                             "items":  [
                                                                           {
-                                                                              "type":  "tconstruct:tool_stack",
-                                                                              "predicate":  {
-                                                                                                "type":  "mantle:and",
-                                                                                                "predicates":  [
-                                                                                                                   {
-                                                                                                                       "type":  "mantle:set",
-                                                                                                                       "items":  [
-                                                                                                                                     "tconstruct:slime_helmet"
-                                                                                                                                 ]
-                                                                                                                   },
-                                                                                                                   {
-                                                                                                                       "type":  "tconstruct:has_material",
-                                                                                                                       "index":  0,
-                                                                                                                       "material":  "tconstruct:ender_pearl"
-                                                                                                                   }
-                                                                                                               ]
-                                                                                            }
+                                                                              "predicates":  {
+                                                                                                 "tconstruct:tool_stack":  {
+                                                                                                                               "type":  "mantle:and",
+                                                                                                                               "predicates":  [
+                                                                                                                                                  {
+                                                                                                                                                      "type":  "mantle:set",
+                                                                                                                                                      "items":  [
+                                                                                                                                                                    "tconstruct:slime_helmet"
+                                                                                                                                                                ]
+                                                                                                                                                  },
+                                                                                                                                                  {
+                                                                                                                                                      "type":  "tconstruct:has_material",
+                                                                                                                                                      "index":  0,
+                                                                                                                                                      "material":  "tconstruct:ender_pearl"
+                                                                                                                                                  }
+                                                                                                                                              ]
+                                                                                                                           }
+                                                                                             }
                                                                           }
                                                                       ]
                                                         },
@@ -187,23 +194,24 @@
                                    "conditions":  {
                                                       "items":  [
                                                                     {
-                                                                        "type":  "tconstruct:tool_stack",
-                                                                        "predicate":  {
-                                                                                          "type":  "mantle:and",
-                                                                                          "predicates":  [
-                                                                                                             {
-                                                                                                                 "type":  "mantle:set",
-                                                                                                                 "items":  [
-                                                                                                                               "tconstruct:slime_helmet"
-                                                                                                                           ]
-                                                                                                             },
-                                                                                                             {
-                                                                                                                 "type":  "tconstruct:has_material",
-                                                                                                                 "index":  0,
-                                                                                                                 "material":  "tconstruct:glass"
-                                                                                                             }
-                                                                                                         ]
-                                                                                      }
+                                                                        "predicates":  {
+                                                                                           "tconstruct:tool_stack":  {
+                                                                                                                         "type":  "mantle:and",
+                                                                                                                         "predicates":  [
+                                                                                                                                            {
+                                                                                                                                                "type":  "mantle:set",
+                                                                                                                                                "items":  [
+                                                                                                                                                              "tconstruct:slime_helmet"
+                                                                                                                                                          ]
+                                                                                                                                            },
+                                                                                                                                            {
+                                                                                                                                                "type":  "tconstruct:has_material",
+                                                                                                                                                "index":  0,
+                                                                                                                                                "material":  "tconstruct:glass"
+                                                                                                                                            }
+                                                                                                                                        ]
+                                                                                                                     }
+                                                                                       }
                                                                     }
                                                                 ]
                                                   },
@@ -213,23 +221,24 @@
                                   "conditions":  {
                                                      "items":  [
                                                                    {
-                                                                       "type":  "tconstruct:tool_stack",
-                                                                       "predicate":  {
-                                                                                         "type":  "mantle:and",
-                                                                                         "predicates":  [
-                                                                                                            {
-                                                                                                                "type":  "mantle:set",
-                                                                                                                "items":  [
-                                                                                                                              "tconstruct:slime_helmet"
-                                                                                                                          ]
-                                                                                                            },
-                                                                                                            {
-                                                                                                                "type":  "tconstruct:has_material",
-                                                                                                                "index":  0,
-                                                                                                                "material":  "tconstruct:gold"
-                                                                                                            }
-                                                                                                        ]
-                                                                                     }
+                                                                       "predicates":  {
+                                                                                          "tconstruct:tool_stack":  {
+                                                                                                                        "type":  "mantle:and",
+                                                                                                                        "predicates":  [
+                                                                                                                                           {
+                                                                                                                                               "type":  "mantle:set",
+                                                                                                                                               "items":  [
+                                                                                                                                                             "tconstruct:slime_helmet"
+                                                                                                                                                         ]
+                                                                                                                                           },
+                                                                                                                                           {
+                                                                                                                                               "type":  "tconstruct:has_material",
+                                                                                                                                               "index":  0,
+                                                                                                                                               "material":  "tconstruct:gold"
+                                                                                                                                           }
+                                                                                                                                       ]
+                                                                                                                    }
+                                                                                      }
                                                                    }
                                                                ]
                                                  },
@@ -239,23 +248,24 @@
                                  "conditions":  {
                                                     "items":  [
                                                                   {
-                                                                      "type":  "tconstruct:tool_stack",
-                                                                      "predicate":  {
-                                                                                        "type":  "mantle:and",
-                                                                                        "predicates":  [
-                                                                                                           {
-                                                                                                               "type":  "mantle:set",
-                                                                                                               "items":  [
-                                                                                                                             "tconstruct:slime_helmet"
-                                                                                                                         ]
-                                                                                                           },
-                                                                                                           {
-                                                                                                               "type":  "tconstruct:has_material",
-                                                                                                               "index":  0,
-                                                                                                               "material":  "tconstruct:ice"
-                                                                                                           }
-                                                                                                       ]
-                                                                                    }
+                                                                      "predicates":  {
+                                                                                         "tconstruct:tool_stack":  {
+                                                                                                                       "type":  "mantle:and",
+                                                                                                                       "predicates":  [
+                                                                                                                                          {
+                                                                                                                                              "type":  "mantle:set",
+                                                                                                                                              "items":  [
+                                                                                                                                                            "tconstruct:slime_helmet"
+                                                                                                                                                        ]
+                                                                                                                                          },
+                                                                                                                                          {
+                                                                                                                                              "type":  "tconstruct:has_material",
+                                                                                                                                              "index":  0,
+                                                                                                                                              "material":  "tconstruct:ice"
+                                                                                                                                          }
+                                                                                                                                      ]
+                                                                                                                   }
+                                                                                     }
                                                                   }
                                                               ]
                                                 },
@@ -265,23 +275,24 @@
                                   "conditions":  {
                                                      "items":  [
                                                                    {
-                                                                       "type":  "tconstruct:tool_stack",
-                                                                       "predicate":  {
-                                                                                         "type":  "mantle:and",
-                                                                                         "predicates":  [
-                                                                                                            {
-                                                                                                                "type":  "mantle:set",
-                                                                                                                "items":  [
-                                                                                                                              "tconstruct:slime_helmet"
-                                                                                                                          ]
-                                                                                                            },
-                                                                                                            {
-                                                                                                                "type":  "tconstruct:has_material",
-                                                                                                                "index":  0,
-                                                                                                                "material":  "tconstruct:iron"
-                                                                                                            }
-                                                                                                        ]
-                                                                                     }
+                                                                       "predicates":  {
+                                                                                          "tconstruct:tool_stack":  {
+                                                                                                                        "type":  "mantle:and",
+                                                                                                                        "predicates":  [
+                                                                                                                                           {
+                                                                                                                                               "type":  "mantle:set",
+                                                                                                                                               "items":  [
+                                                                                                                                                             "tconstruct:slime_helmet"
+                                                                                                                                                         ]
+                                                                                                                                           },
+                                                                                                                                           {
+                                                                                                                                               "type":  "tconstruct:has_material",
+                                                                                                                                               "index":  0,
+                                                                                                                                               "material":  "tconstruct:iron"
+                                                                                                                                           }
+                                                                                                                                       ]
+                                                                                                                    }
+                                                                                      }
                                                                    }
                                                                ]
                                                  },
@@ -291,23 +302,24 @@
                                          "conditions":  {
                                                             "items":  [
                                                                           {
-                                                                              "type":  "tconstruct:tool_stack",
-                                                                              "predicate":  {
-                                                                                                "type":  "mantle:and",
-                                                                                                "predicates":  [
-                                                                                                                   {
-                                                                                                                       "type":  "mantle:set",
-                                                                                                                       "items":  [
-                                                                                                                                     "tconstruct:slime_helmet"
-                                                                                                                                 ]
-                                                                                                                   },
-                                                                                                                   {
-                                                                                                                       "type":  "tconstruct:has_material",
-                                                                                                                       "index":  0,
-                                                                                                                       "material":  "tconstruct:knightmetal"
-                                                                                                                   }
-                                                                                                               ]
-                                                                                            }
+                                                                              "predicates":  {
+                                                                                                 "tconstruct:tool_stack":  {
+                                                                                                                               "type":  "mantle:and",
+                                                                                                                               "predicates":  [
+                                                                                                                                                  {
+                                                                                                                                                      "type":  "mantle:set",
+                                                                                                                                                      "items":  [
+                                                                                                                                                                    "tconstruct:slime_helmet"
+                                                                                                                                                                ]
+                                                                                                                                                  },
+                                                                                                                                                  {
+                                                                                                                                                      "type":  "tconstruct:has_material",
+                                                                                                                                                      "index":  0,
+                                                                                                                                                      "material":  "tconstruct:knightmetal"
+                                                                                                                                                  }
+                                                                                                                                              ]
+                                                                                                                           }
+                                                                                             }
                                                                           }
                                                                       ]
                                                         },
@@ -317,23 +329,24 @@
                                      "conditions":  {
                                                         "items":  [
                                                                       {
-                                                                          "type":  "tconstruct:tool_stack",
-                                                                          "predicate":  {
-                                                                                            "type":  "mantle:and",
-                                                                                            "predicates":  [
-                                                                                                               {
-                                                                                                                   "type":  "mantle:set",
-                                                                                                                   "items":  [
-                                                                                                                                 "tconstruct:slime_helmet"
-                                                                                                                             ]
-                                                                                                               },
-                                                                                                               {
-                                                                                                                   "type":  "tconstruct:has_material",
-                                                                                                                   "index":  0,
-                                                                                                                   "material":  "tconstruct:leather"
-                                                                                                               }
-                                                                                                           ]
-                                                                                        }
+                                                                          "predicates":  {
+                                                                                             "tconstruct:tool_stack":  {
+                                                                                                                           "type":  "mantle:and",
+                                                                                                                           "predicates":  [
+                                                                                                                                              {
+                                                                                                                                                  "type":  "mantle:set",
+                                                                                                                                                  "items":  [
+                                                                                                                                                                "tconstruct:slime_helmet"
+                                                                                                                                                            ]
+                                                                                                                                              },
+                                                                                                                                              {
+                                                                                                                                                  "type":  "tconstruct:has_material",
+                                                                                                                                                  "index":  0,
+                                                                                                                                                  "material":  "tconstruct:leather"
+                                                                                                                                              }
+                                                                                                                                          ]
+                                                                                                                       }
+                                                                                         }
                                                                       }
                                                                   ]
                                                     },
@@ -343,23 +356,24 @@
                                            "conditions":  {
                                                               "items":  [
                                                                             {
-                                                                                "type":  "tconstruct:tool_stack",
-                                                                                "predicate":  {
-                                                                                                  "type":  "mantle:and",
-                                                                                                  "predicates":  [
-                                                                                                                     {
-                                                                                                                         "type":  "mantle:set",
-                                                                                                                         "items":  [
-                                                                                                                                       "tconstruct:slime_helmet"
-                                                                                                                                   ]
-                                                                                                                     },
-                                                                                                                     {
-                                                                                                                         "type":  "tconstruct:has_material",
-                                                                                                                         "index":  0,
-                                                                                                                         "material":  "tconstruct:necrotic_bone"
-                                                                                                                     }
-                                                                                                                 ]
-                                                                                              }
+                                                                                "predicates":  {
+                                                                                                   "tconstruct:tool_stack":  {
+                                                                                                                                 "type":  "mantle:and",
+                                                                                                                                 "predicates":  [
+                                                                                                                                                    {
+                                                                                                                                                        "type":  "mantle:set",
+                                                                                                                                                        "items":  [
+                                                                                                                                                                      "tconstruct:slime_helmet"
+                                                                                                                                                                  ]
+                                                                                                                                                    },
+                                                                                                                                                    {
+                                                                                                                                                        "type":  "tconstruct:has_material",
+                                                                                                                                                        "index":  0,
+                                                                                                                                                        "material":  "tconstruct:necrotic_bone"
+                                                                                                                                                    }
+                                                                                                                                                ]
+                                                                                                                             }
+                                                                                               }
                                                                             }
                                                                         ]
                                                           },
@@ -369,23 +383,24 @@
                                       "conditions":  {
                                                          "items":  [
                                                                        {
-                                                                           "type":  "tconstruct:tool_stack",
-                                                                           "predicate":  {
-                                                                                             "type":  "mantle:and",
-                                                                                             "predicates":  [
-                                                                                                                {
-                                                                                                                    "type":  "mantle:set",
-                                                                                                                    "items":  [
-                                                                                                                                  "tconstruct:slime_helmet"
-                                                                                                                              ]
-                                                                                                                },
-                                                                                                                {
-                                                                                                                    "type":  "tconstruct:has_material",
-                                                                                                                    "index":  0,
-                                                                                                                    "material":  "tconstruct:pig_iron"
-                                                                                                                }
-                                                                                                            ]
-                                                                                         }
+                                                                           "predicates":  {
+                                                                                              "tconstruct:tool_stack":  {
+                                                                                                                            "type":  "mantle:and",
+                                                                                                                            "predicates":  [
+                                                                                                                                               {
+                                                                                                                                                   "type":  "mantle:set",
+                                                                                                                                                   "items":  [
+                                                                                                                                                                 "tconstruct:slime_helmet"
+                                                                                                                                                             ]
+                                                                                                                                               },
+                                                                                                                                               {
+                                                                                                                                                   "type":  "tconstruct:has_material",
+                                                                                                                                                   "index":  0,
+                                                                                                                                                   "material":  "tconstruct:pig_iron"
+                                                                                                                                               }
+                                                                                                                                           ]
+                                                                                                                        }
+                                                                                          }
                                                                        }
                                                                    ]
                                                      },
@@ -395,23 +410,24 @@
                                        "conditions":  {
                                                           "items":  [
                                                                         {
-                                                                            "type":  "tconstruct:tool_stack",
-                                                                            "predicate":  {
-                                                                                              "type":  "mantle:and",
-                                                                                              "predicates":  [
-                                                                                                                 {
-                                                                                                                     "type":  "mantle:set",
-                                                                                                                     "items":  [
-                                                                                                                                   "tconstruct:slime_helmet"
-                                                                                                                               ]
-                                                                                                                 },
-                                                                                                                 {
-                                                                                                                     "type":  "tconstruct:has_material",
-                                                                                                                     "index":  0,
-                                                                                                                     "material":  "tconstruct:rose_gold"
-                                                                                                                 }
-                                                                                                             ]
-                                                                                          }
+                                                                            "predicates":  {
+                                                                                               "tconstruct:tool_stack":  {
+                                                                                                                             "type":  "mantle:and",
+                                                                                                                             "predicates":  [
+                                                                                                                                                {
+                                                                                                                                                    "type":  "mantle:set",
+                                                                                                                                                    "items":  [
+                                                                                                                                                                  "tconstruct:slime_helmet"
+                                                                                                                                                              ]
+                                                                                                                                                },
+                                                                                                                                                {
+                                                                                                                                                    "type":  "tconstruct:has_material",
+                                                                                                                                                    "index":  0,
+                                                                                                                                                    "material":  "tconstruct:rose_gold"
+                                                                                                                                                }
+                                                                                                                                            ]
+                                                                                                                         }
+                                                                                           }
                                                                         }
                                                                     ]
                                                       },
@@ -421,23 +437,24 @@
                                     "conditions":  {
                                                        "items":  [
                                                                      {
-                                                                         "type":  "tconstruct:tool_stack",
-                                                                         "predicate":  {
-                                                                                           "type":  "mantle:and",
-                                                                                           "predicates":  [
-                                                                                                              {
-                                                                                                                  "type":  "mantle:set",
-                                                                                                                  "items":  [
-                                                                                                                                "tconstruct:slime_helmet"
-                                                                                                                            ]
-                                                                                                              },
-                                                                                                              {
-                                                                                                                  "type":  "tconstruct:has_material",
-                                                                                                                  "index":  0,
-                                                                                                                  "material":  "tconstruct:string"
-                                                                                                              }
-                                                                                                          ]
-                                                                                       }
+                                                                         "predicates":  {
+                                                                                            "tconstruct:tool_stack":  {
+                                                                                                                          "type":  "mantle:and",
+                                                                                                                          "predicates":  [
+                                                                                                                                             {
+                                                                                                                                                 "type":  "mantle:set",
+                                                                                                                                                 "items":  [
+                                                                                                                                                               "tconstruct:slime_helmet"
+                                                                                                                                                           ]
+                                                                                                                                             },
+                                                                                                                                             {
+                                                                                                                                                 "type":  "tconstruct:has_material",
+                                                                                                                                                 "index":  0,
+                                                                                                                                                 "material":  "tconstruct:string"
+                                                                                                                                             }
+                                                                                                                                         ]
+                                                                                                                      }
+                                                                                        }
                                                                      }
                                                                  ]
                                                    },
@@ -447,23 +464,24 @@
                                        "conditions":  {
                                                           "items":  [
                                                                         {
-                                                                            "type":  "tconstruct:tool_stack",
-                                                                            "predicate":  {
-                                                                                              "type":  "mantle:and",
-                                                                                              "predicates":  [
-                                                                                                                 {
-                                                                                                                     "type":  "mantle:set",
-                                                                                                                     "items":  [
-                                                                                                                                   "tconstruct:slime_helmet"
-                                                                                                                               ]
-                                                                                                                 },
-                                                                                                                 {
-                                                                                                                     "type":  "tconstruct:has_material",
-                                                                                                                     "index":  0,
-                                                                                                                     "material":  "tconstruct:venombone"
-                                                                                                                 }
-                                                                                                             ]
-                                                                                          }
+                                                                            "predicates":  {
+                                                                                               "tconstruct:tool_stack":  {
+                                                                                                                             "type":  "mantle:and",
+                                                                                                                             "predicates":  [
+                                                                                                                                                {
+                                                                                                                                                    "type":  "mantle:set",
+                                                                                                                                                    "items":  [
+                                                                                                                                                                  "tconstruct:slime_helmet"
+                                                                                                                                                              ]
+                                                                                                                                                },
+                                                                                                                                                {
+                                                                                                                                                    "type":  "tconstruct:has_material",
+                                                                                                                                                    "index":  0,
+                                                                                                                                                    "material":  "tconstruct:venombone"
+                                                                                                                                                }
+                                                                                                                                            ]
+                                                                                                                         }
+                                                                                           }
                                                                         }
                                                                     ]
                                                       },

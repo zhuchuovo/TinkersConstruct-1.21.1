@@ -5,14 +5,15 @@
                                            "conditions":  {
                                                               "items":  [
                                                                             {
-                                                                                "type":  "tconstruct:tool_stack",
-                                                                                "predicate":  {
-                                                                                                  "type":  "tconstruct:stat_in_set",
-                                                                                                  "stat":  "tconstruct:harvest_tier",
-                                                                                                  "values":  [
-                                                                                                                 "minecraft:netherite"
-                                                                                                             ]
-                                                                                              }
+                                                                                "predicates":  {
+                                                                                                   "tconstruct:tool_stack":  {
+                                                                                                                                 "type":  "tconstruct:stat_in_set",
+                                                                                                                                 "stat":  "tconstruct:harvest_tier",
+                                                                                                                                 "values":  [
+                                                                                                                                                "minecraft:netherite"
+                                                                                                                                            ]
+                                                                                                                             }
+                                                                                               }
                                                                             }
                                                                         ]
                                                           },

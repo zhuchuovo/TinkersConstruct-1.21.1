@@ -5,52 +5,53 @@
                                           "conditions":  {
                                                              "items":  [
                                                                            {
-                                                                               "type":  "tconstruct:tool_stack",
-                                                                               "predicate":  {
-                                                                                                 "type":  "mantle:and",
-                                                                                                 "predicates":  [
-                                                                                                                    {
-                                                                                                                        "type":  "tconstruct:has_modifier",
-                                                                                                                        "check":  "upgrades",
-                                                                                                                        "modifier":  {
-                                                                                                                                         "type":  "tconstruct:single",
-                                                                                                                                         "modifier":  "tconstruct:writable"
-                                                                                                                                     }
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                        "type":  "tconstruct:has_modifier",
-                                                                                                                        "check":  "upgrades",
-                                                                                                                        "modifier":  {
-                                                                                                                                         "type":  "tconstruct:single",
-                                                                                                                                         "modifier":  "tconstruct:recapitated"
-                                                                                                                                     }
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                        "type":  "tconstruct:has_modifier",
-                                                                                                                        "check":  "upgrades",
-                                                                                                                        "modifier":  {
-                                                                                                                                         "type":  "tconstruct:single",
-                                                                                                                                         "modifier":  "tconstruct:harmonious"
-                                                                                                                                     }
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                        "type":  "tconstruct:has_modifier",
-                                                                                                                        "check":  "upgrades",
-                                                                                                                        "modifier":  {
-                                                                                                                                         "type":  "tconstruct:single",
-                                                                                                                                         "modifier":  "tconstruct:forecast"
-                                                                                                                                     }
-                                                                                                                    },
-                                                                                                                    {
-                                                                                                                        "type":  "tconstruct:has_modifier",
-                                                                                                                        "check":  "upgrades",
-                                                                                                                        "modifier":  {
-                                                                                                                                         "type":  "tconstruct:single",
-                                                                                                                                         "modifier":  "tconstruct:gilded"
-                                                                                                                                     }
-                                                                                                                    }
-                                                                                                                ]
-                                                                                             }
+                                                                               "predicates":  {
+                                                                                                  "tconstruct:tool_stack":  {
+                                                                                                                                "type":  "mantle:and",
+                                                                                                                                "predicates":  [
+                                                                                                                                                   {
+                                                                                                                                                       "type":  "tconstruct:has_modifier",
+                                                                                                                                                       "check":  "upgrades",
+                                                                                                                                                       "modifier":  {
+                                                                                                                                                                        "type":  "tconstruct:single",
+                                                                                                                                                                        "modifier":  "tconstruct:writable"
+                                                                                                                                                                    }
+                                                                                                                                                   },
+                                                                                                                                                   {
+                                                                                                                                                       "type":  "tconstruct:has_modifier",
+                                                                                                                                                       "check":  "upgrades",
+                                                                                                                                                       "modifier":  {
+                                                                                                                                                                        "type":  "tconstruct:single",
+                                                                                                                                                                        "modifier":  "tconstruct:recapitated"
+                                                                                                                                                                    }
+                                                                                                                                                   },
+                                                                                                                                                   {
+                                                                                                                                                       "type":  "tconstruct:has_modifier",
+                                                                                                                                                       "check":  "upgrades",
+                                                                                                                                                       "modifier":  {
+                                                                                                                                                                        "type":  "tconstruct:single",
+                                                                                                                                                                        "modifier":  "tconstruct:harmonious"
+                                                                                                                                                                    }
+                                                                                                                                                   },
+                                                                                                                                                   {
+                                                                                                                                                       "type":  "tconstruct:has_modifier",
+                                                                                                                                                       "check":  "upgrades",
+                                                                                                                                                       "modifier":  {
+                                                                                                                                                                        "type":  "tconstruct:single",
+                                                                                                                                                                        "modifier":  "tconstruct:forecast"
+                                                                                                                                                                    }
+                                                                                                                                                   },
+                                                                                                                                                   {
+                                                                                                                                                       "type":  "tconstruct:has_modifier",
+                                                                                                                                                       "check":  "upgrades",
+                                                                                                                                                       "modifier":  {
+                                                                                                                                                                        "type":  "tconstruct:single",
+                                                                                                                                                                        "modifier":  "tconstruct:gilded"
+                                                                                                                                                                    }
+                                                                                                                                                   }
+                                                                                                                                               ]
+                                                                                                                            }
+                                                                                              }
                                                                            }
                                                                        ]
                                                          },

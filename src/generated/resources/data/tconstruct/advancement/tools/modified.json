@@ -5,8 +5,9 @@
                                           "conditions":  {
                                                              "items":  [
                                                                            {
-                                                                               "type":  "tconstruct:tool_stack",
-                                                                               "predicate":  "tconstruct:has_upgrades"
+                                                                               "predicates":  {
+                                                                                                  "tconstruct:tool_stack":  "tconstruct:has_upgrades"
+                                                                                              }
                                                                            }
                                                                        ]
                                                          },

@@ -55,7 +55,6 @@ sourceSets.main {
         exclude 'slimeknights/tconstruct/plugin/DietPlugin.java'
         exclude 'slimeknights/tconstruct/plugin/DummmmmmyPlugin.java'
         exclude 'slimeknights/tconstruct/plugin/ImmersiveEngineeringPlugin.java'
-        exclude 'slimeknights/tconstruct/plugin/jei/**'
         // Runtime-first port: the 1.20 FinishedRecipe/provider tree is kept in
         // source control but excluded until it is converted to 1.21 RecipeOutput.
         exclude 'slimeknights/tconstruct/common/data/**'
@@ -83,7 +82,12 @@ sourceSets.main {
         exclude 'slimeknights/tconstruct/library/recipe/material/MaterialsConsumerBuilder.java'
         exclude 'slimeknights/tconstruct/library/recipe/partbuilder/recycle/PartBuilderToolRecycle.java'
         exclude 'slimeknights/tconstruct/shared/data/**'
-        exclude 'slimeknights/tconstruct/smeltery/data/**'
+        exclude { details ->
+            if (!details.file.isFile()) return false
+            def path = details.file.path.replace('\\', '/')
+            return path.contains('/slimeknights/tconstruct/smeltery/data/') &&
+                    !path.endsWith('/smeltery/data/SmelteryCompat.java')
+        }
         exclude 'slimeknights/tconstruct/tables/data/**'
         exclude { details ->
             if (!details.file.isFile()) return false

@@ -1,6 +1,5 @@
 package slimeknights.tconstruct.shared;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.ModelEvent.RegisterGeometryLoaders;
@@ -10,6 +9,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import slimeknights.mantle.client.screen.book.BookScreen;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.ClientEventBase;
 import slimeknights.tconstruct.library.client.book.TinkerBook;
@@ -50,7 +50,7 @@ public class CommonsClientEvents extends ClientEventBase {
   /** Gets the unicode font renderer */
   public static Font unicodeFontRender() {
     if (unicodeRenderer == null) {
-      unicodeRenderer = Minecraft.getInstance().font;
+      unicodeRenderer = BookScreen.getUniformFont();
     }
 
     return unicodeRenderer;

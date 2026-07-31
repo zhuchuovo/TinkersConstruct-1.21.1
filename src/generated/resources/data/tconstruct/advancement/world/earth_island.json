@@ -9,7 +9,7 @@
                                                                                 "entity":  "this",
                                                                                 "predicate":  {
                                                                                                   "location":  {
-                                                                                                                   "structure":  "tconstruct:earth_slime_island"
+                                                                                                                   "structures":  "tconstruct:earth_slime_island"
                                                                                                                }
                                                                                               }
                                                                             }
