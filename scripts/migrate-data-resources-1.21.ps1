@@ -150,7 +150,11 @@ function Convert-BookIngredientNode($Node) {
     }
 
     $Node.type = "neoforge:components"
-    Move-Property $Node "item" "items"
+    if (Has-Property $Node "item") {
+      $items = [object[]]@($Node.item)
+      $Node.PSObject.Properties.Remove("item")
+      Set-Property $Node "items" $items
+    }
     $Node.PSObject.Properties.Remove("nbt")
     Set-Property $Node "components" ([pscustomobject]$components)
     $script:bookIngredientCount++

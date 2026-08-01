@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
@@ -36,6 +35,7 @@ import slimeknights.tconstruct.common.Sounds;
 import slimeknights.tconstruct.library.client.model.ModelProperties;
 import slimeknights.tconstruct.library.fluid.FluidTankAnimated;
 import slimeknights.tconstruct.library.utils.NBTTags;
+import slimeknights.tconstruct.library.utils.RegistryAccessUtil;
 import slimeknights.tconstruct.shared.block.entity.TableBlockEntity;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.block.CastingTankBlock;
@@ -268,26 +268,16 @@ public class CastingTankBlockEntity extends TableBlockEntity implements ITankBlo
    * @param nbt  tank NBT
    */
   public void updateTank(CompoundTag nbt) {
-    if (nbt.isEmpty()) {
-      tank.setFluid(FluidStack.EMPTY);
-    } else {
-      if (level != null) {
-        tank.readFromNBT(level.registryAccess(), nbt);
-        TankBlockEntity.updateLight(this, tank);
-      }
-    }
+    HolderLookup.Provider registries = level == null ? RegistryAccessUtil.BUILTIN : level.registryAccess();
+    tank.setFluid(TankItem.readFluid(registries, nbt));
+    TankBlockEntity.updateLight(this, tank);
   }
 
   @Override
   public void load(CompoundTag tag, HolderLookup.Provider registries) {
     tank.setCapacity(getCapacity(getBlockState().getBlock()));
-    CompoundTag tankTag = tag.getCompound(NBTTags.TANK);
-    if (tankTag.isEmpty()) {
-      tank.setFluid(FluidStack.EMPTY);
-    } else {
-      tank.readFromNBT(registries, tankTag);
-      TankBlockEntity.updateLight(this, tank);
-    }
+    tank.setFluid(TankItem.readFluid(registries, tag.getCompound(NBTTags.TANK)));
+    TankBlockEntity.updateLight(this, tank);
     lastRedstone = tag.getBoolean(TAG_REDSTONE);
     super.load(tag, registries);
   }

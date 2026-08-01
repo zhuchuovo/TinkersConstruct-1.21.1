@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.smeltery.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -45,6 +46,7 @@ import java.util.function.Predicate;
 
 public class TankItem extends BlockTooltipItem {
   public static final String FLUID_ID = TConstruct.makeTranslationKey("item", "tank.fluid_id");
+  private static final String FLUID_TAG = "Fluid";
   private static final Predicate<FluidStack> NO_FILL = FluidStack::isEmpty;
   private final boolean limitStackSize;
   public TankItem(Block blockIn, Properties builder, boolean limitStackSize) {
@@ -233,9 +235,24 @@ public class TankItem extends BlockTooltipItem {
     if (fluid.isEmpty()) {
       removeTank(stack);
     } else {
-      ItemStackUtil.getOrCreateTag(stack).put(NBTTags.TANK, fluid.save(RegistryAccessUtil.BUILTIN));
+      FluidTank tank = new FluidTank(fluid.getAmount());
+      tank.setFluid(fluid);
+      setTank(stack, tank);
     }
     return stack;
+  }
+
+  /**
+   * Reads a fluid from either the current {@link FluidTank} NBT format or the direct fluid stack
+   * format produced by early 1.21 builds.
+   */
+  public static FluidStack readFluid(HolderLookup.Provider registries, CompoundTag nbt) {
+    return FluidStack.parseOptional(registries, unwrapFluidTag(nbt));
+  }
+
+  /** Gets the serialized fluid stack from a tank tag, accepting both supported layouts. */
+  private static CompoundTag unwrapFluidTag(CompoundTag nbt) {
+    return nbt.contains(FLUID_TAG, Tag.TAG_COMPOUND) ? nbt.getCompound(FLUID_TAG) : nbt;
   }
 
   /** Creates a stack with the given fluid and amount, not validated. */
@@ -269,7 +286,7 @@ public class TankItem extends BlockTooltipItem {
     FluidTank tank = ScaledFluidTank.create(TankBlockEntity.getCapacity(stack.getItem()), scale);
     CompoundTag nbt = ItemStackUtil.getTag(stack);
     if (nbt != null) {
-      tank.readFromNBT(RegistryAccessUtil.BUILTIN, nbt.getCompound(NBTTags.TANK));
+      tank.setFluid(readFluid(RegistryAccessUtil.BUILTIN, nbt.getCompound(NBTTags.TANK)));
     }
     return tank;
   }
@@ -282,7 +299,7 @@ public class TankItem extends BlockTooltipItem {
   public static String getSubtype(ItemStack stack) {
     CompoundTag nbt = ItemStackUtil.getTag(stack);
     if (nbt != null && nbt.contains(NBTTags.TANK, Tag.TAG_COMPOUND)) {
-      CompoundTag tank = nbt.getCompound(NBTTags.TANK);
+      CompoundTag tank = unwrapFluidTag(nbt.getCompound(NBTTags.TANK));
       if (tank.contains("id", Tag.TAG_STRING)) {
         return tank.getString("id");
       }

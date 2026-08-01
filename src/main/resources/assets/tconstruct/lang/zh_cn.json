@@ -1783,6 +1783,9 @@
   "material.tconstruct.ice.flavor": "冷静一下！",
   "material.tconstruct.ice.armor": "使受到的冰冻伤害转变为霜盾",
   "material.tconstruct.ice.ammo": "使目标冻结4秒（每级额外延长4秒），造成减速和持续伤害",
+  "material.tconstruct.ice.skull": "流浪者",
+  "material.tconstruct.ice.skull_flavor": "寒意深入骨髓",
+  "material.tconstruct.ice.skull_encyclopedia": "使穿戴者免疫缓慢I。弹射物会对目标施加15秒缓慢II",
 
   "material.tconstruct.cactus": "仙人掌",
   "material.tconstruct.cactus.flavor": "刺背刺客被背刺",
@@ -1813,6 +1816,7 @@
   "material.tconstruct.bone.ranged": "箭矢使目标被穿透护甲值+2×等级，持续5秒",
   "material.tconstruct.bone.armor": "受到攻击后，有15%概率使攻击者在接下来5秒内被穿透护甲值+2×等级（成功格挡则改为10秒）",
   "material.tconstruct.bone.ammo": "箭矢能穿过命中的第一个目标；可投掷武器可以禁用盾牌",
+  "material.tconstruct.bone.skull": "骷髅",
   "material.tconstruct.bone.skull_flavor": "来点奶么？",
   "material.tconstruct.bone.skull_encyclopedia": "饮用奶后获得1分钟抗性提升",
 
@@ -1822,6 +1826,7 @@
   "material.tconstruct.necrotic_bone.ranged": "箭矢命中时，每级回复等同于造成伤害5%的生命值",
   "material.tconstruct.necrotic_bone.armor": "受到攻击后，15%概率逐渐回复当次伤害最多25%的生命值",
   "material.tconstruct.necrotic_bone.ammo": "命中时，每级回复等同于造成伤害5%的生命值",
+  "material.tconstruct.necrotic_bone.skull": "凋灵骷髅",
   "material.tconstruct.necrotic_bone.skull_flavor": "惊悚恐怖骷髅头！",
   "material.tconstruct.necrotic_bone.skull_encyclopedia": "普通攻击给予敌人凋零效果。饮用奶后治疗速度更快",
 
@@ -1835,12 +1840,14 @@
   "material.tconstruct.string": "线",
   "material.tconstruct.string.flavor": "理论上的最佳材料。",
   "material.tconstruct.string.encyclopedia": "可以在工匠站和工作台上使用线修复工具",
+  "material.tconstruct.string.skull": "蜘蛛",
   "material.tconstruct.string.skull_flavor": "蜘蛛是药水大师，也许它们的秘密可以帮助我增强药水……",
   "material.tconstruct.string.skull_encyclopedia": "使正面药水效果的持续时间延长25%",
 
   "material.tconstruct.leather": "皮革",
   "material.tconstruct.leather.flavor": "温“鞣”地杀死一头牛。",
   "material.tconstruct.leather.encyclopedia": "每次使用工具最高只会消耗1点耐久度",
+  "material.tconstruct.leather.skull": "僵尸",
   "material.tconstruct.leather.skull_flavor": "还行吧",
   "material.tconstruct.leather.skull_encyclopedia": "近战攻击时，会根据穿戴者的剩余燃烧时间延长目标的燃烧时间 ",
 
@@ -1858,6 +1865,7 @@
   "material.tconstruct.iron.encyclopedia": "挖掘方块与攻击生物时吸引周围物品。",
   "material.tconstruct.iron.ranged": "发射箭矢时吸引周围物品。",
   "material.tconstruct.iron.armor": "每级使受到的弹射物伤害-8%；并提供最高等级5%的击退抗性。",
+  "material.tconstruct.iron.skull": "尸壳",
   "material.tconstruct.iron.skull_flavor": "违反隔离条例",
   "material.tconstruct.iron.skull_encyclopedia": "近战攻击会将攻击者携带的所有负面效果复制到攻击目标身上",
 
@@ -1877,12 +1885,14 @@
   "material.tconstruct.copper.encyclopedia": "在低海拔时额外增加挖掘速度，每低于海平面64格，挖掘速度+6",
   "material.tconstruct.copper.ranged": "在低海拔时额外增加初速度，每低于海平面64格，初速度+0.05",
   "material.tconstruct.copper.armor": "在低海拔时提升保护，每低于海平面64格，保护+5%",
+  "material.tconstruct.copper.skull": "溺尸",
   "material.tconstruct.copper.skull_flavor": "你的攻击令人窒息",
   "material.tconstruct.copper.skull_encyclopedia": "近战攻击使敌人3秒钟无法呼吸",
 
   "material.tconstruct.gold": "金",
   "material.tconstruct.gold.flavor": "猪灵的最爱",
   "material.tconstruct.gold.armor": "每级对魔法伤害保护+10%，减少负面效果时间。让猪灵变得更友好。",
+  "material.tconstruct.gold.skull": "猪灵",
   "material.tconstruct.gold.skull_flavor": "金闪闪",
   "material.tconstruct.gold.skull_encyclopedia": "使得某些金矿掉落更多金粒，使金盔甲掉落概率+4%。每穿戴一件金盔甲，金粒和金盔甲的掉落概率也会随之增加。",
 
@@ -1910,6 +1920,7 @@
   "material.tconstruct.rose_gold": "玫瑰金",
   "material.tconstruct.rose_gold.flavor": "免责声明：不是真的用玫瑰做的。",
   "material.tconstruct.rose_gold.encyclopedia": "每个玫瑰金部件增加1个额外的升级槽",
+  "material.tconstruct.rose_gold.skull": "猪灵蛮兵",
   "material.tconstruct.rose_gold.skull_flavor": "把那件臂铠拿来物尽其用",
   "material.tconstruct.rose_gold.skull_encyclopedia": "最大生命值增加1颗心。每穿戴有一件金盔甲，额外增加1颗心。",
 
@@ -1976,6 +1987,10 @@
   "material.tconstruct.gunpowder.flavor": "当心爆炸！",
   "material.tconstruct.gunpowder.ammo": "令箭矢在等级+1的范围内爆炸。爆炸伤害取决于弹射物力量",
 
+  "material.tconstruct.redstone": "红石",
+  "material.tconstruct.redstone.flavor": "迅捷！",
+  "material.tconstruct.redstone.ammo": "箭矢每级初速度+10%，可投掷弹射物每级初速度+20%",
+
   "material.tconstruct.earthslime": "大地黏液",
   "material.tconstruct.earthslime.flavor": "过来！",
   "material.tconstruct.earthslime.ammo": "使目标沿相反方向击退",
@@ -1984,19 +1999,28 @@
   "material.tconstruct.skyslime.flavor": "离我远点！",
   "material.tconstruct.skyslime.ammo": "增强弹射物的击退效果",
 
+  "material.tconstruct.turtle": "海龟",
+  "material.tconstruct.turtle.flavor": "海龟宝宝，嘟嘟嘟嘟嘟嘟",
+  "material.tconstruct.turtle.armor": "在水下时抗性+10%；每级游泳速度+5%，等级由强化等级最高的盔甲决定",
+
   "material.tconstruct.blaze": "烈焰棒",
   "material.tconstruct.blaze.flavor": "烧光一切",
   "material.tconstruct.blaze.ammo": "箭矢会燃烧，且每级+5秒目标燃烧时间",
+  "material.tconstruct.blaze.skull": "烈焰人",
+  "material.tconstruct.blaze.skull_flavor": "发现自己太容易着火？或许还不够容易？无论哪种情况，这都适合你",
+  "material.tconstruct.blaze.skull_encyclopedia": "近战和远程攻击都会使目标着火5秒，并使穿戴者免疫着火造成的伤害",
 
   "material.tconstruct.ender_pearl": "末影珍珠",
   "material.tconstruct.ender_pearl.flavor": "安全使用末影珍珠",
   "material.tconstruct.ender_pearl.ammo": "落地时摧毁自身，并使你传送到弹射物的落点。命中怪物时，与它交换位置",
+  "material.tconstruct.ender_pearl.skull": "末影人",
   "material.tconstruct.ender_pearl.skull_flavor": "末影人懂得如何回避危险，科学家也是。他们几个礼拜以来一直漠视我的采访邀请！",
   "material.tconstruct.ender_pearl.skull_encyclopedia": "受到弹射物攻击时自动传送，受到近战攻击时有一定概率随机传送。冷却时间15秒",
 
   "material.tconstruct.glass": "玻璃",
   "material.tconstruct.glass.flavor": "一碰即碎！",
   "material.tconstruct.glass.ammo": "每级-0.75弹射物伤害，但增加一个储罐。命中目标时，对它造成储罐内流体所对应的效果。充填流体时，击中方块将会碎裂",
+  "material.tconstruct.glass.skull": "苦力怕",
   "material.tconstruct.glass.skull_flavor": "现在是谁炸谁了，苦力怕？",
   "material.tconstruct.glass.skull_encyclopedia": "潜行按住“头盔交互”键会使穿戴者爆炸",
 
@@ -2033,6 +2057,7 @@
   "material.tconstruct.pig_iron.flavor": "这是最佳材料，不接受反驳。",
   "material.tconstruct.pig_iron.encyclopedia": "食用后增加1点饥饿值和0.6点饱和度。",
   "material.tconstruct.pig_iron.armor": "每级有15%的概率在食用盔甲后增加1点饥饿值和0.6点饱和度。",
+  "material.tconstruct.pig_iron.skull": "僵尸猪灵",
   "material.tconstruct.pig_iron.skull_flavor": "惹恼我可没有好下场！",
   "material.tconstruct.pig_iron.skull_encyclopedia": "受到来自其他生物的伤害时获得15秒力量效果",
 
@@ -2040,6 +2065,7 @@
   "material.tconstruct.darkthread.flavor": "站到黑暗的一边吧，我们有缝纫线",
   "material.tconstruct.darkthread.encyclopedia": "增加生物掉落物的掉落概率，可与“幸运”同时存在",
   "material.tconstruct.darkthread.ranged": "增加箭矢所击杀生物掉落物的掉落概率",
+  "material.tconstruct.darkthread.skull": "洞穴蜘蛛",
   "material.tconstruct.darkthread.skull_flavor": "高智商战斗必备，对那些需要痛饮来决对错的决斗来说更是如此。",
   "material.tconstruct.darkthread.skull_encyclopedia": "使穿戴者免疫中毒效果，但不会移除已有的中毒效果",
 
@@ -2059,6 +2085,9 @@
   "material.tconstruct.dragon_scale.flavor": "只要有了这个，龙看见了也得怕！",
   "material.tconstruct.dragon_scale.armor": "滞空时+10%抗性；每级攻击伤害+5%，等级由强化等级最高的盔甲决定",
   "material.tconstruct.dragon_scale.ammo": "对于滞空时发射的弹射物，每级使其伤害+1",
+  "material.tconstruct.dragon_scale.skull": "龙",
+  "material.tconstruct.dragon_scale.skull_flavor": "拒绝秒杀！",
+  "material.tconstruct.dragon_scale.skull_encyclopedia": "单次受到的伤害不会超过自身最大生命值减2",
 
   "material.tconstruct.shulker": "潜影壳",
   "material.tconstruct.shulker.flavor": "牢不可破！",
@@ -2115,6 +2144,15 @@
   "material.tconstruct.glowstone.flavor": "白昼朗朗，黑夜茫茫。深山老洞，无所遁藏！",
   "material.tconstruct.glowstone.ammo": "使目标发光，每级增加持续时间10秒。若击中方块，则消耗箭矢在目标位置放置一个永久的光源",
 
+  "material.tconstruct.jadeite": "翡翠",
+  "material.tconstruct.jadeite.flavor": "晶化宝石",
+
+  "material.tconstruct.jeweled_hide": "宝石兽皮",
+  "material.tconstruct.jeweled_hide.flavor": "用纯净宝石鞣制的皮革",
+  "material.tconstruct.jeweled_hide.encyclopedia": "增加挖掘方块时掉落物的掉落概率，可与“幸运”同时存在",
+  "material.tconstruct.jeweled_hide.ranged": "提高钓鱼战利品的品质，可与“幸运”同时存在",
+  "material.tconstruct.jeweled_hide.armor": "最大生命值增加1颗心。用于盾牌时会立即恢复这颗心，但卸下盾牌时会受到1颗心的伤害",
+
   "material.tconstruct.soulsteel": "魂钢",
 
   "material.tconstruct.ancient_hide": "远古兽皮",
@@ -2137,6 +2175,8 @@
   "material.tconstruct.knightmetal.encyclopedia": "目标每穿戴一件盔甲，每级伤害+0.5",
   "material.tconstruct.knightmetal.ranged": "目标每穿戴一件盔甲，每级箭矢伤害+0.25（先于速度计算）",
   "material.tconstruct.knightmetal.armor": "目标每手持一件物品，每级提供的保护+4%",
+  "material.tconstruct.knightmetal.skull_flavor": "正宗羊驼范儿",
+  "material.tconstruct.knightmetal.skull_encyclopedia": "按住再松开“头盔交互”键，可从头盔中射出流体弹射物；完全蓄力约需2秒",
 
   "material.tconstruct.knightly": "骑士金属碎片",
   "material.tconstruct.knightly.flavor": "史莱姆旅途中得到的碎片，未打磨时尤为尖锐。",
@@ -2147,6 +2187,10 @@
   "material.tconstruct.end_rod.ammo": "弹射物在最开始的一秒中无视重力",
 
   "material.tconstruct.knightslime": "骑士史莱姆",
+  "material.tconstruct.knightslime.flavor": "黏糊糊的，还有金属光泽，但却和石头似的？还真是魅力无限！",
+  "material.tconstruct.knightslime.encyclopedia": "每级消耗1点黏液覆层（广域挖掘时每级消耗5点），使挖掘速度+20%、攻击速度+15%",
+  "material.tconstruct.knightslime.ranged": "每级消耗1点黏液覆层，使初速度和拉弓速度各+0.06",
+  "material.tconstruct.knightslime.armor": "每级最多消耗2点黏液覆层，每消耗1点使受到的伤害-2.5%（每级最多-5%）",
 
   "material.tconstruct.enderslime_vine": "黏液藤蔓",
   "material.tconstruct.enderslime_vine.slimeskin": "黏液皮",
@@ -2164,6 +2208,7 @@
 
   "material.tconstruct.blood": "血",
   "material.tconstruct.clay": "黏土",
+  "material.tconstruct.clay.flavor": "纯天然！",
   "material.tconstruct.honey": "蜂蜜",
   "material.tconstruct.phantom": "幻翼膜",
 
@@ -2219,6 +2264,9 @@
   "material.tconstruct.magnetite.flavor": "天然磁场",
   "material.tconstruct.magnetite.ammo": "在弹射物的落点处吸引生物，每级增加3格",
 
+  "material.tconstruct.kobold": "狗头人",
+  "material.tconstruct.kobold.flavor": "如同某种闪耀生物脱落的鳞片",
+
   "material.tconstruct.bronze": "青铜",
   "material.tconstruct.bronze.flavor": "别和紫水晶青铜搞混了。",
   "material.tconstruct.bronze.encyclopedia": "满耐久度时挖掘速度+6，耐久度低于50%时不增加挖掘速度",
@@ -2253,6 +2301,8 @@
   "material.tconstruct.necronium.flavor": "这么强的辐射，你的半条命怕是还要打个折",
   "material.tconstruct.necronium.encyclopedia": "能对目标生物造成至少5秒的凋零效果，另有25%概率对自身造成相同效果",
   "material.tconstruct.necronium.armor": "受到攻击后，有50%概率使攻击者凋零，持续5秒（格挡时改为100%概率）；另有10%概率给自身造成相同效果",
+  "material.tconstruct.necronium.skull_flavor": "化身恶灵骑士",
+  "material.tconstruct.necronium.skull_encyclopedia": "使穿戴者免疫凋零I。近战攻击会使目标凋零6秒",
 
   "material.tconstruct.plated_slimewood": "复合黏木",
   "material.tconstruct.plated_slimewood.flavor": "黄铜的光泽感加上那黏液的啪叽啪叽声，多么美妙啊！",
@@ -2273,6 +2323,12 @@
   "material.tconstruct.fiery.encyclopedia": "工具能自动烧炼所有掉落物。更高等级有概率额外掉落一个烧炼产物，每一额外等级使概率增加20%",
   "material.tconstruct.fiery.ranged": "箭矢能自动烧炼所有掉落物。更高等级有概率额外掉落一个烧炼产物，每一额外等级使概率增加20%",
   "material.tconstruct.fiery.armor": "每级增加5%对着火中敌人的抗性",
+
+  "material.tconstruct.nicrosil": "镍铬合金",
+  "material.tconstruct.nicrosil.flavor": "储存魔力。",
+  "material.tconstruct.nicrosil.encyclopedia": "每次攻击后，攻击伤害+0.5×等级；连续攻击5次后，攻击伤害加成上限为+2.5×等级",
+  "material.tconstruct.nicrosil.ranged": "每次箭矢命中后，弹射物力量+0.25×等级；连续命中5次后，弹射物力量加成上限为+1.25×等级",
+  "material.tconstruct.nicrosil.armor": "受到伤害后，近战伤害暂时+1，至多为所有盔甲上的总等级",
 
 
   "_comment": "Modifiers",
@@ -3995,4 +4051,3 @@
   "advancements.tconstruct.world.ancient_tools.title": "考古学家",
   "advancements.tconstruct.world.ancient_tools.description": "找到所有的远古工具"
 }
-

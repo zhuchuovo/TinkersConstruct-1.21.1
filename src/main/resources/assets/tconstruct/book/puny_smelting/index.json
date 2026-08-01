@@ -62,7 +62,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:small_axe_head",
+                                  "items":  ["tconstruct:small_axe_head"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:seared_stone"
@@ -88,7 +88,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:bow_grip",
+                                  "items":  ["tconstruct:bow_grip"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:slimewood"
@@ -117,7 +117,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:leggings_plating",
+                                  "items":  ["tconstruct:leggings_plating"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:gold"
@@ -131,7 +131,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:travelers_chestplate",
+                                  "items":  ["tconstruct:travelers_chestplate"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "tic_broken":  false,
@@ -164,7 +164,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:creative_slot",
+                                  "items":  ["tconstruct:creative_slot"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "slot":  "upgrades"
@@ -179,7 +179,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:creative_slot",
+                                  "items":  ["tconstruct:creative_slot"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "slot":  "slotless"

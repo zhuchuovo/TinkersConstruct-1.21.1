@@ -26,7 +26,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:tool_binding",
+                                  "items":  ["tconstruct:tool_binding"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:rock#stone"
@@ -55,7 +55,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:bowstring",
+                                  "items":  ["tconstruct:bowstring"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:string"
@@ -76,7 +76,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:arrow_shaft",
+                                  "items":  ["tconstruct:arrow_shaft"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:bamboo"
@@ -91,7 +91,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:pickaxe",
+                                  "items":  ["tconstruct:pickaxe"],
                                   "components":  {
                                                      "minecraft:damage":  0,
                                                      "minecraft:custom_data":  {

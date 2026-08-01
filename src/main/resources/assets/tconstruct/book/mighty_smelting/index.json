@@ -37,7 +37,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:hammer_head",
+                                  "items":  ["tconstruct:hammer_head"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:slimesteel"
@@ -63,7 +63,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:bow_limb",
+                                  "items":  ["tconstruct:bow_limb"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:nahuatl"
@@ -89,7 +89,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:chestplate_plating",
+                                  "items":  ["tconstruct:chestplate_plating"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:obsidian"
@@ -103,7 +103,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:cleaver",
+                                  "items":  ["tconstruct:cleaver"],
                                   "components":  {
                                                      "minecraft:damage":  0,
                                                      "minecraft:custom_data":  {
@@ -146,7 +146,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:creative_slot",
+                                  "items":  ["tconstruct:creative_slot"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "slot":  "abilities"
@@ -161,7 +161,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:creative_slot",
+                                  "items":  ["tconstruct:creative_slot"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "slot":  "defense"

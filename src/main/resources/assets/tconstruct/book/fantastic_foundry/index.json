@@ -39,7 +39,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:large_plate",
+                                  "items":  ["tconstruct:large_plate"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:manyullyn"
@@ -60,7 +60,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:bow_grip",
+                                  "items":  ["tconstruct:bow_grip"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:hepatizon"
@@ -81,7 +81,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:shield_core",
+                                  "items":  ["tconstruct:shield_core"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:blazewood"
@@ -95,7 +95,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:plate_chestplate",
+                                  "items":  ["tconstruct:plate_chestplate"],
                                   "components":  {
                                                      "minecraft:damage":  0,
                                                      "minecraft:custom_data":  {

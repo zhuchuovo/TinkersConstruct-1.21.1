@@ -153,12 +153,8 @@ public class TankBlockEntity extends SmelteryComponentBlockEntity implements ITa
    * @param nbt  tank NBT
    */
   public void updateTank(CompoundTag nbt) {
-    if (nbt.isEmpty()) {
-      tank.setFluid(FluidStack.EMPTY);
-    } else {
-      tank.readFromNBT(registries(), nbt);
-      updateLight(this, tank);
-    }
+    tank.setFluid(TankItem.readFluid(registries(), nbt));
+    updateLight(this, tank);
   }
 
   private HolderLookup.Provider registries() {

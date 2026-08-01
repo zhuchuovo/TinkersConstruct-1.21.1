@@ -3,7 +3,7 @@
     "title":  "Yuvasız Değiştiriciler",
     "item":  {
                  "type":  "neoforge:components",
-                 "items":  "tconstruct:creative_slot",
+                 "items":  ["tconstruct:creative_slot"],
                  "components":  {
                                     "minecraft:custom_data":  {
                                                                   "slot":  "slotless"

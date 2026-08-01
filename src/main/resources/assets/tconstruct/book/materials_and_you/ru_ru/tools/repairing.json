@@ -5,7 +5,7 @@
                  [
                      {
                          "type":  "neoforge:components",
-                         "items":  "tconstruct:pickaxe",
+                         "items":  ["tconstruct:pickaxe"],
                          "components":  {
                                             "minecraft:damage":  70,
                                             "minecraft:custom_data":  {
@@ -27,7 +27,7 @@
              ],
     "result":  {
                    "type":  "neoforge:components",
-                   "items":  "tconstruct:pickaxe",
+                   "items":  ["tconstruct:pickaxe"],
                    "components":  {
                                       "minecraft:damage":  10,
                                       "minecraft:custom_data":  {

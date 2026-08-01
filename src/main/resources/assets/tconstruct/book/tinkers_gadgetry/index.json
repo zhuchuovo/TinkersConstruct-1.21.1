@@ -46,7 +46,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:broad_blade",
+                                  "items":  ["tconstruct:broad_blade"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:knightmetal"
@@ -67,7 +67,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:bowstring",
+                                  "items":  ["tconstruct:bowstring"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:enderslime_vine"
@@ -88,7 +88,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:maille",
+                                  "items":  ["tconstruct:maille"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:dragon_scale"
@@ -113,7 +113,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:arrow_head",
+                                  "items":  ["tconstruct:arrow_head"],
                                   "components":  {
                                                      "minecraft:custom_data":  {
                                                                                    "Material":  "tconstruct:shulker"
@@ -127,7 +127,7 @@
         "icon":  {
                      "item":  {
                                   "type":  "neoforge:components",
-                                  "items":  "tconstruct:battlesign",
+                                  "items":  ["tconstruct:battlesign"],
                                   "components":  {
                                                      "minecraft:damage":  0,
                                                      "minecraft:custom_data":  {

@@ -5,7 +5,7 @@
                  [
                      {
                          "type":  "neoforge:components",
-                         "items":  "tconstruct:pickaxe",
+                         "items":  ["tconstruct:pickaxe"],
                          "components":  {
                                             "minecraft:damage":  70,
                                             "minecraft:custom_data":  {
@@ -24,7 +24,7 @@
                      },
                      {
                          "type":  "neoforge:components",
-                         "items":  "tconstruct:repair_kit",
+                         "items":  ["tconstruct:repair_kit"],
                          "components":  {
                                             "minecraft:custom_data":  {
                                                                           "tic_display":  true,
@@ -36,7 +36,7 @@
              ],
     "result":  {
                    "type":  "neoforge:components",
-                   "items":  "tconstruct:pickaxe",
+                   "items":  ["tconstruct:pickaxe"],
                    "components":  {
                                       "minecraft:damage":  10,
                                       "minecraft:custom_data":  {
