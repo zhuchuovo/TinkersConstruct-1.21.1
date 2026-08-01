@@ -13,7 +13,6 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.common.loot.LootModifierManager;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.mantle.data.loadable.Loadable;
@@ -31,8 +30,8 @@ import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.part.IMaterialItem;
 import slimeknights.tconstruct.library.tools.part.IToolPart;
 import slimeknights.tconstruct.library.utils.GsonLoadable;
+import slimeknights.tconstruct.library.utils.HarvestTiers;
 
-import java.util.Locale;
 import java.util.Set;
 
 @SuppressWarnings("deprecation")
@@ -63,17 +62,17 @@ public class TinkerLoadables {
   public static final StringLoadable<SimpleParticleType> SIMPLE_PARTICLE = instance(Loadables.PARTICLE_TYPE, SimpleParticleType.class, "Expected particle type to be instance of SimpleParticleType");
   public static final StringLoadable<BlockItem> BLOCK_ITEM = instance(Loadables.ITEM, BlockItem.class, "Expected item to be instance of BlockItem");
 
-  /** Tier loadable from the forge tier sorting registry */
+  /** Tier loadable supporting vanilla and optional integration registries. */
   public static final StringLoadable<Tier> TIER = Loadables.RESOURCE_LOCATION.xmap((id, error) -> {
-    for (Tiers tier : Tiers.values()) {
-      if (id.getNamespace().equals("minecraft") && id.getPath().equals(tier.name().toLowerCase(Locale.ROOT))) {
-        return tier;
-      }
+    Tier tier = HarvestTiers.byId(id);
+    if (tier != null) {
+      return tier;
     }
     throw error.create("Unknown harvest tier " + id);
   }, (tier, error) -> {
-    if (tier instanceof Tiers vanilla) {
-      return ResourceLocation.withDefaultNamespace(vanilla.name().toLowerCase(Locale.ROOT));
+    ResourceLocation id = HarvestTiers.getId(tier);
+    if (id != null) {
+      return id;
     }
     throw error.create("Attempt to serialize unregistered tier " + tier);
   });

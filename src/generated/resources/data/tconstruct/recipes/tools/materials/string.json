@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:material",
   "ingredient": {
-    "tag": "c:string"
+    "tag": "c:strings"
   },
   "material": "tconstruct:string",
   "needed": 4,

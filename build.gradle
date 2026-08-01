@@ -50,7 +50,6 @@ sourceSets.main {
     java {
         // These integrations have no NeoForge 1.21.1 API artifact yet. They are
         // intentionally isolated while the core port is brought up.
-        exclude 'slimeknights/tconstruct/plugin/jsonthings/**'
         exclude 'slimeknights/tconstruct/plugin/craftingtweaks/**'
         exclude 'slimeknights/tconstruct/plugin/DietPlugin.java'
         exclude 'slimeknights/tconstruct/plugin/DummmmmmyPlugin.java'
@@ -150,6 +149,8 @@ configurations {
 
 dependencies {
     implementation project(':mantle')
+
+    compileOnly 'dev.gigaherz.jsonthings:JsonThings-1.21.1:0.13.7'
 
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"

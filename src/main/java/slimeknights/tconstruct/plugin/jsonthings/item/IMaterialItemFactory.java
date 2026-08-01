@@ -16,7 +16,7 @@ import java.util.Objects;
 public interface IMaterialItemFactory<T extends Item & IMaterialItem> extends IItemFactory<T> {
   @Override
   default void provideVariants(ResourceKey<CreativeModeTab> tabKey, Output output, ItemDisplayParameters parameters, @Nullable ItemBuilder context, boolean explicit) {
-    if (Objects.requireNonNull(context).getItem() instanceof IMaterialItem materialItem) {
+    if (Objects.requireNonNull(context).get() instanceof IMaterialItem materialItem) {
       materialItem.addVariants(output::accept, "");
     }
   }

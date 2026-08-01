@@ -13,10 +13,10 @@
       "item": "minecraft:leather"
     },
     {
-      "tag": "c:string"
+      "tag": "c:strings"
     },
     {
-      "tag": "c:string"
+      "tag": "c:strings"
     }
   ],
   "level": 1,

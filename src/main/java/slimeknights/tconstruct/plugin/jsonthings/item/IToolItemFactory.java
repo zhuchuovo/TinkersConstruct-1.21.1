@@ -17,7 +17,7 @@ import java.util.Objects;
 public interface IToolItemFactory<T extends Item & IModifiable> extends IItemFactory<T> {
   @Override
   default void provideVariants(ResourceKey<CreativeModeTab> tabKey, Output output, ItemDisplayParameters parameters, @Nullable ItemBuilder context, boolean explicit) {
-    if (Objects.requireNonNull(context).get().self() instanceof IModifiable modifiable) {
+    if (Objects.requireNonNull(context).get() instanceof IModifiable modifiable) {
       ToolBuildHandler.addVariants(output::accept, modifiable, "");
     }
   }

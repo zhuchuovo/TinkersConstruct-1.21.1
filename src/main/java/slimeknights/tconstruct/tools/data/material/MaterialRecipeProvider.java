@@ -108,8 +108,8 @@ public class MaterialRecipeProvider extends BaseRecipeProvider implements IMater
     materialRecipe(consumer, MaterialIds.bone,         Ingredient.of(TinkerTags.Items.BONES),    1, 1, folder + "bone");
     materialRecipe(consumer, MaterialIds.chorus,       Ingredient.of(Items.POPPED_CHORUS_FRUIT), 1, 1, folder + "chorus_popped");
     // tier 1 binding
-    materialRecipe(consumer, MaterialIds.string,  Ingredient.of(Tags.Items.STRING),  1, 4, folder + "string");
-    materialRecipe(consumer, MaterialIds.leather, Ingredient.of(Tags.Items.LEATHER), 1, 1, folder + "leather");
+    materialRecipe(consumer, MaterialIds.string,  Ingredient.of(Tags.Items.STRINGS),  1, 4, folder + "string");
+    materialRecipe(consumer, MaterialIds.leather, Ingredient.of(Tags.Items.LEATHERS), 1, 1, folder + "leather");
     materialRecipe(consumer, MaterialIds.leather, Ingredient.of(Items.RABBIT_HIDE),  1, 2, folder + "rabbit_hide");
     materialRecipe(consumer, MaterialIds.vine,    Ingredient.of(Items.VINE),         1, 1, folder + "vine");
     materialRecipe(consumer, MaterialIds.cactus,  Ingredient.of(Blocks.CACTUS),      1, 1, folder + "cactus");

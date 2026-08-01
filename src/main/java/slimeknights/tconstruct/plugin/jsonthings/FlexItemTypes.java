@@ -108,18 +108,24 @@ public class FlexItemTypes {
     /* Simple armor type with a flat texture */
     register("basic_armor", data -> {
       ResourceLocation name = JsonHelper.getResourceLocation(data, "texture_name");
-      SoundEvent sound = Loadables.SOUND_EVENT.getOrDefault(data, "equip_sound", SoundEvents.ARMOR_EQUIP_GENERIC);
+      SoundEvent sound = Loadables.SOUND_EVENT.getOrDefault(data, "equip_sound", SoundEvents.ARMOR_EQUIP_GENERIC.value());
       ArmorItem.Type slot = TinkerLoadables.ARMOR_SLOT.getIfPresent(data, "slot");
-      return (IToolItemFactory<ModifiableArmorItem>)(props, builder) -> add(ARMOR_ITEMS, new ModifiableArmorItem(new DummyArmorMaterial(name, sound), slot, props, ToolDefinition.create(builder.getRegistryName())));
+      return (IToolItemFactory<ModifiableArmorItem>)(props, builder) -> {
+        DummyArmorMaterial material = new DummyArmorMaterial(name, sound);
+        return add(ARMOR_ITEMS, new ModifiableArmorItem(material.getArmorMaterial(), slot, props, ToolDefinition.create(builder.getRegistryName())));
+      };
     });
 
     /* Layered armor type, used for golden, dyeable, etc */
     Loadable<List<ArmorTextureSupplier>> ARMOR_TEXTURES = ArmorTextureSupplier.LOADER.list(1);
     register("multilayer_armor", data -> {
       ResourceLocation name = JsonHelper.getResourceLocation(data, "model_name");
-      SoundEvent sound = Loadables.SOUND_EVENT.getOrDefault(data, "equip_sound", SoundEvents.ARMOR_EQUIP_GENERIC);
+      SoundEvent sound = Loadables.SOUND_EVENT.getOrDefault(data, "equip_sound", SoundEvents.ARMOR_EQUIP_GENERIC.value());
       ArmorItem.Type slot = TinkerLoadables.ARMOR_SLOT.getIfPresent(data, "slot");
-      return (IToolItemFactory<MultilayerArmorItem>)(props, builder) -> add(ARMOR_ITEMS, new MultilayerArmorItem(new DummyArmorMaterial(name, sound), slot, props, ToolDefinition.create(builder.getRegistryName())));
+      return (IToolItemFactory<MultilayerArmorItem>)(props, builder) -> {
+        DummyArmorMaterial material = new DummyArmorMaterial(name, sound);
+        return add(ARMOR_ITEMS, new MultilayerArmorItem(material.getArmorMaterial(), slot, props, ToolDefinition.create(builder.getRegistryName()), name));
+      };
     });
   }
 

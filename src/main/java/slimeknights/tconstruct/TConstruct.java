@@ -32,6 +32,7 @@ import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability.Tin
 import slimeknights.tconstruct.library.tools.definition.ToolDefinitionLoader;
 import slimeknights.tconstruct.library.tools.layout.StationSlotLayoutLoader;
 import slimeknights.tconstruct.library.utils.Util;
+import slimeknights.tconstruct.plugin.jsonthings.JsonThingsPlugin;
 import slimeknights.tconstruct.shared.TinkerAttributes;
 import slimeknights.tconstruct.shared.TinkerClient;
 import slimeknights.tconstruct.shared.TinkerCommons;
@@ -102,6 +103,10 @@ public class TConstruct {
     // init client logic
     if (FMLEnvironment.dist == Dist.CLIENT) {
       TinkerClient.onConstruct();
+    }
+
+    if (ModList.get().isLoaded("jsonthings")) {
+      JsonThingsPlugin.onConstruct();
     }
 
     // Optional integrations without a 1.21.1 API are temporarily isolated by

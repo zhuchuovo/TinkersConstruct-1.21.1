@@ -4,13 +4,13 @@
   "check_trait_level": true,
   "inputs": [
     {
-      "tag": "c:string"
+      "tag": "c:strings"
     },
     {
       "item": "minecraft:spyglass"
     },
     {
-      "tag": "c:string"
+      "tag": "c:strings"
     }
   ],
   "level": 1,
