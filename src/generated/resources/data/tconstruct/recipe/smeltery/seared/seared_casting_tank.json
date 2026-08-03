@@ -9,7 +9,7 @@
       "tag": "c:ingots/copper"
     },
     "G": {
-      "tag": "c:glass"
+      "tag": "c:glass_blocks"
     }
   },
   "pattern": [

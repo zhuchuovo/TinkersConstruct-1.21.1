@@ -1,0 +1,17 @@
+{
+  "modifier_id": "tconstruct:trim",
+  "text": [
+    {
+      "text": "将盔甲纹饰锻造模板与纹饰材料组合，为盔甲增加1个防御槽，并添加具有独特纹理和材料颜色的外观。"
+    },
+    {
+      "text": "用于黏液套装时，不增加防御槽，而是额外增加1级黏液材料特性。",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "可替换",
+    "无需槽位"
+  ]
+}

@@ -8,6 +8,8 @@ import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.util.Mth;
@@ -17,6 +19,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent.ModifyBakingResult;
+import net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional;
 import net.neoforged.neoforge.client.event.ModelEvent.RegisterGeometryLoaders;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
@@ -95,6 +99,9 @@ import static slimeknights.tconstruct.library.client.model.tools.ToolModel.regis
 @SuppressWarnings("unused")
 @EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.MOD)
 public class ToolClientEvents extends ClientEventBase {
+  private static final ModelResourceLocation MODIFIER_CRYSTAL_ITEM_MODEL = ModelResourceLocation.inventory(getResource("modifier_crystal"));
+  private static final ModelResourceLocation MODIFIER_CRYSTAL_STANDALONE_MODEL = ModelResourceLocation.standalone(getResource("item/modifier_crystal"));
+
   /** Keybinding for interacting using a helmet */
   private static final KeyMapping HELMET_INTERACT = new KeyMapping(TConstruct.makeTranslationKey("key", "helmet_interact"), KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.z"), "key.categories.tconstruct");
   /** Keybinding for interacting using leggings */
@@ -128,6 +135,21 @@ public class ToolClientEvents extends ClientEventBase {
     event.register(getResource("material"), MaterialModel.LOADER);
     event.register(getResource("tool"), ToolModel.LOADER);
     event.register(getResource("material_block"), MaterialBlockModel.LOADER);
+  }
+
+  @SubscribeEvent
+  static void registerAdditionalModels(RegisterAdditional event) {
+    event.register(MODIFIER_CRYSTAL_STANDALONE_MODEL);
+  }
+
+  @SubscribeEvent
+  static void fixModifierCrystalItemModel(ModifyBakingResult event) {
+    BakedModel model = event.getModels().get(MODIFIER_CRYSTAL_STANDALONE_MODEL);
+    if (model == null) {
+      TConstruct.LOG.error("Failed to load the standalone modifier crystal item model");
+      return;
+    }
+    event.getModels().put(MODIFIER_CRYSTAL_ITEM_MODEL, model);
   }
 
   @SubscribeEvent

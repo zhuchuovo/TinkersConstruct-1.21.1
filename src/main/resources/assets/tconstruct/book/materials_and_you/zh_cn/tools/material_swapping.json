@@ -1,0 +1,14 @@
+{
+  "title": "工具材料替换",
+  "image": {
+    "file": "tconstruct:book/images/material_swapping.png",
+    "width": 136,
+    "height": 72
+  },
+  "text": [
+    {
+      "text": "你也可以牺牲另一件相同类型且没有强化的工具来替换部件。材料替换的位置取决于工具放入的槽位。这种方法适合更换那些无法直接合成的工具所使用的材料。",
+      "paragraph": false
+    }
+  ]
+}

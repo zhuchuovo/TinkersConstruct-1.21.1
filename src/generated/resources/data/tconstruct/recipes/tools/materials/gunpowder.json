@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:material",
   "ingredient": {
-    "tag": "c:gunpowder"
+    "tag": "c:gunpowders"
   },
   "material": "tconstruct:gunpowder",
   "needed": 4,

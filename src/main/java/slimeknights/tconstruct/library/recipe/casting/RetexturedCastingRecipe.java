@@ -39,7 +39,7 @@ public class RetexturedCastingRecipe extends ItemCastingRecipe {
   }
 
   private ItemStack assemble0(ICastingContainer inv) {
-    ItemStack result = this.result.get();
+    ItemStack result = this.result.copy();
     if (inv.getStack().getItem() instanceof BlockItem blockItem ) {
       return RetexturedHelper.setTexture(result, blockItem.getBlock());
     }

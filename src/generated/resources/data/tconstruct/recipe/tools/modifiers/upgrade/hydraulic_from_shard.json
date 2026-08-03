@@ -3,7 +3,7 @@
   "allow_crystal": true,
   "amount_per_item": 1,
   "input": {
-    "tag": "c:dusts/prismarine"
+    "tag": "c:gems/prismarine"
   },
   "level": {
     "max": 5

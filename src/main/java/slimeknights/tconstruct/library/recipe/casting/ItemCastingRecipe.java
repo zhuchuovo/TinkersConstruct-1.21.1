@@ -92,11 +92,12 @@ public class ItemCastingRecipe extends AbstractCastingRecipe implements IDisplay
       if (tag != null) {
         output = BuiltInRegistries.ITEM.getTag(tag)
             .flatMap(holders -> holders.stream().findFirst().map(Holder::value))
-            .map(ItemStack::new)
+            .map(item -> new ItemStack(item, this.result.getCount()))
             .orElse(ItemStack.EMPTY);
       }
     }
-    return output;
+    // ItemOutput caches its resolved stack. Never expose that mutable cache to a block or player inventory.
+    return output.copy();
   }
 
   @Override
@@ -125,7 +126,7 @@ public class ItemCastingRecipe extends AbstractCastingRecipe implements IDisplay
 
   @Override
   public ItemStack getOutput() {
-    return this.result.get();
+    return resolveResult();
   }
 
   /**

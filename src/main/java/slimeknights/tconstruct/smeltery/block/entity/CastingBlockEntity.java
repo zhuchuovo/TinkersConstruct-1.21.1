@@ -170,8 +170,9 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
         moldingInventory.setPattern(ItemStack.EMPTY);
         recipe = findMoldingRecipe();
         if (recipe != null) {
+          ItemStack result = recipe.assemble(moldingInventory, level.registryAccess());
           setItem(INPUT, ItemStack.EMPTY);
-          ItemHandlerHelper.giveItemToPlayer(player, recipe.assemble(moldingInventory, level.registryAccess()), player.getInventory().selected);
+          ItemHandlerHelper.giveItemToPlayer(player, result, player.getInventory().selected);
           return;
         }
       }
@@ -195,9 +196,8 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
       // Additional info: Only 1 item can be put into the casting block usually, however recipes
       // can have ItemStacks with stacksize > 1 as output
       // we therefore spill the whole contents on extraction.
-      ItemStack stack = getItem(slot);
+      ItemStack stack = removeItemNoUpdate(slot);
       ItemHandlerHelper.giveItemToPlayer(player, stack, player.getInventory().selected);
-      setItem(slot, ItemStack.EMPTY);
 
       // send a block update for the comparator, needs to be done after the stack is removed
       if (slot == OUTPUT) {

@@ -1,0 +1,13 @@
+{
+  "modifier_id": "tconstruct:banner",
+  "text": [
+    {
+      "text": "让你制作出不祥的盾牌。"
+    }
+  ],
+  "effects": [
+    "使用旗帜装饰盾牌",
+    "再次应用可更换图案",
+    "无需槽位"
+  ]
+}

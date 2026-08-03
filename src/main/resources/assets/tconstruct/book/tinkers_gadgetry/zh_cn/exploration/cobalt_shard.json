@@ -1,0 +1,10 @@
+{
+  "title": "钴碎片",
+  "item": "tconstruct:cobalt_shard",
+  "text": [
+    {
+      "text": "史莱姆不会掉落钴碎片，它们只会出现在灵浆晶洞中，主要可作为钴矿石的替代来源。",
+      "paragraph": true
+    }
+  ]
+}
