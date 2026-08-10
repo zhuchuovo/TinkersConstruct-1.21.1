@@ -94,6 +94,8 @@ public class BlockTagProvider extends BlockTagsProvider {
     addMetalTags(TinkerMaterials.knightslime, true);
 
     // glass
+    Function<String,ResourceLocation> createId = name -> ResourceLocation.fromNamespaceAndPath("create", name);
+    Function<String,ResourceLocation> quarkId = name -> ResourceLocation.fromNamespaceAndPath("quark", name);
     IntrinsicTagAppender<Block> silicaPanes = tag(TinkerTags.Blocks.GLASS_PANES_SILICA);
     silicaPanes.add(
       Blocks.GLASS_PANE, TinkerCommons.clearGlassPane.get(),
@@ -117,6 +119,14 @@ public class BlockTagProvider extends BlockTagsProvider {
     TinkerCommons.clearStainedGlass.values().forEach(impermeable::add);
     TinkerCommons.clearStainedGlass.values().forEach(silicaGlass::add);
     tag(Tags.Blocks.GLASS_TINTED).add(TinkerCommons.clearTintedGlass.get());
+    // create compat: glass, framed/tiled glass and windows all melt into glass
+    silicaGlass.addOptional(createId.apply("glass"), createId.apply("tiled_glass"), createId.apply("framed_glass"));
+    silicaPanes.addOptional(createId.apply("tiled_glass_pane"), createId.apply("framed_glass_pane"));
+    String[] createWindowWoods = {"oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "crimson", "warped", "cherry", "bamboo"};
+    for (String wood : createWindowWoods) {
+      silicaGlass.addOptional(createId.apply(wood + "_window"));
+      silicaPanes.addOptional(createId.apply(wood + "_window_pane"));
+    }
 
     // soul speed on glass
     this.tag(BlockTags.SOUL_SPEED_BLOCKS).add(TinkerCommons.soulGlass.get(), TinkerCommons.soulGlassPane.get(),
@@ -126,8 +136,6 @@ public class BlockTagProvider extends BlockTagsProvider {
     this.tag(TinkerTags.Blocks.TRANSPARENT_OVERLAY).add(TinkerCommons.soulGlass.get(), TinkerCommons.soulGlassPane.get(),
                                                         TinkerSmeltery.searedSoulGlass.get(), TinkerSmeltery.searedSoulGlassPane.get(),
                                                         TinkerSmeltery.scorchedSoulGlass.get(), TinkerSmeltery.scorchedSoulGlassPane.get());
-    Function<String,ResourceLocation> createId = name -> ResourceLocation.fromNamespaceAndPath("create", name);
-    Function<String,ResourceLocation> quarkId = name -> ResourceLocation.fromNamespaceAndPath("quark", name);
     this.tag(TinkerTags.Blocks.WORKSTATION_ROCK)
       .addTags(TinkerTags.Blocks.STONE, TinkerTags.Blocks.BLACKSTONE, TinkerTags.Blocks.GRANITE, TinkerTags.Blocks.DIORITE, TinkerTags.Blocks.ANDESITE, TinkerTags.Blocks.DEEPSLATE, TinkerTags.Blocks.BASALT)
       .add(Blocks.TUFF, Blocks.DRIPSTONE_BLOCK, Blocks.CALCITE)

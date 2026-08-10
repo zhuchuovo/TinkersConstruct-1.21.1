@@ -16,6 +16,62 @@
     "tconstruct:brown_clear_stained_glass",
     "tconstruct:green_clear_stained_glass",
     "tconstruct:red_clear_stained_glass",
-    "tconstruct:black_clear_stained_glass"
+    "tconstruct:black_clear_stained_glass",
+    {
+      "id": "create:glass",
+      "required": false
+    },
+    {
+      "id": "create:tiled_glass",
+      "required": false
+    },
+    {
+      "id": "create:framed_glass",
+      "required": false
+    },
+    {
+      "id": "create:oak_window",
+      "required": false
+    },
+    {
+      "id": "create:spruce_window",
+      "required": false
+    },
+    {
+      "id": "create:birch_window",
+      "required": false
+    },
+    {
+      "id": "create:jungle_window",
+      "required": false
+    },
+    {
+      "id": "create:acacia_window",
+      "required": false
+    },
+    {
+      "id": "create:dark_oak_window",
+      "required": false
+    },
+    {
+      "id": "create:mangrove_window",
+      "required": false
+    },
+    {
+      "id": "create:crimson_window",
+      "required": false
+    },
+    {
+      "id": "create:warped_window",
+      "required": false
+    },
+    {
+      "id": "create:cherry_window",
+      "required": false
+    },
+    {
+      "id": "create:bamboo_window",
+      "required": false
+    }
   ]
 }
