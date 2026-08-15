@@ -1,5 +1,12 @@
 {
-  "type": "neoforge:conditional",
+  "type": "tconstruct:ore_melting",
+  "byproducts": [
+    {
+      "amount": 540,
+      "rate": "metal",
+      "tag": "c:molten_copper"
+    }
+  ],
   "conditions": [
     {
       "type": "mantle:tag_combination_filled",
@@ -9,77 +16,22 @@
       ]
     }
   ],
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "mantle:tag_filled",
-          "tag": "c:ingots/tin"
-        }
-      ],
-      "recipe": {
-        "type": "tconstruct:ore_melting",
-        "byproducts": [
-          {
-            "amount": 540,
-            "rate": "metal",
-            "tag": "c:molten_tin"
-          }
-        ],
-        "ingredient": {
-          "type": "neoforge:intersection",
-          "children": [
-            {
-              "tag": "c:ores/zinc"
-            },
-            {
-              "tag": "c:ore_rates/dense"
-            }
-          ]
-        },
-        "rate": "metal",
-        "result": {
-          "amount": 540,
-          "tag": "c:molten_zinc"
-        },
-        "temperature": 420,
-        "time": 211
+  "ingredient": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "c:ores/zinc"
+      },
+      {
+        "tag": "c:ore_rates/dense"
       }
-    },
-    {
-      "conditions": [
-        {
-          "type": "neoforge:true"
-        }
-      ],
-      "recipe": {
-        "type": "tconstruct:ore_melting",
-        "byproducts": [
-          {
-            "amount": 540,
-            "rate": "metal",
-            "tag": "c:molten_copper"
-          }
-        ],
-        "ingredient": {
-          "type": "neoforge:intersection",
-          "children": [
-            {
-              "tag": "c:ores/zinc"
-            },
-            {
-              "tag": "c:ore_rates/dense"
-            }
-          ]
-        },
-        "rate": "metal",
-        "result": {
-          "amount": 540,
-          "tag": "c:molten_zinc"
-        },
-        "temperature": 420,
-        "time": 211
-      }
-    }
-  ]
+    ]
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 540,
+    "tag": "c:molten_zinc"
+  },
+  "temperature": 420,
+  "time": 211
 }

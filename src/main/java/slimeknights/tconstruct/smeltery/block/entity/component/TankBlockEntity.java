@@ -122,6 +122,8 @@ public class TankBlockEntity extends SmelteryComponentBlockEntity implements ITa
     if (this.level != null) {
       updateLight(this, tank);
       this.requestModelDataUpdate();
+      BlockState state = getBlockState();
+      level.sendBlockUpdated(worldPosition, state, state, 48);
     }
   }
 

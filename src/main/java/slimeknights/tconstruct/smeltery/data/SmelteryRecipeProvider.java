@@ -142,11 +142,11 @@ public class SmelteryRecipeProvider extends BaseRecipeProvider implements ISmelt
 
     // sand casts
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, TinkerSmeltery.blankSandCast, 4)
-                          .requires(Tags.Items.SAND_COLORLESS)
+                          .requires(Tags.Items.SANDS_COLORLESS)
                           .unlockedBy("has_casting", has(TinkerSmeltery.searedTable))
                           .save(consumer, location("smeltery/sand_cast"));
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, TinkerSmeltery.blankRedSandCast, 4)
-                          .requires(Tags.Items.SAND_RED)
+                          .requires(Tags.Items.SANDS_RED)
                           .unlockedBy("has_casting", has(TinkerSmeltery.searedTable))
                           .save(consumer, location("smeltery/red_sand_cast"));
 
@@ -2302,7 +2302,7 @@ public class SmelteryRecipeProvider extends BaseRecipeProvider implements ISmelt
     metal(consumer, TinkerFluids.moltenLead    ).ore(Byproduct.SILVER, Byproduct.GOLD  ).optional().metal().dust().oreberry().plate().gear().coin().common(TOOLS_COMPLEMENT).common(ARMOR).common(FLAKES).sheetmetal().wire();
     metal(consumer, TinkerFluids.moltenSilver  ).ore(Byproduct.LEAD, Byproduct.GOLD    ).optional().metal().dust().oreberry().plate().gear().coin().common(TOOLS_COMPLEMENT).common(ARMOR).common(FLAKES).sheetmetal();
     metal(consumer, TinkerFluids.moltenNickel  ).ore(Byproduct.PLATINUM, Byproduct.IRON).optional().metal().dust().oreberry().plate().gear().coin().common(TOOLS_COMPLEMENT).common(ARMOR).sheetmetal();
-    metal(consumer, TinkerFluids.moltenZinc    ).ore(Byproduct.TIN, Byproduct.COPPER   ).optional().metal().dust().oreberry().plate().gear().geore().common(FLAKES);
+    metal(consumer, TinkerFluids.moltenZinc    ).ore(Byproduct.COPPER                 ).optional().metal().dust().oreberry().plate().gear().geore().common(FLAKES);
     metal(consumer, TinkerFluids.moltenPlatinum).ore(Byproduct.GOLD                    ).optional().metal().dust();
     metal(consumer, TinkerFluids.moltenTungsten).ore(Byproduct.PLATINUM, Byproduct.GOLD).optional().metal().dust();
     metal(consumer, TinkerFluids.moltenChromium).ore(Byproduct.ALUMINUM, Byproduct.IRON).optional().metal().dust().common(FLAKES);
@@ -2366,6 +2366,17 @@ public class SmelteryRecipeProvider extends BaseRecipeProvider implements ISmelt
                             .setCast(Blocks.ANDESITE, true)
                             .setFluidAndTime(TinkerFluids.moltenZinc, FluidValues.NUGGET)
                             .save(createConsumer, location(folder + "create/andesite_alloy_zinc"));
+
+    // create - melt crushed raw ores into their molten metal
+    FluidObject<?>[] crushedMetals = {TinkerFluids.moltenIron, TinkerFluids.moltenGold, TinkerFluids.moltenCopper, TinkerFluids.moltenZinc,
+                                      TinkerFluids.moltenTin, TinkerFluids.moltenAluminum, TinkerFluids.moltenLead, TinkerFluids.moltenSilver,
+                                      TinkerFluids.moltenNickel, TinkerFluids.moltenPlatinum, TinkerFluids.moltenOsmium, TinkerFluids.moltenUranium};
+    for (FluidObject<?> fluid : crushedMetals) {
+      String metal = fluid.getId().getPath().substring("molten_".length());
+      ResourceLocation crushed = ResourceLocation.fromNamespaceAndPath("create", "crushed_raw_" + metal);
+      MeltingRecipeBuilder.melting(ItemNameIngredient.from(crushed), fluid, FluidValues.INGOT)
+                          .save(withCondition(consumer, new ModLoadedCondition("create"), new ItemExistsCondition(crushed)), location(folder + "create/crushed_raw_" + metal));
+    }
 
     // immersive engineering - casting treated wood
     String treatedWood = "treated_wood";

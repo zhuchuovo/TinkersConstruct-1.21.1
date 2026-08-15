@@ -246,6 +246,8 @@ public class CastingTankBlockEntity extends TableBlockEntity implements ITankBlo
     if (this.level != null) {
       TankBlockEntity.updateLight(this, tank);
       this.requestModelDataUpdate();
+      BlockState state = getBlockState();
+      level.sendBlockUpdated(worldPosition, state, state, 48);
     }
   }
 

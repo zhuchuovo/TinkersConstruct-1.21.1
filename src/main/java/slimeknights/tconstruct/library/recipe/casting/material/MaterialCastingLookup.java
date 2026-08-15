@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.FluidStack;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.recipe.RecipeCacheInvalidator;
@@ -20,6 +21,7 @@ import slimeknights.tconstruct.library.utils.SimpleCache;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -101,12 +103,34 @@ public class MaterialCastingLookup {
    */
   public static void registerFluid(MaterialFluidRecipe recipe) {
     LISTENER.checkClear();
-    if (recipe.getInput() == null) {
-      CASTING_FLUIDS.add(recipe);
-    } else {
-      COMPOSITE_FLUIDS.add(recipe);
+    List<MaterialFluidRecipe> list = recipe.getInput() == null ? CASTING_FLUIDS : COMPOSITE_FLUIDS;
+    // On the client, recipes are synced from the server after being parsed on the integrated server. If the
+    // invalidation listener has not run between the two loads (which can happen with 1.21's registry sync
+    // ordering), the same recipe would be registered twice, causing duplicate entries in recipe displays such
+    // as JEI. Skip registrations with identical content to keep the list free of duplicates.
+    for (MaterialFluidRecipe existing : list) {
+      if (existing.getOutput().equals(recipe.getOutput()) && Objects.equals(existing.getInput(), recipe.getInput())
+          && sameFluids(existing.getFluids(), recipe.getFluids()) && existing.getTemperature() == recipe.getTemperature()) {
+        return;
+      }
     }
+    list.add(recipe);
     MaterialRecipeCache.addKnownVariant(recipe.getOutput().getVariant());
+  }
+
+  /** Compares two fluid lists by content; NeoForge 1.21's {@link net.neoforged.neoforge.fluids.FluidStack} does not implement {@link Object#equals(Object)} */
+  private static boolean sameFluids(List<FluidStack> first, List<FluidStack> second) {
+    if (first.size() != second.size()) {
+      return false;
+    }
+    for (int i = 0; i < first.size(); i++) {
+      FluidStack a = first.get(i);
+      FluidStack b = second.get(i);
+      if (a.getAmount() != b.getAmount() || !FluidStack.isSameFluidSameComponents(a, b)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**

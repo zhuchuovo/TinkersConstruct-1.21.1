@@ -203,10 +203,11 @@ public class TankItem extends BlockTooltipItem {
   private static void removeTank(ItemStack stack) {
     CompoundTag nbt = ItemStackUtil.getTag(stack);
     if (nbt != null) {
+      // copy the tag before mutating: ItemStack#copy()/copyWithCount() share the same
+      // CUSTOM_DATA compound, so removing a key in place would also clear other stacks
+      nbt = nbt.copy();
       nbt.remove(NBTTags.TANK);
-      if (nbt.isEmpty()) {
-        ItemStackUtil.setTag(stack, null);
-      }
+      ItemStackUtil.setTag(stack, nbt.isEmpty() ? null : nbt);
     }
   }
 
@@ -220,7 +221,12 @@ public class TankItem extends BlockTooltipItem {
     if (tank.isEmpty()) {
       removeTank(stack);
     } else {
-      ItemStackUtil.getOrCreateTag(stack).put(NBTTags.TANK, tank.writeToNBT(RegistryAccessUtil.BUILTIN, new CompoundTag()));
+      // copy the existing tag if present: it may be shared with other stacks (e.g. via
+      // copyWithCount), so mutate a private copy to avoid corrupting the shared instance
+      CompoundTag nbt = ItemStackUtil.getTag(stack);
+      nbt = nbt == null ? new CompoundTag() : nbt.copy();
+      nbt.put(NBTTags.TANK, tank.writeToNBT(RegistryAccessUtil.BUILTIN, new CompoundTag()));
+      ItemStackUtil.setTag(stack, nbt);
     }
     return stack;
   }
@@ -286,7 +292,13 @@ public class TankItem extends BlockTooltipItem {
     FluidTank tank = ScaledFluidTank.create(TankBlockEntity.getCapacity(stack.getItem()), scale);
     CompoundTag nbt = ItemStackUtil.getTag(stack);
     if (nbt != null) {
-      tank.setFluid(readFluid(RegistryAccessUtil.BUILTIN, nbt.getCompound(NBTTags.TANK)));
+      // the NBT stores the fluid of a single tank; scale it to represent the whole stack,
+      // matching the scaled capacity (like ScaledFluidTank#readFromNBT did before 1.21)
+      FluidStack fluid = readFluid(RegistryAccessUtil.BUILTIN, nbt.getCompound(NBTTags.TANK));
+      if (!fluid.isEmpty()) {
+        fluid.setAmount(fluid.getAmount() * scale);
+      }
+      tank.setFluid(fluid);
     }
     return tank;
   }

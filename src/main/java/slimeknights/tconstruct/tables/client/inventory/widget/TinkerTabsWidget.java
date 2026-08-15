@@ -55,7 +55,9 @@ public class TinkerTabsWidget implements Renderable, GuiEventListener, Narratabl
     this.tabs = new TabsWidget(parent, TAB_ELEMENT, TAB_ELEMENT, TAB_ELEMENT, ACTIVE_TAB_L_ELEMENT, ACTIVE_TAB_C_ELEMENT, ACTIVE_TAB_R_ELEMENT);
 
     int count = tabs.size();
-    this.imageWidth = count * ACTIVE_TAB_C_ELEMENT.w + (count - 1) * this.tabs.spacing;
+    // guard against negative widths when no stations are known client side, e.g. before the
+    // block data has synced; a negative area crashes recipe viewers consuming the module areas
+    this.imageWidth = Math.max(0, count * ACTIVE_TAB_C_ELEMENT.w + (count - 1) * this.tabs.spacing);
     this.imageHeight = ACTIVE_TAB_C_ELEMENT.h;
 
     this.leftPos = parent.cornerX + 4;

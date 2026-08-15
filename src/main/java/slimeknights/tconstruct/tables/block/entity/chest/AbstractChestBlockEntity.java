@@ -39,6 +39,15 @@ public abstract class AbstractChestBlockEntity extends NameableBlockEntity {
   }
 
   /**
+   * Tabbed chests switch between menus frequently; closing the screen on the client for each switch
+   * would release and regrab the mouse, forcing the cursor to the center of the window each time.
+   */
+  @Override
+  public boolean shouldTriggerClientSideContainerClosingOnOpen() {
+    return false;
+  }
+
+  /**
    * Checks if the given item should be inserted into the chest on interact
    * @param player    Player inserting
    * @param heldItem  Stack to insert

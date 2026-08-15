@@ -1,66 +1,26 @@
 {
-  "type": "neoforge:conditional",
+  "type": "tconstruct:ore_melting",
+  "byproducts": [
+    {
+      "amount": 90,
+      "rate": "metal",
+      "tag": "c:molten_copper"
+    }
+  ],
   "conditions": [
     {
       "type": "mantle:tag_filled",
       "tag": "c:raw_materials/zinc"
     }
   ],
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "mantle:tag_filled",
-          "tag": "c:ingots/tin"
-        }
-      ],
-      "recipe": {
-        "type": "tconstruct:ore_melting",
-        "byproducts": [
-          {
-            "amount": 90,
-            "rate": "metal",
-            "tag": "c:molten_tin"
-          }
-        ],
-        "ingredient": {
-          "tag": "c:raw_materials/zinc"
-        },
-        "rate": "metal",
-        "result": {
-          "amount": 90,
-          "tag": "c:molten_zinc"
-        },
-        "temperature": 420,
-        "time": 70
-      }
-    },
-    {
-      "conditions": [
-        {
-          "type": "neoforge:true"
-        }
-      ],
-      "recipe": {
-        "type": "tconstruct:ore_melting",
-        "byproducts": [
-          {
-            "amount": 90,
-            "rate": "metal",
-            "tag": "c:molten_copper"
-          }
-        ],
-        "ingredient": {
-          "tag": "c:raw_materials/zinc"
-        },
-        "rate": "metal",
-        "result": {
-          "amount": 90,
-          "tag": "c:molten_zinc"
-        },
-        "temperature": 420,
-        "time": 70
-      }
-    }
-  ]
+  "ingredient": {
+    "tag": "c:raw_materials/zinc"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_zinc"
+  },
+  "temperature": 420,
+  "time": 70
 }

@@ -38,6 +38,15 @@ public abstract class TableBlockEntity extends InventoryBlockEntity {
     super(tileEntityTypeIn, pos, state, name, false, inventorySize, maxStackSize);
   }
 
+  /**
+   * Tabbed tables switch between menus frequently; closing the screen on the client for each switch
+   * would release and regrab the mouse, forcing the cursor to the center of the window each time.
+   */
+  @Override
+  public boolean shouldTriggerClientSideContainerClosingOnOpen() {
+    return false;
+  }
+
   /* Syncing */
 
   @Override

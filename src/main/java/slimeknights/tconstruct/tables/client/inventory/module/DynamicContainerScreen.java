@@ -10,6 +10,8 @@ import slimeknights.mantle.client.screen.ModuleScreen;
 import slimeknights.mantle.client.screen.MultiModuleScreen;
 import slimeknights.mantle.client.screen.ScalableElementScreen;
 import slimeknights.mantle.client.screen.SliderWidget;
+import slimeknights.mantle.inventory.MultiModuleContainerMenu;
+import slimeknights.mantle.inventory.WrapperSlot;
 
 public class DynamicContainerScreen<P extends MultiModuleScreen<?>, C extends AbstractContainerMenu> extends ModuleScreen<P,C> {
 
@@ -156,18 +158,51 @@ public class DynamicContainerScreen<P extends MultiModuleScreen<?>, C extends Ab
     this.firstSlotId = this.slider.getValue() * this.columns;
     this.lastSlotId = Math.min(this.slotCount, this.firstSlotId + this.rows * this.columns);
     if (oldFirstSlot != this.firstSlotId || oldLastSlot != this.lastSlotId) {
-      for (Slot slot : this.container.slots) {
-        if (this.shouldDrawSlot(slot)) {
-          // calc position of the slot
-          int offset = slot.getSlotIndex() - this.firstSlotId;
-          int x = (offset % this.columns) * DynamicContainerScreen.slot.w;
-          int y = (offset / this.columns) * DynamicContainerScreen.slot.h;
+      // 1.21: reposition the wrapper slots in the parent menu as well, as those are what get rendered and clicked.
+      // The module slots alone are not enough; wrappers copy positions at construction and never see these updates.
+      AbstractContainerMenu parentContainer = this.parent.getMenu();
+      if (parentContainer instanceof MultiModuleContainerMenu parentMenu) {
+        for (Slot renderedSlot : parentMenu.slots) {
+          // only process slots that belong to this sub-container
+          if (parentMenu.getSlotContainer(renderedSlot.index) != this.menu) {
+            continue;
+          }
+          // get the module/original slot (unwrap from wrapper)
+          Slot moduleSlot = renderedSlot instanceof WrapperSlot wrapper ? wrapper.parent : renderedSlot;
+          if (this.shouldDrawSlot(moduleSlot)) {
+            // calc position of the slot
+            int offset = moduleSlot.getSlotIndex() - this.firstSlotId;
+            int x = (offset % this.columns) * DynamicContainerScreen.slot.w;
+            int y = (offset / this.columns) * DynamicContainerScreen.slot.h;
 
-          slot.x = xOffset + x + 1;
-          slot.y = yOffset + y + 1;
-        } else {
-          slot.x = 0;
-          slot.y = 0;
+            int slotX = xOffset + x + 1;
+            int slotY = yOffset + y + 1;
+
+            renderedSlot.x = slotX;
+            renderedSlot.y = slotY;
+            moduleSlot.x = slotX;
+            moduleSlot.y = slotY;
+          } else {
+            renderedSlot.x = 0;
+            renderedSlot.y = 0;
+            moduleSlot.x = 0;
+            moduleSlot.y = 0;
+          }
+        }
+      } else {
+        // fallback to the module slots if the parent is not a multi module container
+        for (Slot slot : this.container.slots) {
+          if (this.shouldDrawSlot(slot)) {
+            int offset = slot.getSlotIndex() - this.firstSlotId;
+            int x = (offset % this.columns) * DynamicContainerScreen.slot.w;
+            int y = (offset / this.columns) * DynamicContainerScreen.slot.h;
+
+            slot.x = xOffset + x + 1;
+            slot.y = yOffset + y + 1;
+          } else {
+            slot.x = 0;
+            slot.y = 0;
+          }
         }
       }
     }

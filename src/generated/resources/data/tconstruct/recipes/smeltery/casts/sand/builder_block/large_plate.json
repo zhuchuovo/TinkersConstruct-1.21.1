@@ -2,7 +2,7 @@
   "type": "tconstruct:item_part_builder",
   "pattern": "tconstruct:large_plate",
   "pattern_item": {
-    "tag": "c:sand/colorless"
+    "tag": "c:sands/colorless"
   },
   "result": {
     "count": 4,

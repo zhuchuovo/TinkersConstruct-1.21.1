@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "create:crushed_raw_silver"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:item_exists",
+      "item": "create:crushed_raw_silver"
+    }
+  ],
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_silver"
+  },
+  "temperature": 790,
+  "time": 60
+}
