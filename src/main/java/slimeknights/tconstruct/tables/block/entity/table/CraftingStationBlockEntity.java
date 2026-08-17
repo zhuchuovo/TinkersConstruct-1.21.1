@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -162,7 +163,8 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
       return;
     }
     CraftingRecipe recipe = holder.value();
-    CraftingInput input = craftingInventory.asCraftInput();
+    CraftingInput.Positioned positionedInput = craftingInventory.asPositionedCraftInput();
+    CraftingInput input = positionedInput.input();
 
     // fire crafting events
     if (!recipe.isSpecial()) {
@@ -177,25 +179,36 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
     CommonHooks.setCraftingPlayer(player);
     NonNullList<ItemStack> remaining = recipe.getRemainingItems(input);
     CommonHooks.setCraftingPlayer(null);
-    for (int i = 0; i < remaining.size(); ++i) {
-      ItemStack original = this.getItem(i);
-      ItemStack newStack = remaining.get(i);
+    updateInputs(this, craftingInventory.getWidth(), positionedInput, remaining, player);
+  }
 
-      // if empty or size 1, set directly (decreases by 1)
-      if (original.isEmpty() || original.getCount() == 1) {
-        this.setItem(i, newStack);
-      }
-      else if (ItemStack.isSameItemSameComponents(original, newStack)) {
-        // if matching, merge (decreasing by 1
-        newStack.grow(original.getCount() - 1);
-        this.setItem(i, newStack);
-      }
-      else {
-        // directly update the slot
-        this.setItem(i, original.copyWithCount(original.getCount() - 1));
-        // otherwise, drop the item as the player
-        if (!newStack.isEmpty() && !player.getInventory().add(newStack)) {
-          player.drop(newStack, false);
+  /** Consumes a positioned crafting input and places any container items back in their original grid slots. */
+  static void updateInputs(Container inventory, int gridWidth, CraftingInput.Positioned positionedInput,
+                           NonNullList<ItemStack> remaining, Player player) {
+    CraftingInput input = positionedInput.input();
+    for (int row = 0; row < input.height(); row++) {
+      for (int column = 0; column < input.width(); column++) {
+        int inputIndex = column + row * input.width();
+        int inventoryIndex = column + positionedInput.left() + (row + positionedInput.top()) * gridWidth;
+        ItemStack original = inventory.getItem(inventoryIndex);
+        ItemStack newStack = remaining.get(inputIndex);
+
+        // if empty or size 1, set directly (decreases by 1)
+        if (original.isEmpty() || original.getCount() == 1) {
+          inventory.setItem(inventoryIndex, newStack);
+        }
+        else if (ItemStack.isSameItemSameComponents(original, newStack)) {
+          // if matching, merge (decreasing by 1)
+          newStack.grow(original.getCount() - 1);
+          inventory.setItem(inventoryIndex, newStack);
+        }
+        else {
+          // directly update the slot
+          inventory.setItem(inventoryIndex, original.copyWithCount(original.getCount() - 1));
+          // otherwise, drop the item as the player
+          if (!newStack.isEmpty() && !player.getInventory().add(newStack)) {
+            player.drop(newStack, false);
+          }
         }
       }
     }

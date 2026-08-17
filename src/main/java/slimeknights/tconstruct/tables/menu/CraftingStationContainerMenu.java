@@ -70,22 +70,20 @@ public class CraftingStationContainerMenu extends TabbedContainerMenu<CraftingSt
         if (!result.isEmpty()) {
           // take the result before we put it in containers; lets events modify the stack
           tile.takeResult(player, result, result.getCount());
-          boolean nothingDone = true;
           if (!subContainers.isEmpty()) { // the sub container check does not do well with 0 sub containers
-            nothingDone = this.refillAnyContainer(result, this.subContainers);
+            this.refillAnyContainer(result, this.subContainers);
           }
-          nothingDone &= this.moveToPlayerInventory(result);
+          this.moveToPlayerInventory(result);
           if (!subContainers.isEmpty()) {
-            nothingDone &= this.moveToAnyContainer(result, this.subContainers);
+            this.moveToAnyContainer(result, this.subContainers);
           }
-          // if successfully added to an inventory, update
-          if (!nothingDone) {
-            if (!result.isEmpty()) {
-              player.drop(result, false);
-            }
-            tile.getCraftingResult().clearContent();
-            return original;
+          // if the result could not be fully placed (e.g. full inventory), drop the remainder.
+          // the inputs were already consumed by takeResult, so deleting the leftover would lose items
+          if (!result.isEmpty()) {
+            player.drop(result, false);
           }
+          tile.getCraftingResult().clearContent();
+          return original;
         } else {
           tile.notifyUncraftable(player);
         }

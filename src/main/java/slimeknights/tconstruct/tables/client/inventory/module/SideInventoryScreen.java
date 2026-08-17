@@ -20,6 +20,13 @@ import slimeknights.tconstruct.tables.client.inventory.widget.BorderWidget;
 
 public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends AbstractContainerMenu> extends ModuleScreen<P,C> {
 
+  /**
+   * Position used for slots that are currently outside the visible area. Must be far enough off screen
+   * that the slot is neither rendered nor hovered/clicked; (0,0) would place them at the top left corner
+   * of the parent GUI, making hidden chest slots appear and be interactable "out of thin air".
+   */
+  private static final int HIDDEN_SLOT_POSITION = Integer.MIN_VALUE / 2;
+
   protected ScalableElementScreen overlap = GenericScreen.overlap;
   protected ElementScreen overlapTopLeft = GenericScreen.overlapTopLeft;
   protected ElementScreen overlapTopRight = GenericScreen.overlapTopRight;
@@ -254,10 +261,10 @@ public class SideInventoryScreen<P extends MultiModuleScreen<?>, C extends Abstr
           moduleSlot.x = slotX;
           moduleSlot.y = slotY;
         } else {
-          renderedSlot.x = 0;
-          renderedSlot.y = 0;
-          moduleSlot.x = 0;
-          moduleSlot.y = 0;
+          renderedSlot.x = HIDDEN_SLOT_POSITION;
+          renderedSlot.y = HIDDEN_SLOT_POSITION;
+          moduleSlot.x = HIDDEN_SLOT_POSITION;
+          moduleSlot.y = HIDDEN_SLOT_POSITION;
         }
       }
     }
