@@ -255,10 +255,15 @@ public class ToolHarvestLogic {
       player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
       ToolHarvestContext context = new ToolHarvestContext(world, serverPlayer, state, pos, sideHit,
         !player.isCreative() && state.canHarvestBlock(world, pos, player), false);
-      breakBlock(tool, ItemStack.EMPTY, context, true);
+      // As the 1.21 LeftClickBlock STOP event runs before vanilla destroys the
+      // block, fire the break event from our custom path as well.
+      breakBlock(tool, ItemStack.EMPTY, context, false);
       player.setItemInHand(InteractionHand.MAIN_HAND, stack);
     } else {
       // run standard breaking logic
+      // The 1.21 LeftClickBlock STOP event runs before vanilla's
+      // ServerPlayerGameMode.destroyBlock, so no BreakEvent has been fired yet.
+      // Let the custom path fire it itself to preserve permissions, drops, and XP.
       runBlockBreak(stack, tool, state, pos, sideHit, serverPlayer, null);
     }
     return true;
@@ -295,7 +300,10 @@ public class ToolHarvestLogic {
 
     // actually break the block, run AOE if successful
     int harvested = 0;
-    if (breakBlock(tool, stack, context, true)) {
+    // The custom STOP-event path replaces vanilla destroyBlock, so fire the
+    // center block's BreakEvent here rather than reading stale XP from a prior
+    // break.
+    if (breakBlock(tool, stack, context, false)) {
       harvested += 1;
       for (BlockPos extraPos : extraBlocks) {
         BlockState extraState = world.getBlockState(extraPos);

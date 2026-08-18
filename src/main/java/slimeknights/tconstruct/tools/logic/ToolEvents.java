@@ -34,11 +34,13 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent.LivingVisibilityEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.common.util.TriState;
 import slimeknights.tconstruct.library.events.TinkerToolEvent.Result;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -75,6 +77,9 @@ import slimeknights.tconstruct.library.tools.helper.ArmorUtil;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolDamageUtil;
+import slimeknights.tconstruct.library.tools.helper.ToolHarvestLogic;
+import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.item.ranged.ModifiableLauncherItem;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
@@ -93,6 +98,39 @@ import java.util.Objects;
  */
 @EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.GAME)
 public class ToolEvents {
+  /**
+   * NeoForge 1.21 removed the old IForgeItem.onBlockStartBreak hook. Enter the
+   * custom harvest path from the left-click event when vanilla is about to
+   * destroy the center block.
+   */
+  @SubscribeEvent
+  static void onLeftClickBlock(LeftClickBlock event) {
+    if (event.getAction() != LeftClickBlock.Action.STOP || event.isCanceled()) {
+      return;
+    }
+    if (event.getEntity().level().getBlockState(event.getPos()).isAir()) {
+      // Instant-mined blocks are already handled by vanilla at START.
+      return;
+    }
+    ItemStack stack = event.getItemStack();
+    if (!(stack.getItem() instanceof ModifiableItem) && !(stack.getItem() instanceof ModifiableLauncherItem)) {
+      return;
+    }
+
+    // Preserve the old stacked-tool behavior: stacked tools cannot mine.
+    if (stack.getCount() > 1) {
+      event.setCanceled(true);
+      return;
+    }
+
+    // This event is server-side at STOP. Run the authoritative harvest (drops,
+    // AOE, hooks, and durability), then cancel vanilla to avoid processing the
+    // center block twice. The client has already shown normal break visuals.
+    if (ToolHarvestLogic.handleBlockBreak(stack, event.getPos(), event.getEntity())) {
+      event.setCanceled(true);
+    }
+  }
+
   @SuppressWarnings("removal")
   @SubscribeEvent
   static void onBreakSpeed(PlayerEvent.BreakSpeed event) {

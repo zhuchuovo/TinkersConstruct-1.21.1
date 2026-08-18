@@ -61,6 +61,24 @@ public abstract class AbstractCastingBlock extends TableBlock {
     return super.useItemOn(stack, state, world, pos, player, hand, rayTraceResult);
   }
 
+  /**
+   * Empty-hand interactions are dispatched through this method in 1.21. Without
+   * forwarding them to the casting tile, players on a server cannot retrieve a
+   * cast, mold, or finished output using an empty hand.
+   */
+  @Override
+  protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+    if (player.isShiftKeyDown()) {
+      return InteractionResult.PASS;
+    }
+    BlockEntity te = world.getBlockEntity(pos);
+    if (te instanceof CastingBlockEntity casting) {
+      casting.interact(player, InteractionHand.MAIN_HAND);
+      return InteractionResult.sidedSuccess(world.isClientSide);
+    }
+    return super.useWithoutItem(state, world, pos, player, hit);
+  }
+
   @SuppressWarnings("deprecation")
   @Deprecated
   @Override

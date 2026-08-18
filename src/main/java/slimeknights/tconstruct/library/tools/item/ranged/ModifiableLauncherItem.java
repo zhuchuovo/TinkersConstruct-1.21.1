@@ -415,7 +415,7 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   }
 
   public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, Player player) {
-    return false;
+    return ToolHarvestLogic.handleBlockBreak(stack, pos, player);
   }
 
 

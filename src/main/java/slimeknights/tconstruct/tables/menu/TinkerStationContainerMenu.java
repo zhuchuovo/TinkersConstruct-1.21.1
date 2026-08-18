@@ -5,6 +5,7 @@ import static slimeknights.tconstruct.library.tools.definition.ModifiableArmorMa
 import lombok.Getter;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -123,30 +124,48 @@ public class TinkerStationContainerMenu extends TabbedContainerMenu<TinkerStatio
       if (tile != null && slot.hasItem()) {
         // return the original result so shift click works
         ItemStack original = slot.getItem().copy();
-        // but add the true result into the inventory
-        ItemStack result = original.copy();
+        // Recalculate on the authoritative side before consuming inputs. The
+        // displayed client cache can be one recipe update behind while joining
+        // a dedicated server.
+        ItemStack result = tile.calcResult(player).copy();
+        if (result.isEmpty()) {
+          return ItemStack.EMPTY;
+        }
         // take the result before we put it in containers; lets events modify the stack
         tile.onCraft(player, result, result.getCount());
-        boolean nothingDone = true;
         if (!subContainers.isEmpty()) { // the sub container check does not do well with 0 sub containers
-          nothingDone = this.refillAnyContainer(result, this.subContainers);
+          this.refillAnyContainer(result, this.subContainers);
         }
-        nothingDone &= this.moveToPlayerInventory(result);
+        this.moveToPlayerInventory(result);
         if (!subContainers.isEmpty()) {
-          nothingDone &= this.moveToAnyContainer(result, this.subContainers);
+          this.moveToAnyContainer(result, this.subContainers);
         }
-        // if successfully added to an inventory, update
-        if (!nothingDone) {
-          if (!result.isEmpty()) {
-            player.drop(result, false);
-          }
-          tile.getCraftingResult().clearContent();
-          return original;
+        // Inputs were consumed before moving the result, so never leave a
+        // remainder in the lazy result slot or silently delete it when the
+        // inventory is full.
+        if (!result.isEmpty()) {
+          player.drop(result, false);
         }
+        tile.getCraftingResult().clearContent();
+        return original;
       }
       return ItemStack.EMPTY;
     } else {
       return super.quickMoveStack(player, index);
+    }
+  }
+
+  /**
+   * The menu is assigned to the player only after its constructor returns. Do
+   * the first server-side recipe calculation here, once the menu is open, so
+   * dedicated-server clients receive the recipe before trying to take the
+   * result slot.
+   */
+  @Override
+  protected void syncNewContainer(ServerPlayer player) {
+    if (tile != null) {
+      tile.calcResult(player);
+      tile.syncRecipe(player);
     }
   }
 }

@@ -324,7 +324,9 @@ public class ModifiableItem extends TieredItem implements IModifiableDisplay {
   }
 
   public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, Player player) {
-    return stack.getCount() > 1;
+    // Kept for compatibility with loaders that still expose this legacy hook;
+    // NeoForge 1.21 routes the real path through ToolEvents instead.
+    return stack.getCount() > 1 || ToolHarvestLogic.handleBlockBreak(stack, pos, player);
   }
 
 
