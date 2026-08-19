@@ -20,6 +20,7 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.recipe.worktable.IModifierWorktableRecipe;
 import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 import slimeknights.tconstruct.tables.TinkerTables;
 
 import java.util.Collections;
@@ -96,6 +97,6 @@ public class ModifierWorktableCategory implements IRecipeCategory<IModifierWorkt
 
   @Override
   public ResourceLocation getRegistryName(IModifierWorktableRecipe recipe) {
-    return recipe.getId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getId());
   }
 }

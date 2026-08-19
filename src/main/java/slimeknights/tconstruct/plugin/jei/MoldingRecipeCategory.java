@@ -22,6 +22,7 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.GuiUtil;
 import slimeknights.tconstruct.library.recipe.TinkerRecipeTypes;
 import slimeknights.tconstruct.library.recipe.molding.MoldingRecipe;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
 import java.util.Collections;
@@ -102,6 +103,6 @@ public class MoldingRecipeCategory implements IRecipeCategory<MoldingRecipe> {
 
   @Override
   public ResourceLocation getRegistryName(MoldingRecipe recipe) {
-    return recipe.getId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getId());
   }
 }

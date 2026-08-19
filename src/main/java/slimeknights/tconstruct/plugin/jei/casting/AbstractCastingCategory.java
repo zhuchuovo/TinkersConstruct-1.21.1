@@ -29,6 +29,7 @@ import slimeknights.tconstruct.library.client.GuiUtil;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.casting.IDisplayableCastingRecipe;
 import slimeknights.tconstruct.plugin.jei.util.FluidTooltipCallback;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 
 import javax.annotation.Nullable;
 import java.awt.Color;
@@ -129,6 +130,6 @@ public abstract class AbstractCastingCategory implements IRecipeCategory<IDispla
   @Nullable
   @Override
   public ResourceLocation getRegistryName(IDisplayableCastingRecipe recipe) {
-    return recipe.getRecipeId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getRecipeId());
   }
 }

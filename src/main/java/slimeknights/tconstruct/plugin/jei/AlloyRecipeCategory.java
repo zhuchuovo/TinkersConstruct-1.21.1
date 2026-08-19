@@ -29,6 +29,7 @@ import slimeknights.tconstruct.library.recipe.fuel.MeltingFuel;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelLookup;
 import slimeknights.tconstruct.plugin.jei.melting.MeltingFuelHandler;
 import slimeknights.tconstruct.plugin.jei.util.FluidTooltipCallback;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 
 import java.awt.Color;
@@ -164,6 +165,6 @@ public class AlloyRecipeCategory implements IRecipeCategory<AlloyRecipe> {
 
   @Override
   public ResourceLocation getRegistryName(AlloyRecipe recipe) {
-    return recipe.getId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getId());
   }
 }

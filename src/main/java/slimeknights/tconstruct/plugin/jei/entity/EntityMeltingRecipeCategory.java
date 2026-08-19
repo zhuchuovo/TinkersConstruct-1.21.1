@@ -30,6 +30,7 @@ import slimeknights.tconstruct.library.recipe.entitymelting.EntityMeltingRecipe;
 import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 import slimeknights.tconstruct.plugin.jei.melting.MeltingFuelHandler;
 import slimeknights.tconstruct.plugin.jei.util.FluidTooltipCallback;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 
 import java.awt.Color;
 import java.util.List;
@@ -108,7 +109,7 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
 
   @Override
   public ResourceLocation getRegistryName(EntityMeltingRecipe recipe) {
-    return recipe.getId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getId());
   }
 
   /** Tooltip for relevant damage on the fluid */

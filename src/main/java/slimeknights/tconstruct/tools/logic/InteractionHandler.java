@@ -230,8 +230,11 @@ public class InteractionHandler {
         // did not interact with an entity? try direct interaction
         // needs to be run here as the interact empty hook does not fire when targeting blocks
         InteractionResult result = onChestplateUse(player, chestplate, hand);
-        event.setCanceled(true);
         event.setCancellationResult(result);
+        // Only consume the interaction if a chestplate modifier handled it. If all
+        // chestplate hooks pass, leave the event uncanceled so the normal block
+        // interaction path (including other mods) can handle the empty hand.
+        event.setCanceled(result.consumesAction());
       }
     }
   }

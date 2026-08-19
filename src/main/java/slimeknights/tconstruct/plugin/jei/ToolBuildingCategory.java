@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.GuiUtil;
 import slimeknights.tconstruct.library.recipe.tinkerstation.building.ToolBuildingRecipe;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import slimeknights.tconstruct.library.tools.layout.LayoutSlot;
 import slimeknights.tconstruct.tools.TinkerTools;
@@ -153,6 +154,6 @@ public class ToolBuildingCategory implements IRecipeCategory<ToolBuildingRecipe>
 
   @Override
   public ResourceLocation getRegistryName(ToolBuildingRecipe recipe) {
-    return recipe.getId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getId());
   }
 }

@@ -25,6 +25,7 @@ import slimeknights.tconstruct.library.materials.definition.MaterialVariant;
 import slimeknights.tconstruct.library.recipe.partbuilder.IDisplayPartBuilderRecipe;
 import slimeknights.tconstruct.library.tools.layout.Patterns;
 import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 import slimeknights.tconstruct.tables.TinkerTables;
 
 import java.awt.Color;
@@ -90,6 +91,6 @@ public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderR
 
   @Override
   public ResourceLocation getRegistryName(IDisplayPartBuilderRecipe recipe) {
-    return recipe.getId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getId());
   }
 }

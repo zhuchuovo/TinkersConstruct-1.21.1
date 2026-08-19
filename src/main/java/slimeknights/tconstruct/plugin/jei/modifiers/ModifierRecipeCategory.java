@@ -33,6 +33,7 @@ import slimeknights.tconstruct.library.tools.SlotType.SlotCount;
 import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.item.CreativeSlotItem;
 
@@ -234,7 +235,7 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
   @Nullable
   @Override
   public ResourceLocation getRegistryName(IDisplayModifierRecipe recipe) {
-    return recipe.getRecipeId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getRecipeId());
   }
 
 

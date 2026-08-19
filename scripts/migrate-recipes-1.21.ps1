@@ -69,6 +69,53 @@ foreach ($file in Get-ChildItem -LiteralPath $source -File -Recurse) {
   # NeoForge 1.21 removed that serializer; these require a separate semantic
   # conversion and intentionally remain in the ignored legacy directory.
   if ($text -match '"type"\s*:\s*"neoforge:conditional"') {
+    # Preserve the configurable Netherite alloy by splitting the prioritized
+    # alternatives into mutually exclusive 1.21 recipes.
+    if ($normalizedRelative.Equals('smeltery/alloys/molten_netherite.json', [StringComparison]::OrdinalIgnoreCase)) {
+      $legacy = $text | ConvertFrom-Json
+      $branches = @($legacy.recipes)
+      if ($branches.Count -ne 2) {
+        throw "Expected two Netherite alloy branches: $($file.FullName)"
+      }
+
+      $primaryConditions = @($branches[0].conditions)
+      if ($primaryConditions.Count -eq 0) {
+        throw "Expected the cheaper Netherite alloy to have a condition: $($file.FullName)"
+      }
+      $primaryPredicate = if ($primaryConditions.Count -eq 1) {
+        $primaryConditions[0]
+      } else {
+        [ordered]@{ type = 'neoforge:and'; values = $primaryConditions }
+      }
+      $extension = [IO.Path]::GetExtension($relative)
+      $standardRelative = $relative.Substring(0, $relative.Length - $extension.Length) + '_standard' + $extension
+      $variants = @(
+        [ordered]@{ Relative = $relative; Branch = $branches[0]; Conditions = $primaryConditions },
+        [ordered]@{
+          Relative = $standardRelative
+          Branch = $branches[1]
+          Conditions = @([ordered]@{ type = 'neoforge:not'; value = $primaryPredicate })
+        }
+      )
+
+      foreach ($variant in $variants) {
+        $converted = [ordered]@{
+          type = $variant.Branch.recipe.type
+          'neoforge:conditions' = $variant.Conditions
+        }
+        foreach ($property in $variant.Branch.recipe.PSObject.Properties) {
+          if ($property.Name -ne 'type') {
+            $converted[$property.Name] = $property.Value
+          }
+        }
+        $target = Join-Path $destination $variant.Relative
+        [IO.Directory]::CreateDirectory((Split-Path -Parent $target)) | Out-Null
+        $convertedText = ($converted | ConvertTo-Json -Depth 100) + [Environment]::NewLine
+        [IO.File]::WriteAllText($target, $convertedText, [Text.UTF8Encoding]::new($false))
+      }
+      $migrated += 2
+      continue
+    }
     $conditional++
     continue
   }

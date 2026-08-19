@@ -104,6 +104,7 @@ import slimeknights.tconstruct.plugin.jei.transfer.TinkerStationTransferInfo;
 import slimeknights.tconstruct.plugin.jei.transfer.ToolInventoryTransferInfo;
 import slimeknights.tconstruct.plugin.jei.util.GuiContainerTankHandler;
 import slimeknights.tconstruct.plugin.jei.util.PotionSubtypeInterpreter;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 import slimeknights.tconstruct.plugin.jei.util.ToolPartSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.util.ToolSubtypeInterpreter;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
@@ -196,37 +197,38 @@ public class JEIPlugin implements IModPlugin {
     assert level != null;
     RegistryAccess access = level.registryAccess();
     RecipeManager manager = level.getRecipeManager();
+    RecipeIdMap.clear();
     // casting
-    List<IDisplayableCastingRecipe> castingBasinRecipes = RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.CASTING_BASIN.get(), IDisplayableCastingRecipe.class);
+    List<IDisplayableCastingRecipe> castingBasinRecipes = RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.CASTING_BASIN.get(), IDisplayableCastingRecipe.class);
     register.addRecipes(TConstructJEIConstants.CASTING_BASIN, castingBasinRecipes);
-    List<IDisplayableCastingRecipe> castingTableRecipes = RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.CASTING_TABLE.get(), IDisplayableCastingRecipe.class);
+    List<IDisplayableCastingRecipe> castingTableRecipes = RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.CASTING_TABLE.get(), IDisplayableCastingRecipe.class);
     register.addRecipes(TConstructJEIConstants.CASTING_TABLE, castingTableRecipes);
 
     // melting
-    List<MeltingRecipe> meltingRecipes = RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.MELTING.get(), MeltingRecipe.class);
+    List<MeltingRecipe> meltingRecipes = RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.MELTING.get(), MeltingRecipe.class);
     register.addRecipes(TConstructJEIConstants.MELTING, meltingRecipes);
     register.addRecipes(TConstructJEIConstants.FOUNDRY, meltingRecipes);
     MeltingFuelHandler.setMeltngFuels(RecipeHelper.getRecipes(manager, TinkerRecipeTypes.FUEL.get(), MeltingFuel.class));
 
     // entity melting
-    List<EntityMeltingRecipe> entityMeltingRecipes = RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.ENTITY_MELTING.get(), EntityMeltingRecipe.class);
+    List<EntityMeltingRecipe> entityMeltingRecipes = RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.ENTITY_MELTING.get(), EntityMeltingRecipe.class);
     // generate a "default" recipe for all other entity types
     entityMeltingRecipes.add(new DefaultEntityMeltingRecipe(entityMeltingRecipes));
     register.addRecipes(TConstructJEIConstants.ENTITY_MELTING, entityMeltingRecipes);
 
     // alloying
-    List<AlloyRecipe> alloyRecipes = RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.ALLOYING.get(), AlloyRecipe.class);
+    List<AlloyRecipe> alloyRecipes = RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.ALLOYING.get(), AlloyRecipe.class);
     register.addRecipes(TConstructJEIConstants.ALLOY, alloyRecipes);
 
     // molding
     List<MoldingRecipe> moldingRecipes = ImmutableList.<MoldingRecipe>builder()
-      .addAll(RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.MOLDING_TABLE.get(), MoldingRecipe.class))
-      .addAll(RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.MOLDING_BASIN.get(), MoldingRecipe.class))
+      .addAll(RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.MOLDING_TABLE.get(), MoldingRecipe.class))
+      .addAll(RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.MOLDING_BASIN.get(), MoldingRecipe.class))
       .build();
     register.addRecipes(TConstructJEIConstants.MOLDING, moldingRecipes);
 
     // modifiers
-    List<IDisplayModifierRecipe> modifierRecipes = RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.TINKER_STATION.get(), IDisplayModifierRecipe.class)
+    List<IDisplayModifierRecipe> modifierRecipes = RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.TINKER_STATION.get(), IDisplayModifierRecipe.class)
                                                                .stream()
                                                                .sorted((r1, r2) -> {
                                                                  SlotType t1 = r1.getSlotType();
@@ -238,11 +240,11 @@ public class JEIPlugin implements IModPlugin {
     register.addRecipes(TConstructJEIConstants.MODIFIERS, modifierRecipes);
 
     // beheading
-    List<SeveringRecipe> severingRecipes = RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.SEVERING.get(), SeveringRecipe.class);
+    List<SeveringRecipe> severingRecipes = RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.SEVERING.get(), SeveringRecipe.class);
     register.addRecipes(TConstructJEIConstants.SEVERING, severingRecipes);
 
     // tool building
-    List<ToolBuildingRecipe> toolBuilding = RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.TINKER_STATION.get(), ToolBuildingRecipe.class)
+    List<ToolBuildingRecipe> toolBuilding = RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.TINKER_STATION.get(), ToolBuildingRecipe.class)
       .stream()
       .sorted(Comparator.comparingInt(r -> StationSlotLayoutLoader.getInstance().get(r.getLayoutSlotId()).getSortIndex()))
       .toList();
@@ -250,10 +252,10 @@ public class JEIPlugin implements IModPlugin {
 
     // part builder
     MaterialItemList.setRecipes(List.of()); // list of recipes is ignored as this whole class is getting ditched in 1.21; it just clears cache right now
-    register.addRecipes(TConstructJEIConstants.PART_BUILDER, RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.PART_BUILDER.get(), IDisplayPartBuilderRecipe.class));
+    register.addRecipes(TConstructJEIConstants.PART_BUILDER, RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.PART_BUILDER.get(), IDisplayPartBuilderRecipe.class));
 
     // modifier worktable
-    register.addRecipes(TConstructJEIConstants.MODIFIER_WORKTABLE, RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.MODIFIER_WORKTABLE.get(), IModifierWorktableRecipe.class));
+    register.addRecipes(TConstructJEIConstants.MODIFIER_WORKTABLE, RecipeIdMap.getRecipes(access, manager, TinkerRecipeTypes.MODIFIER_WORKTABLE.get(), IModifierWorktableRecipe.class));
   }
 
   /**

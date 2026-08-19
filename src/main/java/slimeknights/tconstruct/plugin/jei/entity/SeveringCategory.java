@@ -17,6 +17,7 @@ import slimeknights.mantle.plugin.jei.entity.EntityIngredientRenderer;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.recipe.modifiers.severing.SeveringRecipe;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 import slimeknights.tconstruct.tools.TinkerTools;
 
@@ -61,6 +62,6 @@ public class SeveringCategory implements IRecipeCategory<SeveringRecipe> {
 
   @Override
   public ResourceLocation getRegistryName(SeveringRecipe recipe) {
-    return recipe.getId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getId());
   }
 }

@@ -28,6 +28,7 @@ import slimeknights.tconstruct.library.recipe.fuel.MeltingFuel;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelLookup;
 import slimeknights.tconstruct.library.recipe.melting.MeltingRecipe;
 import slimeknights.tconstruct.plugin.jei.util.FluidTooltipCallback;
+import slimeknights.tconstruct.plugin.jei.util.RecipeIdMap;
 
 import java.awt.Color;
 import java.util.Collections;
@@ -124,6 +125,6 @@ public abstract class AbstractMeltingCategory implements IRecipeCategory<Melting
 
   @Override
   public ResourceLocation getRegistryName(MeltingRecipe recipe) {
-    return recipe.getId();
+    return RecipeIdMap.getRecipeId(recipe, recipe.getId());
   }
 }
