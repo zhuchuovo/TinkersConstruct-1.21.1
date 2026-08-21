@@ -39,7 +39,7 @@
 
 ## 上游
 
-本项目上游为：[https://github.com/zhuchuovo/TinkersConstruct-1.21.1](https://github.com/zhuchuovo/TinkersConstruct-1.21.1)
+本项目上游为：[https://github.com/SlimeKnights/TinkersConstruct/](https://github.com/SlimeKnights/TinkersConstruct/)
 
 ## 许可证
 
