@@ -49,6 +49,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.ItemStackUtil;
 import slimeknights.tconstruct.library.utils.Schedule;
 import slimeknights.tconstruct.shared.TinkerEffects;
 import slimeknights.tconstruct.tools.TinkerTools;
@@ -61,6 +62,11 @@ import javax.annotation.Nullable;
 public class ThrownTool extends ThrownTrident implements ToolProjectile {
   /** Key to sync the stack to the client */
   protected static final EntityDataAccessor<ItemStack> STACK = SynchedEntityData.defineId(ThrownTool.class, EntityDataSerializers.ITEM_STACK);
+  /**
+   * Maximum custom data sent as part of an entity update. Tool inventories and other modifier data can be arbitrarily
+   * large; sending that data for every thrown tool can make the set-entity-data packet fail to encode.
+   */
+  private static final int MAX_SYNCED_STACK_TAG_SIZE = 512 * 1024;
   /** Movement speed in water */
   protected static final EntityDataAccessor<Float> WATER_INERTIA = SynchedEntityData.defineId(ThrownTool.class, EntityDataSerializers.FLOAT);
   /** Volatile integer key for the loyalty level */
@@ -104,7 +110,7 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
   /** Sets any relevant properties from the stack */
   private void updateFromStack() {
     ItemStack thrownStack = getThrownStack();
-    this.entityData.set(STACK, thrownStack);
+    updateDisplayStack();
     this.entityData.set(ID_LOYALTY, (byte) ModifierUtil.getVolatileInt(thrownStack, LOYALTY));
     this.entityData.set(ID_FOIL, ModifierUtil.checkVolatileFlag(thrownStack, ModifiableItem.SHINY));
     this.noDespawn = ModifierUtil.checkVolatileFlag(thrownStack, IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY);
@@ -116,6 +122,40 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
   /** Gets the mutable tool stack stored by AbstractArrow in 1.21. */
   private ItemStack getThrownStack() {
     return this.getPickupItemStackOrigin();
+  }
+
+  /**
+   * Builds the stack sent to clients for rendering. The server keeps the complete stack in the pickup item; only trim
+   * oversized custom data from the synchronized copy so a large tool inventory cannot disconnect the client.
+   */
+  private ItemStack getDisplayStack() {
+    ItemStack display = getThrownStack().copyWithCount(1);
+    CompoundTag tag = ItemStackUtil.getTag(display);
+    if (tag != null && tag.sizeInBytes() > MAX_SYNCED_STACK_TAG_SIZE) {
+      CompoundTag trimmed = new CompoundTag();
+      copyDisplayTag(tag, trimmed, ToolStack.TAG_MATERIALS);
+      copyDisplayTag(tag, trimmed, ToolStack.TAG_UPGRADES);
+      copyDisplayTag(tag, trimmed, ToolStack.TAG_MODIFIERS);
+      // A malformed or exceptionally large modifier list should not defeat the safeguard.
+      if (trimmed.sizeInBytes() > MAX_SYNCED_STACK_TAG_SIZE) {
+        trimmed = new CompoundTag();
+        copyDisplayTag(tag, trimmed, ToolStack.TAG_MATERIALS);
+      }
+      ItemStackUtil.setTag(display, trimmed);
+    }
+    return display;
+  }
+
+  private static void copyDisplayTag(CompoundTag source, CompoundTag target, String key) {
+    Tag value = source.get(key);
+    if (value != null) {
+      target.put(key, value.copy());
+    }
+  }
+
+  /** Forces a stack update so durability and broken state changes remain visible client side. */
+  private void updateDisplayStack() {
+    this.entityData.set(STACK, getDisplayStack(), true);
   }
 
   /** Called after {@link #shoot(double, double, double, float, float)} but before the first tick of hte projectile to do final setup. */
@@ -201,7 +241,7 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
         ToolDamageUtil.damage(getTool(), 1, getOwner() instanceof LivingEntity l ? l : null, getThrownStack());
         // update the stack so visual changes to the tool render (e.g. broken or fluid)
         // need to force since its the same instance, just NBT changes
-        this.entityData.set(STACK, getThrownStack(), true);
+        updateDisplayStack();
       }
       dealtDamage = true;
     }
@@ -269,7 +309,7 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
         }
         // update the stack so visual changes to the tool render (e.g. broken or fluid)
         // need to force since its the same instance, just NBT changes
-          this.entityData.set(STACK, getThrownStack(), true);
+        updateDisplayStack();
       }
     }
   }
@@ -333,7 +373,7 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
                 // update the stack so visual changes to the tool render (e.g. broken or fluid)
                 // need to force since its the same instance, just NBT changes
                 if (!level.isClientSide) {
-                  this.entityData.set(STACK, getThrownStack(), true);
+                  updateDisplayStack();
                 }
                 return;
               }
