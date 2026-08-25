@@ -292,6 +292,7 @@ import slimeknights.tconstruct.tools.modules.durability.DurabilityAsCapacityModu
 import slimeknights.tconstruct.tools.modules.durability.ShareDurabilityModule;
 import slimeknights.tconstruct.tools.modules.durability.ToolDamageRangeModule;
 import slimeknights.tconstruct.tools.modules.interaction.BrushModule;
+import slimeknights.tconstruct.tools.modules.interaction.AutoFireModule;
 import slimeknights.tconstruct.tools.modules.interaction.BucketModule;
 import slimeknights.tconstruct.tools.modules.interaction.ExtinguishCampfireModule;
 import slimeknights.tconstruct.tools.modules.interaction.FireballModule;
@@ -952,6 +953,7 @@ public final class TinkerModifiers extends TinkerModule {
       ModifierModule.LOADER.register(getResource("projectile_place_glow"), ProjectilePlaceGlowModule.LOADER);
       ModifierModule.LOADER.register(getResource("shears"), ShearsModule.LOADER);
       ModifierModule.LOADER.register(getResource("throwing"), ThrowingModule.LOADER);
+      ModifierModule.LOADER.register(getResource("auto_fire"), AutoFireModule.LOADER);
       ModifierModule.LOADER.register(getResource("spitting"), SpittingModule.LOADER);
       ModifierModule.LOADER.register(getResource("splashing"), SplashingModule.LOADER);
       ModifierModule.LOADER.register(getResource("slurping"), SlurpingModule.LOADER);

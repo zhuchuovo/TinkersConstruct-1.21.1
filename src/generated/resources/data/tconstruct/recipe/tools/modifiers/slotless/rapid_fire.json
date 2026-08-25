@@ -1,0 +1,28 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:dispenser"
+    },
+    {
+      "item": "minecraft:dispenser"
+    },
+    {
+      "item": "minecraft:dispenser"
+    },
+    {
+      "item": "minecraft:dispenser"
+    },
+    {
+      "item": "minecraft:dispenser"
+    }
+  ],
+  "level": {
+    "max": 1
+  },
+  "result": "tconstruct:rapid_fire",
+  "tools": {
+    "tag": "tconstruct:modifiable/ranged/crossbows"
+  }
+}

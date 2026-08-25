@@ -109,6 +109,7 @@ public class ModifierIds {
   // TODO 1.20 - change ID to arrow_pierce
   public static final ModifierId arrowPierce = id("impaling");
   public static final ModifierId quickCharge = id("quick_charge");
+  public static final ModifierId rapidFire = id("rapid_fire");
   public static final ModifierId trueshot = id("trueshot");
   public static final ModifierId blindshot = id("blindshot");
   public static final ModifierId bulkQuiver = id("bulk_quiver");

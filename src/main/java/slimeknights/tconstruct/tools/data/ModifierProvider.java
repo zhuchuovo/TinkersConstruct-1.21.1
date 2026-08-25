@@ -234,6 +234,7 @@ import slimeknights.tconstruct.tools.modules.cosmetic.TrimModule;
 import slimeknights.tconstruct.tools.modules.durability.ShareDurabilityModule;
 import slimeknights.tconstruct.tools.modules.durability.ToolDamageRangeModule;
 import slimeknights.tconstruct.tools.modules.interaction.BrushModule;
+import slimeknights.tconstruct.tools.modules.interaction.AutoFireModule;
 import slimeknights.tconstruct.tools.modules.interaction.BucketModule;
 import slimeknights.tconstruct.tools.modules.interaction.ExtinguishCampfireModule;
 import slimeknights.tconstruct.tools.modules.interaction.FireballModule;
@@ -605,6 +606,7 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
       .addModule(new ItemAbilitiesModule(TinkerItemAbilities.SHIELD_DISABLE))
       .addModule(new ArrowPierceModule(LevelingInt.flat(1), ModifierCondition.ANY_TOOL));
     buildModifier(ModifierIds.quickCharge).addModule(StatBoostModule.multiplyBase(ToolStats.DRAW_SPEED).eachLevel(0.25f));
+    buildModifier(ModifierIds.rapidFire).levelDisplay(ModifierLevelDisplay.NO_LEVELS).addModule(AutoFireModule.INSTANCE);
     buildModifier(ModifierIds.trueshot).addModule(StatBoostModule.add(ToolStats.ACCURACY).eachLevel(0.1f));
     buildModifier(ModifierIds.blindshot).addModule(StatBoostModule.add(ToolStats.ACCURACY).eachLevel(-0.1f));
     buildModifier(ModifierIds.erratic)

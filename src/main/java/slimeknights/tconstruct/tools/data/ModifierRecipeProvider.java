@@ -553,6 +553,15 @@ public class ModifierRecipeProvider extends BaseRecipeProvider {
       .setSlots(SlotType.UPGRADE, 1)
       .saveSalvage(consumer, prefix(ModifierIds.quickCharge, upgradeSalvage))
       .save(consumer, prefix(ModifierIds.quickCharge, upgradeFolder));
+    ModifierRecipeBuilder.modifier(ModifierIds.rapidFire)
+      .setTools(TinkerTags.Items.CROSSBOWS)
+      .addInput(Blocks.DISPENSER)
+      .addInput(Blocks.DISPENSER)
+      .addInput(Blocks.DISPENSER)
+      .addInput(Blocks.DISPENSER)
+      .addInput(Blocks.DISPENSER)
+      .setMaxLevel(1)
+      .save(consumer, prefix(ModifierIds.rapidFire, slotlessFolder));
     IncrementalModifierRecipeBuilder.modifier(ModifierIds.trueshot)
                                     .setInput(Items.TARGET, 1, 10)
                                     .setSlots(SlotType.UPGRADE, 1)
