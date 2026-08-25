@@ -52,6 +52,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.ItemStackUtil;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import javax.annotation.Nullable;
@@ -296,6 +297,40 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
     }
   }
 
+  /**
+   * Loads the crossbow with ammo from the entity's inventory and immediately fires it. Used by the rapid fire modifier.
+   * Does nothing and returns false on the client, or if no ammo is available.
+   * @param tool     Tool instance
+   * @param living   Entity holding the crossbow
+   * @param hand     Hand holding the crossbow
+   * @return  True if the crossbow was loaded and fired
+   */
+  public static boolean loadAndFire(IToolStackView tool, LivingEntity living, InteractionHand hand) {
+    Level level = living.level();
+    if (level.isClientSide) {
+      return false;
+    }
+    ItemStack bow = living.getItemInHand(hand);
+    if (!(bow.getItem() instanceof ModifiableCrossbowItem crossbow)) {
+      return false;
+    }
+    Player player = living instanceof Player p ? p : null;
+    ItemStack ammo = BowAmmoModifierHook.consumeAmmo(tool, bow, living, player, crossbow.getSupportedHeldProjectiles());
+    if (ammo.isEmpty()) {
+      return false;
+    }
+    Tag saved = ammo.save(level.registryAccess());
+    if (!(saved instanceof CompoundTag ammoNBT)) {
+      return false;
+    }
+    // write through a copied tag as in releaseUsing, so the loaded state properly syncs before firing
+    CompoundTag tagCopy = ItemStackUtil.getOrCreateTag(bow).copy();
+    ToolStack.from(bow.getItem(), tool.getDefinition(), tagCopy).getPersistentData().put(KEY_CROSSBOW_AMMO, ammoNBT);
+    ItemStackUtil.setTag(bow, tagCopy);
+    fireCrossbow(ToolStack.from(bow), living, player != null && player.getAbilities().instabuild, hand, ammoNBT);
+    return true;
+  }
+
   @Override
   public void releaseUsing(ItemStack bow, Level level, LivingEntity living, int chargeRemaining) {
     ToolStack tool = ToolStack.from(bow);
@@ -321,7 +356,14 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
       if (!level.isClientSide) {
         Tag saved = ammo.save(level.registryAccess());
         if (saved instanceof CompoundTag ammoNBT) {
-          persistentData.put(KEY_CROSSBOW_AMMO, ammoNBT);
+          // 1.21 data components are copy-on-write: editing the custom data tag in place is invisible to
+          // inventory synchronization, so the client would never see the loaded ammo. Write through a
+          // copied tag so the component change is detected and synced, same as the damage component does.
+          CompoundTag tagCopy = ItemStackUtil.getOrCreateTag(bow).copy();
+          ToolStack.from(bow.getItem(), tool.getDefinition(), tagCopy).getPersistentData().put(KEY_CROSSBOW_AMMO, ammoNBT);
+          ItemStackUtil.setTag(bow, tagCopy);
+          // the component was replaced above, refresh the tool view before further use
+          tool = ToolStack.from(bow);
           // if the crossbow broke during loading, fire immediately
           if (tool.isBroken()) {
             fireCrossbow(tool, living, player != null && player.getAbilities().instabuild, living.getUsedItemHand(), ammoNBT);
