@@ -516,7 +516,7 @@ public class SmelteryRecipeProvider extends BaseRecipeProvider implements ISmelt
                             .setCast(Items.FLINT, true) // if gravel works, flint makes sense to use
                             .save(consumer, location(castingFolder + "brick_composite"));
     // cobble
-    searedCasting(consumer, TinkerSmeltery.searedCobble, CompoundIngredient.of(Ingredient.of(Tags.Items.COBBLESTONE), Ingredient.of(Blocks.GRAVEL)), castingFolder + "cobble/block");
+    searedCasting(consumer, TinkerSmeltery.searedCobble, CompoundIngredient.of(Ingredient.of(Tags.Items.COBBLESTONES), Ingredient.of(Blocks.GRAVEL)), castingFolder + "cobble/block");
     searedSlabCasting(consumer, TinkerSmeltery.searedCobble.getSlab(), Ingredient.of(Blocks.COBBLESTONE_SLAB), castingFolder + "cobble/slab");
     searedCasting(consumer, TinkerSmeltery.searedCobble.getStairs(), Ingredient.of(Blocks.COBBLESTONE_STAIRS), castingFolder + "cobble/stairs");
     searedCasting(consumer, TinkerSmeltery.searedCobble.getWall(), Ingredient.of(Blocks.COBBLESTONE_WALL), castingFolder + "cobble/wall");
@@ -1419,7 +1419,7 @@ public class SmelteryRecipeProvider extends BaseRecipeProvider implements ISmelt
     // overworld stones from quartz
     ItemCastingRecipeBuilder.basinRecipe(Blocks.ANDESITE)
                             .setFluidAndTime(TinkerFluids.moltenQuartz, FluidValues.GEM / 2)
-                            .setCast(Tags.Items.COBBLESTONE, true)
+                            .setCast(Tags.Items.COBBLESTONES, true)
                             .save(consumer, prefix(id(Blocks.ANDESITE), folder + "quartz/"));
     ItemCastingRecipeBuilder.basinRecipe(Blocks.DIORITE)
                             .setFluidAndTime(TinkerFluids.moltenQuartz, FluidValues.GEM / 2)
@@ -2259,7 +2259,7 @@ public class SmelteryRecipeProvider extends BaseRecipeProvider implements ISmelt
     metal(consumer, TinkerFluids.moltenIron  ).ore(Byproduct.STEEL        ).metal().dust().plate().gear().coin().sheetmetal().geore().oreberry().minecraftTools().toolCostMelting(11, "tools_costing_11").common(HAMMER, FLAKES).rod();
     metal(consumer, TinkerFluids.moltenCobalt).ore(Byproduct.SMALL_DIAMOND).metal().dust()
       .melting(1/9f, "raw_nugget", 1/2f, false);
-    metal(consumer, TinkerFluids.moltenSteel ).metal().dust().plate().gear().coin().sheetmetal().common(SHOVEL_PLUS, SWORD, AXES, MEKANISM_SHIELD, FLAKES).common(ARMOR_PLUS).wire().rod().rawOre(Byproduct.IRON)
+    metal(consumer, TinkerFluids.moltenSteel ).metal().dust().plate().gear().coin().sheetmetal().common(SHOVEL_PLUS, SWORD, AXES, MEKANISM_SHIELD, FLAKES).common(ARMOR_PLUS).wire().rod().optional().rawOre(Byproduct.IRON)
       .toolItemMelting(11, "railcraft", "spike_maul")
       .melting(1/9f, "raw_nugget", 1/2f, false);
     // gold ore does non-standard byproduct handling, as it wants sparse gold ore to have a different byproduct, hence moving byproducts so we don't have ores for the metal call

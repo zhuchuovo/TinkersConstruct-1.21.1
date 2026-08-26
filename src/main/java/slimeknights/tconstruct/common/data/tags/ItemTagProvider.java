@@ -492,7 +492,7 @@ public class ItemTagProvider extends ItemTagsProvider {
     // contains any ground stones
     this.tag(TinkerTags.Items.STONESHIELDS)
         .addTag(Tags.Items.STONE)
-        .addTag(Tags.Items.COBBLESTONE)
+        .addTag(Tags.Items.COBBLESTONES)
         .addTag(Tags.Items.SANDSTONE)
         .addTag(Tags.Items.END_STONES)
         .addTag(Tags.Items.GRAVEL) // for shovels and axes to use
