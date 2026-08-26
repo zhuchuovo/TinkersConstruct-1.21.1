@@ -31,6 +31,15 @@ public class MelterBlock extends TinyMultiblockControllerBlock {
     return pLevel.isClientSide ? null : BlockEntityHelper.castTicker(check, TinkerSmeltery.melter.get(), MelterBlockEntity.SERVER_TICKER);
   }
 
+  @Override
+  @Deprecated
+  public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+    if (!newState.is(this)) {
+      BlockEntityHelper.get(MelterBlockEntity.class, level, pos).ifPresent(melter -> dropInventory(level, pos, melter.getItemHandler()));
+    }
+    super.onRemove(state, level, pos, newState, isMoving);
+  }
+
 
   /*
    * Display

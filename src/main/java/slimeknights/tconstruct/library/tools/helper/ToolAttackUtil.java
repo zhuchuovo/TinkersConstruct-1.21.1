@@ -65,10 +65,11 @@ public class ToolAttackUtil {
    * Inefficient to call when the tool is in the mainhand.
    * @param tool     Held tool
    * @param holder   Entity holding the tool
+   * @param sourceSlot Slot currently containing the tool, or null if it is not equipped
    * @param attribute  Attribute to fetch
    * @return  Base value of the attribute
    */
-  public static float getToolAttribute(IToolStackView tool, LivingEntity holder, Attribute attribute, float toolValue) {
+  public static float getToolAttribute(IToolStackView tool, LivingEntity holder, @Nullable EquipmentSlot sourceSlot, Attribute attribute, float toolValue) {
     Holder<Attribute> attributeHolder = BuiltInRegistries.ATTRIBUTE.wrapAsHolder(attribute);
     // fetch attribute instance
     AttributeInstance instance = holder.getAttribute(attributeHolder);
@@ -83,18 +84,30 @@ public class ToolAttackUtil {
     // start building our attributes list
     Map<Operation, Set<AttributeModifier>> modifiers = CombatHelper.copyModifiers(instance);
 
-    // remove mainhand attributes
+    // remove mainhand attributes, including attribute modifiers supplied by enchantments
     ItemStack mainStack = CombatHelper.getMainhandAttributeStack(holder);
     if (!mainStack.isEmpty()) {
-      mainStack.getAttributeModifiers().forEach(EquipmentSlot.MAINHAND, (check, modifier) -> {
-        if (check.equals(attributeHolder)) modifiers.get(modifier.operation()).remove(modifier);
-      });
+      removeSlotAttributes(mainStack, EquipmentSlot.MAINHAND, attributeHolder, modifiers);
+    }
+
+    // the source tool is already contributing its real offhand attributes to the holder.
+    // Remove those before applying its simulated mainhand attributes, otherwise slot-wide
+    // modifiers are counted once for the offhand and once again for the mainhand.
+    if (sourceSlot == EquipmentSlot.OFFHAND) {
+      ItemStack sourceStack = holder.getItemBySlot(sourceSlot);
+      if (!sourceStack.isEmpty()) {
+        removeSlotAttributes(sourceStack, sourceSlot, attributeHolder, modifiers);
+      }
     }
 
     // start adding in "mainhand" attributes for the given slot and attribute
     BiConsumer<Attribute, AttributeModifier> attributeConsumer = (check, modifier) -> {
       if (check == attribute) {
-        // this will remove duplicates due to AttributeModifier equals only checking UUID
+        // attribute instances only allow a single modifier for an ID; mirror that behavior
+        // in the copied sets in case another equipped item uses the same ID.
+        for (Set<AttributeModifier> values : modifiers.values()) {
+          values.removeIf(existing -> existing.id().equals(modifier.id()));
+        }
         modifiers.get(modifier.operation()).add(modifier);
       }
     };
@@ -104,6 +117,22 @@ public class ToolAttackUtil {
 
     // add in the tool value and build the stat
     return (float) CombatHelper.computeAttribute(attributeHolder, instance.getBaseValue() + toolValue, modifiers);
+  }
+
+  /** Compatibility overload for callers that do not track the source slot. */
+  public static float getToolAttribute(IToolStackView tool, LivingEntity holder, Attribute attribute, float toolValue) {
+    return getToolAttribute(tool, holder, null, attribute, toolValue);
+  }
+
+  /** Removes all modifiers supplied by the given stack in the given slot, matching by modifier ID. */
+  private static void removeSlotAttributes(ItemStack stack, EquipmentSlot slot, Holder<Attribute> attribute, Map<Operation,Set<AttributeModifier>> modifiers) {
+    stack.forEachModifier(slot, (check, modifier) -> {
+      if (check.equals(attribute)) {
+        for (Set<AttributeModifier> values : modifiers.values()) {
+          values.removeIf(existing -> existing.id().equals(modifier.id()));
+        }
+      }
+    });
   }
 
   /** Gets the critical modifier to apply, returning 1.0 if not critical. */
@@ -144,7 +173,10 @@ public class ToolAttackUtil {
       return false;
     }
     if (isAttackable(attacker, target)) {
-      performAttack(tool, ToolAttackContext.attacker(attacker).target(target).defaultCooldown().applyAttributes().build());
+      // Rebuild the attack attribute from the actual tool. This avoids stale or
+      // duplicated main-hand attribute modifiers, which was most visible on
+      // dagger damage after changing modifiers or swapping equipment.
+      performAttack(tool, ToolAttackContext.attacker(attacker).target(target).defaultCooldown().toolAttributes(tool).build());
     }
     return true;
   }
@@ -493,7 +525,7 @@ public class ToolAttackUtil {
     if (slotType == EquipmentSlot.MAINHAND) {
       return (float) holder.getAttributeValue(BuiltInRegistries.ATTRIBUTE.wrapAsHolder(attribute));
     }
-    return getToolAttribute(tool, holder, attribute, toolValue);
+    return getToolAttribute(tool, holder, slotType, attribute, toolValue);
   }
 
   /**
@@ -548,11 +580,7 @@ public class ToolAttackUtil {
       return true;
     }
     ToolAttackContext.Builder builder = ToolAttackContext.attacker(attackerLiving).target(targetEntity).slot(sourceSlot, hand).cooldown((float)cooldownFunction.getAsDouble());
-    if (sourceSlot == EquipmentSlot.MAINHAND) {
-      builder.applyAttributes();
-    } else {
-      builder.toolAttributes(tool);
-    }
+    builder.toolAttributes(tool);
     if (isExtraAttack) {
       builder.extraAttack();
     }

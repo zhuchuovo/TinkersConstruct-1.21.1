@@ -7,7 +7,7 @@
     {
       "type": "tconstruct:infinity",
       "ammo": "tconstruct:crystalshot",
-      "check_standard_arrows": true,
+      "check_standard_arrows": false,
       "durability_usage": 4,
       "variant_tag": "variant"
     }

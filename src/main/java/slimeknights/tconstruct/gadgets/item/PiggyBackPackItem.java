@@ -4,6 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -200,7 +202,11 @@ public class PiggyBackPackItem extends TooltipItem {
           if (amplifier > 2) {
             amplifier = 2;
           }
-          graphics.blitSprite(ICONS[amplifier], x, y, 18, 18);
+          // Effect icons are stored in the mob-effect atlas, not the GUI atlas
+          // used by GuiGraphics.blitSprite(ResourceLocation).
+          MobEffectTextureManager textures = mc.getMobEffectTextures();
+          TextureAtlasSprite sprite = textures.getSprite(ICONS[amplifier]);
+          graphics.blit(x, y, 0, 18, 18, sprite);
         }
 
         @Override

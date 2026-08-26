@@ -507,10 +507,15 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     // note chestplates will have both modules, but will get ignored due to setting the looting slot
     // the air check on weapon looting is for projectiles which use an item of air in their tool context
     LootingModule WEAPON_LOOTING = LootingModule.builder().toolItem(ItemPredicate.or(ItemPredicate.set(Items.AIR), ItemPredicate.tag(MELEE))).weapon();
+    // Vanilla loot tables query the MOB_LOOTING enchantment directly. Expose the
+    // weapon looting module through the gameplay-enchantment hook as well, so
+    // vanilla loot functions see Luck/Looting on a Tinkers melee weapon.
+    EnchantmentModule WEAPON_LOOTING_ENCHANTMENT = EnchantmentModule.builder(Enchantments.MOB_LOOTING)
+      .toolItem(ItemPredicate.tag(MELEE)).constant();
     LootingModule ARMOR_LOOTING = LootingModule.builder().toolItem(armor).armor(ARMOR_SLOTS);
-    buildModifier(ModifierIds.luck).levelDisplay(new UniqueForLevels(3)).addModules(CONSTANT_FORTUNE, ARMOR_FORTUNE, WEAPON_LOOTING, ARMOR_LOOTING, SEA_LUCK, ARMOR_LUCK);
+    buildModifier(ModifierIds.luck).levelDisplay(new UniqueForLevels(3)).addModules(CONSTANT_FORTUNE, ARMOR_FORTUNE, WEAPON_LOOTING, WEAPON_LOOTING_ENCHANTMENT, ARMOR_LOOTING, SEA_LUCK, ARMOR_LUCK);
     buildModifier(ModifierIds.fortune).addModules(CONSTANT_FORTUNE, ARMOR_FORTUNE, SEA_LUCK, ARMOR_LUCK);
-    buildModifier(ModifierIds.looting).addModules(WEAPON_LOOTING, ARMOR_LOOTING);
+    buildModifier(ModifierIds.looting).addModules(WEAPON_LOOTING, WEAPON_LOOTING_ENCHANTMENT, ARMOR_LOOTING);
     // boot traits
     UniqueForLevels twoLevels = new UniqueForLevels(2, false);
     buildModifier(ModifierIds.looter).levelDisplay(twoLevels)
@@ -518,6 +523,7 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
       .addModule(AttributeModule.builder(TinkerAttributes.EXPERIENCE_MULTIPLIER, Operation.ADD_MULTIPLIED_BASE).minLevel(2).flat(0.25f));
     buildModifier(ModifierIds.fortunate).levelDisplay(twoLevels)
       .addModule(EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).lootingLevel(LevelingInt.ONE).toolItem(harvest).constant())
+      .addModule(EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).lootingLevel(LevelingInt.ONE).toolItem(armor).armorHarvest(ARMOR_SLOTS))
       .addModule(AttributeModule.builder(Attributes.LUCK, Operation.ADD_VALUE).toolTag(TinkerTags.Items.ARMOR).flat(1))
       .addModule(LootingModule.builder().minLevel(2).lootingLevel(LevelingInt.ONE).armor(ARMOR_SLOTS));
 
@@ -637,7 +643,7 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     buildModifier(ModifierIds.crystalshot).priority(50) // after bulk quiver
       .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
       .addModule(ModifierVariantColorModule.INSTANCE)
-      .addModule(new InfinityModule(new ItemStack(TinkerTools.crystalshotItem), CrystalshotItem.TAG_VARIANT,  4, true));
+      .addModule(new InfinityModule(new ItemStack(TinkerTools.crystalshotItem), CrystalshotItem.TAG_VARIANT,  4, false));
     buildModifier(ModifierIds.barebow)
       .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
       .addModule(new VolatileFlagModule(BowAmmoModifierHook.SKIP_INVENTORY_AMMO));

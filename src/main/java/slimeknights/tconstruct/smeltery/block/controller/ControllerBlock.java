@@ -3,8 +3,10 @@ package slimeknights.tconstruct.smeltery.block.controller;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.neoforged.neoforge.items.IItemHandler;
 import slimeknights.mantle.block.InventoryBlock;
 import slimeknights.tconstruct.smeltery.block.component.SearedBlock;
 
@@ -31,6 +34,18 @@ public abstract class ControllerBlock extends InventoryBlock {
   protected ControllerBlock(Properties builder) {
     super(builder);
     this.registerDefaultState(this.defaultBlockState().setValue(ACTIVE, false).setValue(IN_STRUCTURE, false));
+  }
+
+  /** Drops and clears an inventory before the block capability becomes unavailable during removal. */
+  protected static void dropInventory(Level level, BlockPos pos, IItemHandler inventory) {
+    if (!level.isClientSide) {
+      for (int slot = 0; slot < inventory.getSlots(); slot++) {
+        ItemStack stack = inventory.extractItem(slot, Integer.MAX_VALUE, false);
+        if (!stack.isEmpty()) {
+          Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
+        }
+      }
+    }
   }
 
 

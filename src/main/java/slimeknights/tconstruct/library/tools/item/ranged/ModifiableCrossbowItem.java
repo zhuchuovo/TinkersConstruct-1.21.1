@@ -3,6 +3,7 @@ package slimeknights.tconstruct.library.tools.item.ranged;
 import lombok.Getter;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -27,6 +28,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -52,6 +54,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.ItemStackUtil;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import javax.annotation.Nullable;
@@ -286,6 +289,7 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
 
       // clear the ammo, damage the bow
       tool.getPersistentData().remove(KEY_CROSSBOW_AMMO);
+      syncPersistentData(living.getItemInHand(hand));
       ToolDamageUtil.damageAnimated(tool, damage, living, hand);
 
       // stats
@@ -322,12 +326,24 @@ public class ModifiableCrossbowItem extends ModifiableLauncherItem {
         Tag saved = ammo.save(level.registryAccess());
         if (saved instanceof CompoundTag ammoNBT) {
           persistentData.put(KEY_CROSSBOW_AMMO, ammoNBT);
+          // ModDataNBT mutates the unsafe custom-data tag in place. Re-set the
+          // component so the server marks the held stack dirty and sends the
+          // loaded projectile to clients for the dynamic model.
+          syncPersistentData(bow);
           // if the crossbow broke during loading, fire immediately
           if (tool.isBroken()) {
             fireCrossbow(tool, living, player != null && player.getAbilities().instabuild, living.getUsedItemHand(), ammoNBT);
           }
         }
       }
+    }
+  }
+
+  /** Re-publishes the mutable tool tag as an item component to trigger inventory synchronization. */
+  private static void syncPersistentData(ItemStack stack) {
+    CompoundTag tag = ItemStackUtil.getTag(stack);
+    if (tag != null) {
+      stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
     }
   }
 

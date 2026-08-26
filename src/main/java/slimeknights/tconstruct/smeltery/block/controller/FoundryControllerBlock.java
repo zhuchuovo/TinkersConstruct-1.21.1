@@ -47,7 +47,10 @@ public class FoundryControllerBlock extends HeatingControllerBlock {
   @Deprecated
   public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
     if (!newState.is(this)) {
-      BlockEntityHelper.get(FoundryBlockEntity.class, worldIn, pos).ifPresent(FoundryBlockEntity::invalidateStructure);
+      BlockEntityHelper.get(FoundryBlockEntity.class, worldIn, pos).ifPresent(foundry -> {
+        dropInventory(worldIn, pos, foundry.getMeltingInventory());
+        foundry.invalidateStructure();
+      });
     }
     super.onRemove(state, worldIn, pos, newState, isMoving);
   }

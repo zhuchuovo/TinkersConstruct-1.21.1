@@ -21,6 +21,15 @@
       }
     },
     {
+      "type": "tconstruct:constant_enchantment",
+      "level": 1,
+      "name": "minecraft:looting",
+      "tool": {
+        "type": "mantle:tag",
+        "tag": "tconstruct:modifiable/melee"
+      }
+    },
+    {
       "type": "tconstruct:armor_looting",
       "level": 1,
       "slots": [

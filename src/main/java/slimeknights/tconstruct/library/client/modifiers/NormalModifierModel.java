@@ -69,7 +69,10 @@ public class NormalModifierModel implements SimpleModifierModel {
 
   @Override
   public void addQuads(IToolStackView tool, ModifierEntry entry, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
-    Material spriteName = isLarge ? large : small;
+    // Some broad tools only ship a small overlay for a modifier. Reuse that
+    // overlay for the large model instead of dropping the modifier entirely;
+    // a dedicated large texture still takes precedence when available.
+    Material spriteName = isLarge && large != null ? large : small;
     if (spriteName != null) {
       quadConsumer.accept(MantleItemLayerModel.getQuadsForSprite(color, -1, spriteGetter.apply(spriteName), transforms, luminosity, pixels));
     }

@@ -17,6 +17,23 @@
       }
     },
     {
+      "type": "tconstruct:armor_harvest_enchantment",
+      "level": {
+        "flat": 1
+      },
+      "name": "minecraft:fortune",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "mantle:tag",
+        "tag": "tconstruct:modifiable/armor/worn"
+      }
+    },
+    {
       "type": "tconstruct:attribute",
       "attribute": "minecraft:generic.luck",
       "flat": 1.0,

@@ -93,27 +93,29 @@ public class CombatFishingHookRenderer extends EntityRenderer<CombatFishingHook>
   @Override
   public void render(CombatFishingHook hook, float yaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
     Player player = hook.getPlayerOwner();
+    // Render the bobber even while the owner is waiting for its client-side
+    // entity reference to synchronize. The line requires the owner, but the
+    // bobber itself does not.
+    poseStack.pushPose();
+    poseStack.pushPose();
+    poseStack.scale(0.5F, 0.5F, 0.5F);
+    poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
+    poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
+
+    // select material
+    MaterialTexture texture = TEXTURE_CACHE.apply(hook.getMaterial());
+    VertexConsumer consumer = buffer.getBuffer(texture.texture);
+    int bobberLight = texture.applyLuminosity(packedLight);
+
+    // render bobber
+    PoseStack.Pose lastPose = poseStack.last();
+    texture.vertex(consumer, lastPose, bobberLight, 0f, 0, 0, 1);
+    texture.vertex(consumer, lastPose, bobberLight, 1f, 0, 1, 1);
+    texture.vertex(consumer, lastPose, bobberLight, 1f, 1, 1, 0);
+    texture.vertex(consumer, lastPose, bobberLight, 0f, 1, 0, 0);
+    poseStack.popPose();
+
     if (player != null) {
-      // setup rendering
-      poseStack.pushPose();
-      poseStack.pushPose();
-      poseStack.scale(0.5F, 0.5F, 0.5F);
-      poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-      poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-
-      // select material
-      MaterialTexture texture = TEXTURE_CACHE.apply(hook.getMaterial());
-      VertexConsumer consumer = buffer.getBuffer(texture.texture);
-      int bobberLight = texture.applyLuminosity(packedLight);
-
-      // render bobber
-      PoseStack.Pose lastPose = poseStack.last();
-      texture.vertex(consumer, lastPose, bobberLight, 0f, 0, 0, 1);
-      texture.vertex(consumer, lastPose, bobberLight, 1f, 0, 1, 1);
-      texture.vertex(consumer, lastPose, bobberLight, 1f, 1, 1, 0);
-      texture.vertex(consumer, lastPose, bobberLight, 0f, 1, 0, 0);
-      poseStack.popPose();
-
       // handle hand side
       int sideOffset = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
       ItemStack itemstack = player.getMainHandItem();
@@ -157,8 +159,12 @@ public class CombatFishingHookRenderer extends EntityRenderer<CombatFishingHook>
       }
 
       poseStack.popPose();
-      super.render(hook, yaw, partialTicks, poseStack, buffer, packedLight);
+    } else {
+      // Balance the outer pose used by the line rendering when the owner is
+      // not synchronized on the client yet.
+      poseStack.popPose();
     }
+    super.render(hook, yaw, partialTicks, poseStack, buffer, packedLight);
   }
 
   @Override

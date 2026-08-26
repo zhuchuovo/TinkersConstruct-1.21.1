@@ -12,8 +12,11 @@ public final class TinkerFood {
   /** Bacon. What more is there to say? */
   public static final FoodProperties BACON = (new FoodProperties.Builder()).nutrition(4).saturationModifier(0.6F).build();
 
-  /** Cheese is used for both the block and the ingot, eating the block returns 3 ingots */
+  /** Cheese ingot food value. */
   public static final FoodProperties CHEESE = (new FoodProperties.Builder()).nutrition(3).saturationModifier(0.4F).build();
+
+  /** Cheese block contains four ingots, so its food value is four times that of an ingot. */
+  public static final FoodProperties CHEESE_BLOCK = (new FoodProperties.Builder()).nutrition(12).saturationModifier(0.4F).build();
 
   /** For the modifier */
   public static final FoodProperties JEWELED_APPLE = (new FoodProperties.Builder()).nutrition(4).saturationModifier(1.2F).effect(() -> new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 0), 1.0F).effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 2400, 0), 1.0F).alwaysEdible().build();

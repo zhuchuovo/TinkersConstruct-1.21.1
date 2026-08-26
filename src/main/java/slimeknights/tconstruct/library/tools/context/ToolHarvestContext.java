@@ -75,6 +75,14 @@ public class ToolHarvestContext {
     return new ToolHarvestContext(world, living, player, projectile, state, pos, this.sideHit, state.canHarvestBlock(world, pos, player), true, true, targetedPos, targetedState);
   }
 
+  /** Creates a copy using a state changed by {@link net.minecraft.world.level.block.Block#playerWillDestroy}. */
+  public ToolHarvestContext withState(BlockState state) {
+    if (this.state == state) {
+      return this;
+    }
+    return new ToolHarvestContext(world, living, player, projectile, state, pos, sideHit, canHarvest, isEffective, isAOE, targetedPos, targetedState);
+  }
+
   /** Checks if this is a projectile */
   public boolean isProjectile() {
     return projectile != null;

@@ -59,7 +59,7 @@ public class OffhandAttackModifier extends NoLevelsModifier implements EntityInt
     } else {
       // if we get here, its always offhand
       // need to cancel out the base 4 attack speed in the tool attack speed, since we removed the main hand one doing it
-      attackSpeed = ToolAttackUtil.getToolAttribute(tool, player, Attributes.ATTACK_SPEED.value(), tool.getStats().get(ToolStats.ATTACK_SPEED) - 4);
+      attackSpeed = ToolAttackUtil.getToolAttribute(tool, player, source.getSlot(InteractionHand.OFF_HAND), Attributes.ATTACK_SPEED.value(), tool.getStats().get(ToolStats.ATTACK_SPEED) - 4);
     }
     OffhandCooldownTracker.applyCooldown(player, attackSpeed, 20);
   }

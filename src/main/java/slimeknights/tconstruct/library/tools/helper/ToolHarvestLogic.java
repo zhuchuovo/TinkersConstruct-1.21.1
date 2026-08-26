@@ -3,6 +3,7 @@ package slimeknights.tconstruct.library.tools.helper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
+import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -141,6 +142,13 @@ public class ToolHarvestLogic {
       return false;
     }
 
+    // run vanilla pre-destroy behavior before removal. This notably marks decorated pots
+    // as cracked so their sherd drops and block entity data are used by the loot table.
+    BlockState state = context.getState();
+    Block block = state.getBlock();
+    state = block.playerWillDestroy(world, pos, state, player);
+    context = context.withState(state);
+
     // creative just removes the block
     if (player.isCreative()) {
       removeBlock(tool, context);
@@ -148,7 +156,6 @@ public class ToolHarvestLogic {
     }
 
     // determine damage to do
-    BlockState state = context.getState();
     int damage = getDamage(tool, world, pos, state);
 
     // remove the block
@@ -157,7 +164,6 @@ public class ToolHarvestLogic {
     boolean removed = removeBlock(tool, context);
 
     // harvest drops
-    Block block = state.getBlock();
     if (removed && canHarvest) {
       block.playerDestroy(world, player, pos, state, te, stack);
     }
@@ -207,8 +213,9 @@ public class ToolHarvestLogic {
       // normally this is sent within one of the block breaking hooks that is called on both sides, suppressing the packet being sent to the breaking player
       // we only break the center block client side, so need to send the event directly
       // TODO: in theory, we can use this to reduce the number of sounds playing on breaking a lot of blocks, would require sending a custom packet if we want the particles still
-      world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(context.getState()));
-      TinkerNetwork.getInstance().sendVanillaPacket(Objects.requireNonNull(context.getPlayer()), new ClientboundBlockUpdatePacket(world, pos));
+      ServerPlayer player = Objects.requireNonNull(context.getPlayer());
+      TinkerNetwork.getInstance().sendVanillaPacket(player, new ClientboundLevelEventPacket(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(context.getState()), false));
+      TinkerNetwork.getInstance().sendVanillaPacket(player, new ClientboundBlockUpdatePacket(world, pos));
       return true;
     }
     return false;

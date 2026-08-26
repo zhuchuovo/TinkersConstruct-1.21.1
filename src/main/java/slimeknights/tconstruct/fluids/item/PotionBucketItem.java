@@ -22,6 +22,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
+import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.utils.Util;
 
 import javax.annotation.Nonnull;
@@ -30,6 +31,8 @@ import java.util.function.Supplier;
 
 /** Implements filling a bucket with an NBT fluid */
 public class PotionBucketItem extends PotionItem {
+  /** Number of potion bottles contained in a bucket. */
+  private static final int POTION_SCALE = FluidType.BUCKET_VOLUME / FluidValues.BOTTLE;
   private final Supplier<? extends Fluid> supplier;
   public PotionBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
     super(builder);
@@ -72,14 +75,17 @@ public class PotionBucketItem extends PotionItem {
       CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
     }
 
-    // effects are 2x duration
+    // scale effects by the number of potion bottles contained in the bucket
     if (!level.isClientSide) {
       for (MobEffectInstance effect : PotionUtils.getMobEffects(stack)) {
         if (effect.getEffect().value().isInstantenous()) {
-          effect.getEffect().value().applyInstantenousEffect(player, player, living, effect.getAmplifier(), 2.5D);
+          effect.getEffect().value().applyInstantenousEffect(player, player, living, effect.getAmplifier(), POTION_SCALE);
         } else {
-          MobEffectInstance newEffect = new MobEffectInstance(effect);
-          newEffect.mapDuration(duration -> duration * 5 / 2);
+          MobEffectInstance newEffect = new MobEffectInstance(
+            effect.getEffect(), effect.mapDuration(duration -> duration * POTION_SCALE), effect.getAmplifier(),
+            effect.isAmbient(), effect.isVisible(), effect.showIcon());
+          newEffect.getCures().clear();
+          newEffect.getCures().addAll(effect.getCures());
           living.addEffect(newEffect);
         }
       }
@@ -106,7 +112,7 @@ public class PotionBucketItem extends PotionItem {
 
   @Override
   public void appendHoverText(ItemStack pStack, Item.TooltipContext context, List<Component> pTooltip, TooltipFlag pFlag) {
-    PotionUtils.addPotionTooltip(pStack, pTooltip, 2.5f);
+    PotionUtils.addPotionTooltip(pStack, pTooltip, POTION_SCALE);
   }
 
   @Override

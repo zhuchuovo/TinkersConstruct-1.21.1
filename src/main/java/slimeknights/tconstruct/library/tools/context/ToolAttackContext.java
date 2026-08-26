@@ -257,8 +257,8 @@ public class ToolAttackContext {
 
     /** Sets the base damage from the player attributes for the given slot containing the given tool. Should not be used if the tool is in mainhand, call {@link #applyAttributes()} instead. */
     public Builder toolAttributes(IToolStackView tool) {
-      baseDamage = ToolAttackUtil.getToolAttribute(tool, attacker, Attributes.ATTACK_DAMAGE.value(), tool.getStats().get(ToolStats.ATTACK_DAMAGE));
-      baseKnockback = ToolAttackUtil.getToolAttribute(tool, attacker, Attributes.ATTACK_KNOCKBACK.value(), baseKnockback) / 2;
+      baseDamage = ToolAttackUtil.getToolAttribute(tool, attacker, slot, Attributes.ATTACK_DAMAGE.value(), tool.getStats().get(ToolStats.ATTACK_DAMAGE));
+      baseKnockback = ToolAttackUtil.getToolAttribute(tool, attacker, slot, Attributes.ATTACK_KNOCKBACK.value(), baseKnockback) / 2;
       return this;
     }
 

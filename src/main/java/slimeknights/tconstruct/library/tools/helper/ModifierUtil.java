@@ -205,7 +205,14 @@ public final class ModifierUtil {
 
   /** Calculates inaccuracy from the conditional tool stat. */
   public static float getInaccuracy(IToolStackView tool, @Nullable LivingEntity living) {
-    return 3 * (1 / ConditionalStatModifierHook.getModifiedStat(tool, living, ToolStats.ACCURACY) - 1);
+    float accuracy = ConditionalStatModifierHook.getModifiedStat(tool, living, ToolStats.ACCURACY);
+    // Accuracy is intended to be exact at 1.0. Avoid tiny floating point errors
+    // turning a perfect bow into a visibly inaccurate one, and never return a
+    // negative spread for values above the perfect accuracy cap.
+    if (accuracy >= 1.0f - 1.0e-5f) {
+      return 0.0f;
+    }
+    return Math.max(0.0f, 3 * (1 / accuracy - 1));
   }
 
   /** @deprecated use {@link GeneralInteractionModifierHook#addCooldown(IToolStackView, Player, float)} */

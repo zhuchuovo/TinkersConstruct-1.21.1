@@ -1,13 +1,19 @@
 package slimeknights.tconstruct.tools;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.Input;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.layers.CapeLayer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -70,6 +76,8 @@ import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.ModifierManager;
 import slimeknights.tconstruct.library.modifiers.modules.technical.ArmorStatModule;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataKeys;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
+import slimeknights.tconstruct.library.tools.item.armor.ModifiableArmorItem;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.library.utils.HarvestTiers;
@@ -183,6 +191,36 @@ public class ToolClientEvents extends ClientEventBase {
     event.registerEntityRenderer(TinkerTools.thrownTool.get(), ThrownToolRenderer::new);
     event.registerEntityRenderer(TinkerModifiers.fluidSpitEntity.get(), FluidEffectProjectileRenderer::new);
     event.registerEntityRenderer(TinkerModifiers.fireball.get(), context -> new ThrownItemRenderer<>(context, 0.75f, true));
+  }
+
+  /** Replaces vanilla's cape layer so modifiable elytra chestplates hide capes as vanilla elytra do. */
+  @SubscribeEvent
+  static void replaceCapeLayers(EntityRenderersEvent.AddLayers event) {
+    for (var skin : event.getSkins()) {
+      PlayerRenderer renderer = event.getSkin(skin);
+      if (renderer != null) {
+        for (int i = 0; i < renderer.layers.size(); i++) {
+          if (renderer.layers.get(i).getClass() == CapeLayer.class) {
+            renderer.layers.set(i, new TinkerCapeLayer(renderer));
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  /** Vanilla cape layer with support for Tinkers' Construct elytra flags. */
+  private static class TinkerCapeLayer extends CapeLayer {
+    private TinkerCapeLayer(PlayerRenderer renderer) {
+      super(renderer);
+    }
+
+    @Override
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
+      if (!ModifierUtil.checkVolatileFlag(player.getItemBySlot(EquipmentSlot.CHEST), ModifiableArmorItem.ELYTRA)) {
+        super.render(poseStack, buffer, packedLight, player, limbSwing, limbSwingAmount, partialTick, ageInTicks, netHeadYaw, headPitch);
+      }
+    }
   }
 
   @SubscribeEvent
