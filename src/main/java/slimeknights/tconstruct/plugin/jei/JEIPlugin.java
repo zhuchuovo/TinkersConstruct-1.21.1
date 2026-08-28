@@ -461,6 +461,7 @@ public class JEIPlugin implements IModPlugin {
       addItems.add(TankItem.fillTank(TinkerSmeltery.scorchedTank, TankType.FUEL_TANK, TinkerFluids.blazingBlood.get()));
     }
     // tool config filters to 1 material, easiest to just remove all then add back the 1
+    // if the creative is showing just 1, skip the client option
     String showOnlyTools = Config.CLIENT.showOnlyToolMaterial.get();
     if (!showOnlyTools.isEmpty()) {
       for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(TinkerTags.Items.MODIFIABLE)) {
@@ -470,8 +471,9 @@ public class JEIPlugin implements IModPlugin {
         }
       }
     }
+    // parts work the same as tools
     String showOnlyParts = Config.CLIENT.showOnlyPartMaterial.get();
-    if (!showOnlyTools.isEmpty()) {
+    if (!showOnlyParts.isEmpty()) {
       for (Holder<Item> item : BuiltInRegistries.ITEM.getTagOrEmpty(TinkerTags.Items.TOOL_PARTS)) {
         if (item.value() instanceof IMaterialItem part) {
           part.addVariants(removeItem, "");

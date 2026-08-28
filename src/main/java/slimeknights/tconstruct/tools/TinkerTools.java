@@ -149,6 +149,12 @@ import static slimeknights.tconstruct.TConstruct.getResource;
  * Contains all complete tool items
  */
 public final class TinkerTools extends TinkerModule {
+  /**
+   * ProjectileWeaponItem does not add damage components itself. A zero default keeps the
+   * launcher stack damageable while ModifiableLauncherItem supplies its dynamic max damage.
+   */
+  private static final Item.Properties DURABLE_LAUNCHER_PROPS = new Item.Properties().stacksTo(1).durability(0);
+
   public static final RegistryObject<IngredientType<ToolHookIngredient>> toolHookIngredient =
     INGREDIENT_TYPES.register("tool_hook", () -> ToolHookIngredient.TYPE);
 
@@ -195,8 +201,8 @@ public final class TinkerTools extends TinkerModule {
   public static final ItemObject<ModifiableItem> sword = ITEMS.register("sword", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.SWORD));
   public static final ItemObject<ModifiableItem> cleaver = ITEMS.register("cleaver", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.CLEAVER));
 
-  public static final ItemObject<ModifiableCrossbowItem> crossbow = ITEMS.register("crossbow", () -> new ModifiableCrossbowItem(UNSTACKABLE_PROPS, ToolDefinitions.CROSSBOW));
-  public static final ItemObject<ModifiableBowItem> longbow = ITEMS.register("longbow", () -> new ModifiableBowItem(UNSTACKABLE_PROPS, ToolDefinitions.LONGBOW, true));
+  public static final ItemObject<ModifiableCrossbowItem> crossbow = ITEMS.register("crossbow", () -> new ModifiableCrossbowItem(DURABLE_LAUNCHER_PROPS, ToolDefinitions.CROSSBOW));
+  public static final ItemObject<ModifiableBowItem> longbow = ITEMS.register("longbow", () -> new ModifiableBowItem(DURABLE_LAUNCHER_PROPS, ToolDefinitions.LONGBOW, true));
   public static final ItemObject<ModifiableItem> fishingRod = ITEMS.register("fishing_rod", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.FISHING_ROD));
   public static final ItemObject<ModifiableItem> javelin = ITEMS.register("javelin", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.JAVELIN));
   public static final ItemObject<ModifiableArrowItem> arrow = ITEMS.register("arrow", () -> new ModifiableArrowItem(ITEM_PROPS, ToolDefinitions.ARROW));
@@ -211,7 +217,7 @@ public final class TinkerTools extends TinkerModule {
 
   // ancient
   public static final ItemObject<ModifiableItem> meltingPan = ITEMS.register("melting_pan", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.MELTING_PAN));
-  public static final ItemObject<ModifiableCrossbowItem> warPick = ITEMS.register("war_pick", () -> new ModifiableCrossbowItem(UNSTACKABLE_PROPS, ToolDefinitions.WAR_PICK));
+  public static final ItemObject<ModifiableCrossbowItem> warPick = ITEMS.register("war_pick", () -> new ModifiableCrossbowItem(DURABLE_LAUNCHER_PROPS, ToolDefinitions.WAR_PICK));
   public static final ItemObject<ModifiableItem> battlesign = ITEMS.register("battlesign", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.BATTLESIGN));
   public static final ItemObject<ModifiableItem> swasher = ITEMS.register("swasher", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.SWASHER));
   public static final ItemObject<ModifiableItem> minotaurAxe;

@@ -208,6 +208,10 @@ public class TinkerTags {
 
     // misc compat
     public static final TagKey<Block> BUDDING = common("budding");
+    public static final TagKey<Block> BUDDING_BLOCKS = common("budding_blocks");
+    public static final TagKey<Block> CLUSTERS = common("clusters");
+    public static final TagKey<Block> BUDS = common("buds");
+    public static final TagKey<Block> GROWTH_ACCELERATABLE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("ae2", "growth_acceleratable"));
     // ceramics compat
     @SuppressWarnings("removal")
     public static final TagKey<Block> CISTERN_CONNECTIONS = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("ceramics", "cistern_connections"));

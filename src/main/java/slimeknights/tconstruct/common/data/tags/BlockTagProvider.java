@@ -310,8 +310,23 @@ public class BlockTagProvider extends BlockTagsProvider {
     this.tag(TinkerTags.Blocks.EARTH_SLIME_SPAWN).add(TinkerWorld.earthGeode.getBlock(), TinkerWorld.earthGeode.getBudding()).addTag(FoliageType.EARTH.getGrassBlockTag());
     this.tag(TinkerTags.Blocks.ENDER_SLIME_SPAWN).add(TinkerWorld.enderGeode.getBlock(), TinkerWorld.enderGeode.getBudding()).addTag(FoliageType.ENDER.getGrassBlockTag());
 
-    // budding tag
-    tag(TinkerTags.Blocks.BUDDING).add(TinkerWorld.earthGeode.getBudding(), TinkerWorld.skyGeode.getBudding(), TinkerWorld.ichorGeode.getBudding(), TinkerWorld.enderGeode.getBudding());
+    // crystal growth compat
+    IntrinsicTagAppender<Block> budding = tag(TinkerTags.Blocks.BUDDING);
+    IntrinsicTagAppender<Block> buddingBlocks = tag(TinkerTags.Blocks.BUDDING_BLOCKS);
+    IntrinsicTagAppender<Block> growthAcceleratable = tag(TinkerTags.Blocks.GROWTH_ACCELERATABLE);
+    IntrinsicTagAppender<Block> clusters = tag(TinkerTags.Blocks.CLUSTERS);
+    IntrinsicTagAppender<Block> buds = tag(TinkerTags.Blocks.BUDS);
+    GeodeItemObject[] slimeGeodes = {TinkerWorld.earthGeode, TinkerWorld.skyGeode, TinkerWorld.ichorGeode, TinkerWorld.enderGeode};
+    for (GeodeItemObject geode : slimeGeodes) {
+      Block buddingBlock = geode.getBudding();
+      budding.add(buddingBlock);
+      buddingBlocks.add(buddingBlock);
+      growthAcceleratable.add(buddingBlock);
+      clusters.add(geode.getBud(BudSize.CLUSTER));
+      for (BudSize size : BudSize.SIZES) {
+        buds.add(geode.getBud(size));
+      }
+    }
 
     this.tag(BlockTags.GUARDED_BY_PIGLINS)
         .add(TinkerTables.castChest.get(), TinkerCommons.goldBars.get(), TinkerCommons.goldPlatform.get());

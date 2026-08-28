@@ -80,14 +80,20 @@ public class FlexItemTypes {
     /* Register a modifiable tool instance for bow like items (release on finish) */
     register("bow", data -> {
       boolean storeDrawingItem = GsonHelper.getAsBoolean(data, "store_drawing_item", false);
-      return (IToolItemFactory<ModifiableBowItem>)(props, builder) -> add(TOOL_ITEMS, new ModifiableBowItem(props, ToolDefinition.create(builder.getRegistryName()), storeDrawingItem));
+      return (IToolItemFactory<ModifiableBowItem>)(props, builder) -> {
+        props.durability(0);
+        return add(TOOL_ITEMS, new ModifiableBowItem(props, ToolDefinition.create(builder.getRegistryName()), storeDrawingItem));
+      };
     });
 
     /* Register a modifiable tool instance for crossbow like items (load on finish) */
     register("crossbow", data -> {
       boolean allowFireworks = GsonHelper.getAsBoolean(data, "allow_fireworks");
       boolean storeDrawingItem = GsonHelper.getAsBoolean(data, "store_drawing_item", false);
-      return (IToolItemFactory<ModifiableCrossbowItem>)(props, builder) -> add(CROSSBOW_ITEMS, new ModifiableCrossbowItem(props, ToolDefinition.create(builder.getRegistryName()), allowFireworks ? ProjectileWeaponItem.ARROW_OR_FIREWORK : ProjectileWeaponItem.ARROW_ONLY, storeDrawingItem));
+      return (IToolItemFactory<ModifiableCrossbowItem>)(props, builder) -> {
+        props.durability(0);
+        return add(CROSSBOW_ITEMS, new ModifiableCrossbowItem(props, ToolDefinition.create(builder.getRegistryName()), allowFireworks ? ProjectileWeaponItem.ARROW_OR_FIREWORK : ProjectileWeaponItem.ARROW_ONLY, storeDrawingItem));
+      };
     });
 
     /* Register a modifiable arrow item */

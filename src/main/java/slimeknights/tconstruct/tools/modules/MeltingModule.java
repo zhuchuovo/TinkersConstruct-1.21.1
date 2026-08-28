@@ -188,10 +188,8 @@ public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal
           current.grow(amount);
         }
         isDirty = true;
-      } else if (forceMelt) {
-        // if forced to melt, anything unmeltable is deleted
-        iterator.remove();
       }
+      // items that cannot melt always drop normally; never delete unmeltable drops
     }
     if (isDirty) {
       TANK_HELPER.setFluid(tool, current);
