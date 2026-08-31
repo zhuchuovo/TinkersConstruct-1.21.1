@@ -170,9 +170,21 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
           if (listSlot == slot) {
             if (stack.isEmpty()) {
               list.remove(i);
+              // ListTag is mutable. Re-publish the changed value through the
+              // tool data wrapper so component-backed stacks can persist and
+              // synchronize the updated inventory.
+              if (list.isEmpty()) {
+                modData.remove(key);
+              } else {
+                modData.put(key, list);
+              }
             } else {
               compound.getAllKeys().clear();
               writeStack(stack, slot, compound);
+              // Re-publish after mutating the existing list entry. This is
+              // required for 1.21 custom-data components, whose old value may
+              // otherwise remain in the component map/sync snapshots.
+              modData.put(key, list);
             }
             return;
           // try to keep the stacks in order by inserting after the last slot smaller than the target
@@ -197,6 +209,9 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
         } else {
           list.add(insertIndex, compound);
         }
+        // Re-publish after mutating the list so the owning tool stack sees the
+        // new slot and emits a component update.
+        modData.put(key, list);
       }
     }
   }

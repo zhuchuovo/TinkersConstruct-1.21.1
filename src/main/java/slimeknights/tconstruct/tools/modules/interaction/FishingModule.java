@@ -1,6 +1,7 @@
 package slimeknights.tconstruct.tools.modules.interaction;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -88,7 +89,7 @@ public enum FishingModule implements ModifierModule, GeneralInteractionModifierH
         player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
       } else {
         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.FISHING_BOBBER_THROW, SoundSource.NEUTRAL, 0.5f, 0.4f / (level.getRandom().nextFloat() * 0.4f + 0.8f));
-        if (!level.isClientSide) {
+        if (level instanceof ServerLevel serverLevel) {
           float luck = ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.SEA_LUCK);
           float lure = ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.LURE);
           float velocity = ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.VELOCITY);
@@ -117,7 +118,7 @@ public enum FishingModule implements ModifierModule, GeneralInteractionModifierH
           for (ModifierEntry entry : modifiers.getModifiers()) {
             entry.getHook(ModifierHooks.PROJECTILE_LAUNCH).onProjectileLaunch(tool, entry, player, ItemStack.EMPTY, hook, null, arrowData, true);
           }
-          level.addFreshEntity(hook);
+          serverLevel.addFreshEntity(hook);
         }
 
         player.awardStat(Stats.ITEM_USED.get(tool.getItem()));

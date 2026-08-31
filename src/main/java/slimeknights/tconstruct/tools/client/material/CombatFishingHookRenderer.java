@@ -2,7 +2,6 @@ package slimeknights.tconstruct.tools.client.material;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -100,7 +99,6 @@ public class CombatFishingHookRenderer extends EntityRenderer<CombatFishingHook>
     poseStack.pushPose();
     poseStack.scale(0.5F, 0.5F, 0.5F);
     poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-    poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
 
     // select material
     MaterialTexture texture = TEXTURE_CACHE.apply(hook.getMaterial());

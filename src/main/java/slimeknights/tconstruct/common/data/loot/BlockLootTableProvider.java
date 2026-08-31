@@ -136,9 +136,9 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
     this.add(TinkerTables.partChest.get(), block ->
       droppingWithFunctions(block, builder ->
         builder.apply(COPY_NAME)));
-    // cast chest - name and inventory
+    // cast chest - name; inventory is dropped when the block is broken
     this.add(TinkerTables.castChest.get(), block -> droppingWithFunctions(block, builder ->
-      builder.apply(COPY_NAME).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Items", "TinkerData.Items"))));
+      builder.apply(COPY_NAME)));
 
     // tables with legs
     this.dropTable(TinkerTables.craftingStation.get());

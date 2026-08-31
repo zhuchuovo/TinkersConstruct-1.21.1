@@ -142,10 +142,12 @@ public class ToolHarvestLogic {
       return false;
     }
 
-    // run vanilla pre-destroy behavior before removal. This notably marks decorated pots
-    // as cracked so their sherd drops and block entity data are used by the loot table.
+    // Vanilla captures the block entity before pre-destroy behavior, as that callback may
+    // replace the state or otherwise make the original block entity unavailable.
     BlockState state = context.getState();
     Block block = state.getBlock();
+    boolean canHarvest = context.canHarvest();
+    BlockEntity te = canHarvest ? world.getBlockEntity(pos) : null;
     state = block.playerWillDestroy(world, pos, state, player);
     context = context.withState(state);
 
@@ -159,8 +161,6 @@ public class ToolHarvestLogic {
     int damage = getDamage(tool, world, pos, state);
 
     // remove the block
-    boolean canHarvest = context.canHarvest();
-    BlockEntity te = canHarvest ? world.getBlockEntity(pos) : null; // ensures tile entity is fetched so it's around for afterBlockBreak
     boolean removed = removeBlock(tool, context);
 
     // harvest drops

@@ -30,7 +30,7 @@ public final class ToolCapabilityProvider {
     event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ignored) -> {
       Supplier<ToolStack> tool = refreshingTool(stack);
       return tool.get().getVolatileData().getInt(ToolInventoryCapability.TOTAL_SLOTS) > 0
-        ? new ToolInventoryCapability(tool) : null;
+        ? new ToolInventoryCapability(stack, tool) : null;
     }, tools);
     event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ignored) -> {
       Supplier<ToolStack> tool = refreshingTool(stack);

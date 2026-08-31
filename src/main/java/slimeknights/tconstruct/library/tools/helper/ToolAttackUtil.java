@@ -173,10 +173,9 @@ public class ToolAttackUtil {
       return false;
     }
     if (isAttackable(attacker, target)) {
-      // Rebuild the attack attribute from the actual tool. This avoids stale or
-      // duplicated main-hand attribute modifiers, which was most visible on
-      // dagger damage after changing modifiers or swapping equipment.
-      performAttack(tool, ToolAttackContext.attacker(attacker).target(target).defaultCooldown().toolAttributes(tool).build());
+      // The vanilla attack path already has the mainhand tool attributes applied.
+      // Only offhand attacks need the simulated attribute path.
+      performAttack(tool, ToolAttackContext.attacker(attacker).target(target).defaultCooldown().applyAttributes().build());
     }
     return true;
   }
@@ -580,7 +579,11 @@ public class ToolAttackUtil {
       return true;
     }
     ToolAttackContext.Builder builder = ToolAttackContext.attacker(attackerLiving).target(targetEntity).slot(sourceSlot, hand).cooldown((float)cooldownFunction.getAsDouble());
-    builder.toolAttributes(tool);
+    if (sourceSlot == EquipmentSlot.MAINHAND) {
+      builder.applyAttributes();
+    } else {
+      builder.toolAttributes(tool);
+    }
     if (isExtraAttack) {
       builder.extraAttack();
     }

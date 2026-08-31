@@ -7,7 +7,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -145,11 +147,12 @@ public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal
     }
 
     // allow tools to decide that we *must* melt the drops
-    // for harvestable blocsk though, ignore that flag if the block was not effective (so we don't delete
+    // for harvestable blocks though, ignore that flag if the block was not effective
     boolean forceMelt = tool.getVolatileData().getBoolean(FORCE_MELTING);
-    if (forceMelt && context.hasParam(LootContextParams.BLOCK_STATE)) {
-      BlockState state = context.getParam(LootContextParams.BLOCK_STATE);
-      forceMelt = tool.getHook(ToolHooks.IS_EFFECTIVE).isToolEffective(tool, state);
+    BlockState harvestedState = context.hasParam(LootContextParams.BLOCK_STATE)
+                                ? context.getParam(LootContextParams.BLOCK_STATE) : null;
+    if (forceMelt && harvestedState != null) {
+      forceMelt = tool.getHook(ToolHooks.IS_EFFECTIVE).isToolEffective(tool, harvestedState);
     }
 
     // try melting each item dropped
@@ -158,6 +161,11 @@ public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal
     boolean isDirty = false;
     while (iterator.hasNext()) {
       ItemStack stack = iterator.next();
+      // Decorated pots carry their sherd pattern as a data component. Keep the block drop intact;
+      // the same item can still be melted normally when supplied outside block harvesting.
+      if (shouldPreserveDrop(harvestedState, stack)) {
+        continue;
+      }
       FluidStack output = meltItem(modifier, stack, world);
       // fluid must match tank fluid
       if (!output.isEmpty() && (current.isEmpty() || current.isFluidEqual(output))) {
@@ -194,6 +202,11 @@ public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal
     if (isDirty) {
       TANK_HELPER.setFluid(tool, current);
     }
+  }
+
+  /** Keeps data-bearing block drops that should not be consumed by harvest melting. */
+  static boolean shouldPreserveDrop(@Nullable BlockState harvestedState, ItemStack stack) {
+    return harvestedState != null && harvestedState.is(Blocks.DECORATED_POT) && stack.is(Items.DECORATED_POT);
   }
 
   /** Melts the target entity based on the damage dealt */

@@ -2,6 +2,8 @@ package slimeknights.tconstruct.library.tools.capability.inventory;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
@@ -10,6 +12,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
@@ -28,6 +31,7 @@ import slimeknights.tconstruct.library.tools.definition.module.display.ToolNameH
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
+import slimeknights.tconstruct.library.utils.ItemStackUtil;
 import slimeknights.tconstruct.tools.menu.ToolContainerMenu;
 
 import javax.annotation.Nonnull;
@@ -86,6 +90,8 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
     }
   });
 
+  /** Item stack containing this inventory */
+  private final ItemStack container;
   /** Supplier to the tool instance */
   private final Supplier<? extends IToolStackView> tool;
   /** Cache of all stacks that have been parsed thus far */
@@ -180,9 +186,39 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
 
   /** Gets a stack from the given inventory, caching it */
   private void setAndCache(InventoryModifierHook inventory, int localSlot, int globalSlot, ItemStack stack) {
-    inventory.setStack(tool.get(), indexEntry, localSlot, stack);
+    // ItemStack copies share component values using copy-on-write. Detach the
+    // custom-data component before mutating the inventory list, otherwise the
+    // server's menu synchronization snapshot is modified in place as well.
+    inventory.setStack(prepareForMutation(), indexEntry, localSlot, stack);
+    syncContainer();
     // cache the stack to save lookup times later
     cacheStack(globalSlot, stack);
+  }
+
+  /** Detaches custom data from any ItemStack synchronization snapshots. */
+  private IToolStackView prepareForMutation() {
+    CompoundTag tag = ItemStackUtil.getTag(container);
+    if (tag == null) {
+      tag = new CompoundTag();
+    }
+    // CustomData.of makes a defensive copy of the supplied tag.
+    container.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+    return tool.get();
+  }
+
+  /**
+   * Modifier data is stored in the mutable NBT exposed by CustomData. Re-set
+   * the component after changing it so ItemStack comparison and network sync
+   * observe the updated inventory.
+   */
+  private void syncContainer() {
+    CompoundTag tag = ItemStackUtil.getTag(container);
+    if (tag != null) {
+      container.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+      // CustomData.of copies the tag, so rebind the shared tool view to the
+      // component now stored on the container before the next operation.
+      tool.get();
+    }
   }
 
 
@@ -272,7 +308,8 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
       // store new stack
       if (!simulate) {
         current.setCount(newSize);
-        inventory.setStack(tool, indexEntry, localSlot, current); // update stack in NBT
+        inventory.setStack(prepareForMutation(), indexEntry, localSlot, current); // update stack in NBT
+        syncContainer();
       }
     }
 
@@ -314,7 +351,8 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
         setAndCache(inventory, localSlot, slot, ItemStack.EMPTY);
       } else {
         current.shrink(amount);
-        inventory.setStack(tool, indexEntry, localSlot, current); // update in NBT
+        inventory.setStack(prepareForMutation(), indexEntry, localSlot, current); // update in NBT
+        syncContainer();
       }
     }
     return result;

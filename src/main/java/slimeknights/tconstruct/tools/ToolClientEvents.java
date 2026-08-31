@@ -327,7 +327,11 @@ public class ToolClientEvents extends ClientEventBase {
     event.register((stack, index) -> {
       ModifierId modifier = ModifierCrystalItem.getModifier(stack);
       if (modifier != null) {
-        return ResourceColorManager.getColor(Util.makeTranslationKey("modifier", modifier));
+        // ItemRenderer treats the color handler result as ARGB. Mantle's
+        // ResourceColorManager returns a TextColor RGB value (the alpha bits
+        // are intentionally stripped), so add an opaque alpha channel here.
+        // Without it every tinted crystal quad is rendered fully transparent.
+        return 0xFF000000 | ResourceColorManager.getColor(Util.makeTranslationKey("modifier", modifier));
       }
       return -1;
     }, TinkerModifiers.modifierCrystal);

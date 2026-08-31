@@ -76,6 +76,7 @@ public class CombatFishingHook extends FishingHook implements ProjectileWithKnoc
   public CombatFishingHook(Player player, Level level, int luck, int lure, float velocity, float inaccuracy) {
     super(TinkerTools.fishingHook.get(), level, luck, lure);
     this.setOwner(player);
+    player.fishing = this;
     float xRot = player.getXRot();
     float yRot = player.getYRot();
     float yAngle = (-yRot * PI / 180f) - PI;

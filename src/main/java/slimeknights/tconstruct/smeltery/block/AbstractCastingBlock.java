@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import slimeknights.mantle.block.InventoryBlock;
 import slimeknights.mantle.util.BlockEntityHelper;
 import slimeknights.tconstruct.shared.block.TableBlock;
 import slimeknights.tconstruct.smeltery.block.entity.CastingBlockEntity;
@@ -99,6 +100,20 @@ public abstract class AbstractCastingBlock extends TableBlock {
   @Override
   protected boolean openGui(Player playerEntity, Level world, BlockPos blockPos) {
     return false;
+  }
+
+  /**
+   * Casting blocks expose their fluid tank as a capability, but their item
+   * handler is intentionally not exposed for automation. Drop both casting
+   * slots directly when the block is broken so the contents are not lost.
+   */
+  @Override
+  @Deprecated
+  public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
+    if (state.getBlock() != newState.getBlock() && world.getBlockEntity(pos) instanceof CastingBlockEntity casting) {
+      InventoryBlock.dropInventoryItems(world, pos, casting.getItemHandler());
+    }
+    super.onRemove(state, world, pos, newState, isMoving);
   }
 
   @Override
