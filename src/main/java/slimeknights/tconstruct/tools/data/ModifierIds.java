@@ -266,6 +266,16 @@ public class ModifierIds {
   public static final ModifierId crumbling = id("crumbling");
   public static final ModifierId enhanced = id("enhanced");
   public static final ModifierId tasty = id("tasty");
+  /** Modifier that simply marks a tool as edible, used to avoid double eating */
+  public static final ModifierId edible = id("edible");
+  public static final ModifierId savory = id("savory");
+  public static final ModifierId scrumptious = id("scrumptious");
+  /** Trait for horns, boosts unarmed damage while sprinting */
+  public static final ModifierId ramAttack = id("ram_attack");
+  /** Trait for nautilus shells, grants immunity to a few effects */
+  public static final ModifierId shellGut = id("shell_gut");
+  /** Protection against attackers that are in the air */
+  public static final ModifierId airborn = id("airborn");
   public static final ModifierId lightweight = id("lightweight");
   public static final ModifierId crystalbound = id("crystalbound");
   public static final ModifierId crystalstrike = id("crystalstrike");

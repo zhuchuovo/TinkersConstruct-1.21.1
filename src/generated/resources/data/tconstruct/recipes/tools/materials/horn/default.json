@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "registry": "minecraft:instrument",
+      "match": "minecraft:goat_horns",
+      "ignore": "tconstruct:variant_horns"
+    }
+  ],
+  "ingredient": {
+    "type": "tconstruct:instrument",
+    "ignore": "tconstruct:variant_horns",
+    "item": "minecraft:goat_horn"
+  },
+  "material": "tconstruct:horn",
+  "needed": 1,
+  "value": 4
+}

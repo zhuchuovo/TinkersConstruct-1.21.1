@@ -36,6 +36,8 @@ public final class MaterialIds {
   public static final MaterialId slimewood = id("slimewood");
   public static final MaterialId venombone = id("venombone");
   public static final MaterialId slimeskin = id("slimeskin");
+  public static final MaterialId skyslimeskin = id("skyslimeskin");
+  public static final MaterialId enderslimeskin = id("enderslimeskin");
   // tier 2 - nether
   public static final MaterialId scorchedStone = id("scorched_stone");
   public static final MaterialId necroticBone = id("necrotic_bone");
@@ -135,6 +137,10 @@ public final class MaterialIds {
   public static final MaterialId rottenFlesh = id("rotten_flesh");
   // slimesuit
   public static final MaterialId phantom = id("phantom");
+  public static final MaterialId nautilus = id("nautilus");
+  public static final MaterialId horn = id("horn");
+  public static final MaterialId cheese = id("cheese");
+  public static final MaterialId venom = id("venom");
   public static final MaterialId blood = id("blood");
   public static final MaterialId clay = id("clay");
   public static final MaterialId honey = id("honey");
