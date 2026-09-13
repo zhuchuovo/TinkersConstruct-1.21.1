@@ -1,0 +1,378 @@
+Compiled from "CustomData.java"
+public final class net.minecraft.world.item.component.CustomData {
+  private static final org.slf4j.Logger LOGGER;
+
+  public static final net.minecraft.world.item.component.CustomData EMPTY;
+
+  public static final com.mojang.serialization.Codec<net.minecraft.world.item.component.CustomData> CODEC;
+
+  public static final com.mojang.serialization.Codec<net.minecraft.world.item.component.CustomData> CODEC_WITH_ID;
+
+  public static final net.minecraft.network.codec.StreamCodec<io.netty.buffer.ByteBuf, net.minecraft.world.item.component.CustomData> STREAM_CODEC;
+
+  private final net.minecraft.nbt.CompoundTag tag;
+
+  private net.minecraft.world.item.component.CustomData(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       9: return
+
+  public static net.minecraft.world.item.component.CustomData of(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: new           #8                  // class net/minecraft/world/item/component/CustomData
+       3: dup
+       4: aload_0
+       5: invokevirtual #13                 // Method net/minecraft/nbt/CompoundTag.copy:()Lnet/minecraft/nbt/CompoundTag;
+       8: invokespecial #19                 // Method "<init>":(Lnet/minecraft/nbt/CompoundTag;)V
+      11: areturn
+
+  public static java.util.function.Predicate<net.minecraft.world.item.ItemStack> itemMatcher(net.minecraft.core.component.DataComponentType<net.minecraft.world.item.component.CustomData>, net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokedynamic #22,  0             // InvokeDynamic #0:test:(Lnet/minecraft/core/component/DataComponentType;Lnet/minecraft/nbt/CompoundTag;)Ljava/util/function/Predicate;
+       7: areturn
+
+  public boolean matchedBy(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       5: iconst_1
+       6: invokestatic  #26                 // Method net/minecraft/nbt/NbtUtils.compareNbt:(Lnet/minecraft/nbt/Tag;Lnet/minecraft/nbt/Tag;Z)Z
+       9: ireturn
+
+  public static void update(net.minecraft.core.component.DataComponentType<net.minecraft.world.item.component.CustomData>, net.minecraft.world.item.ItemStack, java.util.function.Consumer<net.minecraft.nbt.CompoundTag>);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: getstatic     #32                 // Field EMPTY:Lnet/minecraft/world/item/component/CustomData;
+       5: invokevirtual #36                 // Method net/minecraft/world/item/ItemStack.getOrDefault:(Lnet/minecraft/core/component/DataComponentType;Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #8                  // class net/minecraft/world/item/component/CustomData
+      11: aload_2
+      12: invokevirtual #42                 // Method update:(Ljava/util/function/Consumer;)Lnet/minecraft/world/item/component/CustomData;
+      15: astore_3
+      16: aload_3
+      17: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+      20: invokevirtual #46                 // Method net/minecraft/nbt/CompoundTag.isEmpty:()Z
+      23: ifeq          35
+      26: aload_1
+      27: aload_0
+      28: invokevirtual #50                 // Method net/minecraft/world/item/ItemStack.remove:(Lnet/minecraft/core/component/DataComponentType;)Ljava/lang/Object;
+      31: pop
+      32: goto          42
+      35: aload_1
+      36: aload_0
+      37: aload_3
+      38: invokevirtual #54                 // Method net/minecraft/world/item/ItemStack.set:(Lnet/minecraft/core/component/DataComponentType;Ljava/lang/Object;)Ljava/lang/Object;
+      41: pop
+      42: return
+
+  public static void set(net.minecraft.core.component.DataComponentType<net.minecraft.world.item.component.CustomData>, net.minecraft.world.item.ItemStack, net.minecraft.nbt.CompoundTag);
+    Code:
+       0: aload_2
+       1: invokevirtual #46                 // Method net/minecraft/nbt/CompoundTag.isEmpty:()Z
+       4: ifne          20
+       7: aload_1
+       8: aload_0
+       9: aload_2
+      10: invokestatic  #57                 // Method of:(Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/item/component/CustomData;
+      13: invokevirtual #54                 // Method net/minecraft/world/item/ItemStack.set:(Lnet/minecraft/core/component/DataComponentType;Ljava/lang/Object;)Ljava/lang/Object;
+      16: pop
+      17: goto          26
+      20: aload_1
+      21: aload_0
+      22: invokevirtual #50                 // Method net/minecraft/world/item/ItemStack.remove:(Lnet/minecraft/core/component/DataComponentType;)Ljava/lang/Object;
+      25: pop
+      26: return
+
+  public net.minecraft.world.item.component.CustomData update(java.util.function.Consumer<net.minecraft.nbt.CompoundTag>);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: invokevirtual #13                 // Method net/minecraft/nbt/CompoundTag.copy:()Lnet/minecraft/nbt/CompoundTag;
+       7: astore_2
+       8: aload_1
+       9: aload_2
+      10: invokeinterface #61,  2           // InterfaceMethod java/util/function/Consumer.accept:(Ljava/lang/Object;)V
+      15: new           #8                  // class net/minecraft/world/item/component/CustomData
+      18: dup
+      19: aload_2
+      20: invokespecial #19                 // Method "<init>":(Lnet/minecraft/nbt/CompoundTag;)V
+      23: areturn
+
+  public void loadInto(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_1
+       1: new           #14                 // class net/minecraft/nbt/CompoundTag
+       4: dup
+       5: invokespecial #67                 // Method net/minecraft/nbt/CompoundTag."<init>":()V
+       8: invokevirtual #68                 // Method net/minecraft/world/entity/Entity.saveWithoutId:(Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/nbt/CompoundTag;
+      11: astore_2
+      12: aload_1
+      13: invokevirtual #74                 // Method net/minecraft/world/entity/Entity.getUUID:()Ljava/util/UUID;
+      16: astore_3
+      17: aload_2
+      18: aload_0
+      19: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+      22: invokevirtual #78                 // Method net/minecraft/nbt/CompoundTag.merge:(Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/nbt/CompoundTag;
+      25: pop
+      26: aload_1
+      27: aload_2
+      28: invokevirtual #81                 // Method net/minecraft/world/entity/Entity.load:(Lnet/minecraft/nbt/CompoundTag;)V
+      31: aload_1
+      32: aload_3
+      33: invokevirtual #84                 // Method net/minecraft/world/entity/Entity.setUUID:(Ljava/util/UUID;)V
+      36: return
+
+  public boolean loadInto(net.minecraft.world.level.block.entity.BlockEntity, net.minecraft.core.HolderLookup$Provider);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: invokevirtual #88                 // Method net/minecraft/world/level/block/entity/BlockEntity.saveCustomOnly:(Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/CompoundTag;
+       5: astore_3
+       6: aload_3
+       7: invokevirtual #13                 // Method net/minecraft/nbt/CompoundTag.copy:()Lnet/minecraft/nbt/CompoundTag;
+      10: astore        4
+      12: aload_3
+      13: aload_0
+      14: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+      17: invokevirtual #78                 // Method net/minecraft/nbt/CompoundTag.merge:(Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/nbt/CompoundTag;
+      20: pop
+      21: aload_3
+      22: aload         4
+      24: invokevirtual #94                 // Method net/minecraft/nbt/CompoundTag.equals:(Ljava/lang/Object;)Z
+      27: ifne          88
+      30: aload_1
+      31: aload_3
+      32: aload_2
+      33: invokevirtual #98                 // Method net/minecraft/world/level/block/entity/BlockEntity.loadCustomOnly:(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V
+      36: aload_1
+      37: invokevirtual #102                // Method net/minecraft/world/level/block/entity/BlockEntity.setChanged:()V
+      40: iconst_1
+      41: ireturn
+      42: astore        5
+      44: getstatic     #107                // Field LOGGER:Lorg/slf4j/Logger;
+      47: ldc           #111                // String Failed to apply custom data to block entity at {}
+      49: aload_1
+      50: invokevirtual #113                // Method net/minecraft/world/level/block/entity/BlockEntity.getBlockPos:()Lnet/minecraft/core/BlockPos;
+      53: aload         5
+      55: invokeinterface #117,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      60: aload_1
+      61: aload         4
+      63: aload_2
+      64: invokevirtual #98                 // Method net/minecraft/world/level/block/entity/BlockEntity.loadCustomOnly:(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V
+      67: goto          88
+      70: astore        6
+      72: getstatic     #107                // Field LOGGER:Lorg/slf4j/Logger;
+      75: ldc           #123                // String Failed to rollback block entity at {} after failure
+      77: aload_1
+      78: invokevirtual #113                // Method net/minecraft/world/level/block/entity/BlockEntity.getBlockPos:()Lnet/minecraft/core/BlockPos;
+      81: aload         6
+      83: invokeinterface #117,  4          // InterfaceMethod org/slf4j/Logger.warn:(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V
+      88: iconst_0
+      89: ireturn
+    Exception table:
+       from    to  target type
+          30    41    42   Class java/lang/Exception
+          60    67    70   Class java/lang/Exception
+
+  public <T> com.mojang.serialization.DataResult<net.minecraft.world.item.component.CustomData> update(com.mojang.serialization.DynamicOps<net.minecraft.nbt.Tag>, com.mojang.serialization.MapEncoder<T>, T);
+    Code:
+       0: aload_2
+       1: aload_3
+       2: aload_1
+       3: aload_1
+       4: invokeinterface #125,  1          // InterfaceMethod com/mojang/serialization/DynamicOps.mapBuilder:()Lcom/mojang/serialization/RecordBuilder;
+       9: invokeinterface #131,  4          // InterfaceMethod com/mojang/serialization/MapEncoder.encode:(Ljava/lang/Object;Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/RecordBuilder;)Lcom/mojang/serialization/RecordBuilder;
+      14: aload_0
+      15: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+      18: invokeinterface #137,  2          // InterfaceMethod com/mojang/serialization/RecordBuilder.build:(Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+      23: invokedynamic #143,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+      28: invokeinterface #147,  2          // InterfaceMethod com/mojang/serialization/DataResult.map:(Ljava/util/function/Function;)Lcom/mojang/serialization/DataResult;
+      33: areturn
+
+  public <T> com.mojang.serialization.DataResult<T> read(com.mojang.serialization.MapDecoder<T>);
+    Code:
+       0: aload_0
+       1: getstatic     #153                // Field net/minecraft/nbt/NbtOps.INSTANCE:Lnet/minecraft/nbt/NbtOps;
+       4: aload_1
+       5: invokevirtual #159                // Method read:(Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/MapDecoder;)Lcom/mojang/serialization/DataResult;
+       8: areturn
+
+  public <T> com.mojang.serialization.DataResult<T> read(com.mojang.serialization.DynamicOps<net.minecraft.nbt.Tag>, com.mojang.serialization.MapDecoder<T>);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       5: invokeinterface #163,  2          // InterfaceMethod com/mojang/serialization/DynamicOps.getMap:(Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+      10: invokeinterface #166,  1          // InterfaceMethod com/mojang/serialization/DataResult.getOrThrow:()Ljava/lang/Object;
+      15: checkcast     #170                // class com/mojang/serialization/MapLike
+      18: astore_3
+      19: aload_2
+      20: aload_1
+      21: aload_3
+      22: invokeinterface #172,  3          // InterfaceMethod com/mojang/serialization/MapDecoder.decode:(Lcom/mojang/serialization/DynamicOps;Lcom/mojang/serialization/MapLike;)Lcom/mojang/serialization/DataResult;
+      27: areturn
+
+  public int size();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: invokevirtual #178                // Method net/minecraft/nbt/CompoundTag.size:()I
+       7: ireturn
+
+  public boolean isEmpty();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: invokevirtual #46                 // Method net/minecraft/nbt/CompoundTag.isEmpty:()Z
+       7: ireturn
+
+  public net.minecraft.nbt.CompoundTag copyTag();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: invokevirtual #13                 // Method net/minecraft/nbt/CompoundTag.copy:()Lnet/minecraft/nbt/CompoundTag;
+       7: areturn
+
+  public boolean contains(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: aload_1
+       5: invokevirtual #182                // Method net/minecraft/nbt/CompoundTag.contains:(Ljava/lang/String;)Z
+       8: ireturn
+
+  public boolean equals(java.lang.Object);
+    Code:
+       0: aload_1
+       1: aload_0
+       2: if_acmpne     7
+       5: iconst_1
+       6: ireturn
+       7: aload_1
+       8: instanceof    #8                  // class net/minecraft/world/item/component/CustomData
+      11: ifeq          33
+      14: aload_1
+      15: checkcast     #8                  // class net/minecraft/world/item/component/CustomData
+      18: astore_2
+      19: aload_0
+      20: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+      23: aload_2
+      24: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+      27: invokevirtual #94                 // Method net/minecraft/nbt/CompoundTag.equals:(Ljava/lang/Object;)Z
+      30: goto          34
+      33: iconst_0
+      34: ireturn
+
+  public int hashCode();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: invokevirtual #186                // Method net/minecraft/nbt/CompoundTag.hashCode:()I
+       7: ireturn
+
+  public java.lang.String toString();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: invokevirtual #189                // Method net/minecraft/nbt/CompoundTag.toString:()Ljava/lang/String;
+       7: areturn
+
+  public net.minecraft.nbt.CompoundTag getUnsafe();
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: areturn
+
+  private static net.minecraft.world.item.component.CustomData lambda$update$5(net.minecraft.nbt.Tag);
+    Code:
+       0: new           #8                  // class net/minecraft/world/item/component/CustomData
+       3: dup
+       4: aload_0
+       5: checkcast     #14                 // class net/minecraft/nbt/CompoundTag
+       8: invokespecial #19                 // Method "<init>":(Lnet/minecraft/nbt/CompoundTag;)V
+      11: areturn
+
+  private static boolean lambda$itemMatcher$4(net.minecraft.core.component.DataComponentType, net.minecraft.nbt.CompoundTag, net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_2
+       1: aload_0
+       2: getstatic     #32                 // Field EMPTY:Lnet/minecraft/world/item/component/CustomData;
+       5: invokevirtual #36                 // Method net/minecraft/world/item/ItemStack.getOrDefault:(Lnet/minecraft/core/component/DataComponentType;Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #8                  // class net/minecraft/world/item/component/CustomData
+      11: astore_3
+      12: aload_3
+      13: aload_1
+      14: invokevirtual #193                // Method matchedBy:(Lnet/minecraft/nbt/CompoundTag;)Z
+      17: ireturn
+
+  private static net.minecraft.nbt.CompoundTag lambda$static$3(net.minecraft.world.item.component.CustomData);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: areturn
+
+  private static com.mojang.serialization.DataResult lambda$static$2(net.minecraft.world.item.component.CustomData);
+    Code:
+       0: aload_0
+       1: invokevirtual #197                // Method getUnsafe:()Lnet/minecraft/nbt/CompoundTag;
+       4: ldc           #200                // String id
+       6: bipush        8
+       8: invokevirtual #202                // Method net/minecraft/nbt/CompoundTag.contains:(Ljava/lang/String;I)Z
+      11: ifeq          21
+      14: aload_0
+      15: invokestatic  #205                // InterfaceMethod com/mojang/serialization/DataResult.success:(Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;
+      18: goto          30
+      21: aload_0
+      22: invokedynamic #208,  0            // InvokeDynamic #2:get:(Lnet/minecraft/world/item/component/CustomData;)Ljava/util/function/Supplier;
+      27: invokestatic  #212                // InterfaceMethod com/mojang/serialization/DataResult.error:(Ljava/util/function/Supplier;)Lcom/mojang/serialization/DataResult;
+      30: areturn
+
+  private static java.lang.String lambda$static$1(net.minecraft.world.item.component.CustomData);
+    Code:
+       0: aload_0
+       1: invokestatic  #216                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+       4: invokedynamic #222,  0            // InvokeDynamic #3:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+       9: areturn
+
+  private static net.minecraft.nbt.CompoundTag lambda$static$0(net.minecraft.world.item.component.CustomData);
+    Code:
+       0: aload_0
+       1: getfield      #7                  // Field tag:Lnet/minecraft/nbt/CompoundTag;
+       4: areturn
+
+  static {};
+    Code:
+       0: invokestatic  #226                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #107                // Field LOGGER:Lorg/slf4j/Logger;
+       6: new           #8                  // class net/minecraft/world/item/component/CustomData
+       9: dup
+      10: new           #14                 // class net/minecraft/nbt/CompoundTag
+      13: dup
+      14: invokespecial #67                 // Method net/minecraft/nbt/CompoundTag."<init>":()V
+      17: invokespecial #19                 // Method "<init>":(Lnet/minecraft/nbt/CompoundTag;)V
+      20: putstatic     #32                 // Field EMPTY:Lnet/minecraft/world/item/component/CustomData;
+      23: getstatic     #232                // Field net/minecraft/nbt/CompoundTag.CODEC:Lcom/mojang/serialization/Codec;
+      26: getstatic     #236                // Field net/minecraft/nbt/TagParser.AS_CODEC:Lcom/mojang/serialization/Codec;
+      29: invokestatic  #241                // InterfaceMethod com/mojang/serialization/Codec.withAlternative:(Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;
+      32: invokedynamic #247,  0            // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+      37: invokedynamic #248,  0            // InvokeDynamic #5:apply:()Ljava/util/function/Function;
+      42: invokeinterface #249,  3          // InterfaceMethod com/mojang/serialization/Codec.xmap:(Ljava/util/function/Function;Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+      47: putstatic     #253                // Field CODEC:Lcom/mojang/serialization/Codec;
+      50: getstatic     #253                // Field CODEC:Lcom/mojang/serialization/Codec;
+      53: invokedynamic #254,  0            // InvokeDynamic #6:apply:()Ljava/util/function/Function;
+      58: invokeinterface #255,  2          // InterfaceMethod com/mojang/serialization/Codec.validate:(Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;
+      63: putstatic     #259                // Field CODEC_WITH_ID:Lcom/mojang/serialization/Codec;
+      66: getstatic     #262                // Field net/minecraft/network/codec/ByteBufCodecs.COMPOUND_TAG:Lnet/minecraft/network/codec/StreamCodec;
+      69: invokedynamic #247,  0            // InvokeDynamic #4:apply:()Ljava/util/function/Function;
+      74: invokedynamic #268,  0            // InvokeDynamic #7:apply:()Ljava/util/function/Function;
+      79: invokeinterface #269,  3          // InterfaceMethod net/minecraft/network/codec/StreamCodec.map:(Ljava/util/function/Function;Ljava/util/function/Function;)Lnet/minecraft/network/codec/StreamCodec;
+      84: putstatic     #274                // Field STREAM_CODEC:Lnet/minecraft/network/codec/StreamCodec;
+      87: return
+}

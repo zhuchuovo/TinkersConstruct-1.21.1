@@ -1,0 +1,59 @@
+JAVELIN ENTITY-DATA BUG FIX VERIFICATION
+Date: 2026-09-05
+
+CHANGED_BRANCH_OR_FIELD
+ThrownTool entity metadata field STACK, through updateDisplayStack() and getDisplayStack(ItemStack).
+The client synchronization copy now keeps only render-relevant tool data (materials, upgrades, modifiers, broken/damage state, and the invisible-modifier display list) instead of copying unbounded tic_persistent data. The server pickup stack remains the complete stack.
+
+MODIFIED_FILE
+D:\code\mcmod\TinkersConstruct-1.21.1\src\main\java\slimeknights\tconstruct\tools\entity\ThrownTool.java
+SHA256: 8E5B94F2A477769BB2164BC3E2BF1D3E7302C8DFF7E17F46DC26E828EA54236E
+
+DIFF_FILE
+D:\code\mcmod\TinkersConstruct-1.21.1\.codex-artifacts\javelin-entity-data\ThrownTool.diff
+
+VERIFICATION.txt
+D:\code\mcmod\TinkersConstruct-1.21.1\.codex-artifacts\javelin-entity-data\VERIFICATION.txt
+
+ROLLBACK.sh
+D:\code\mcmod\TinkersConstruct-1.21.1\.codex-artifacts\javelin-entity-data\ROLLBACK.sh
+Executable check: Git Bash mode -rwxr-xr-x (755); direct execution succeeded.
+
+BASELINE
+Command: ./gradlew test --no-daemon --console=plain
+Input: baseline ThrownTool.java from D:\code\mcmod\TinkersConstruct-1.21.1\.codex-artifacts\javelin-entity-data\baseline\ThrownTool.java (SHA256 A27EAEF20E407DABC2AA9549E109D2465EEBFA21064430250F8E666CADEF4F22), before the fix.
+Literal output/result:
+  BUILD SUCCESSFUL in 1m 16s
+  13 actionable tasks: 2 executed, 11 up-to-date
+Exit status: 0
+Log: D:\code\mcmod\TinkersConstruct-1.21.1\.codex-artifacts\javelin-entity-data\baseline-test.log
+
+MODIFIED TEST
+Command: .\gradlew.bat test --no-daemon --console=plain
+Input: modified D:\code\mcmod\TinkersConstruct-1.21.1\src\main\java\slimeknights\tconstruct\tools\entity\ThrownTool.java plus D:\code\mcmod\TinkersConstruct-1.21.1\src\test\java\slimeknights\tconstruct\tools\entity\ThrownToolTest.java.
+Literal output/result:
+  BUILD SUCCESSFUL in 12s
+  13 actionable tasks: 13 up-to-date
+Exit status: 0
+Log: D:\code\mcmod\TinkersConstruct-1.21.1\.codex-artifacts\javelin-entity-data\modified-test-final.log
+
+MODIFIED BUILD
+Command: .\gradlew.bat build --no-daemon --console=plain
+Input: modified working tree.
+Literal output/result:
+  BUILD SUCCESSFUL in 1m 39s
+  16 actionable tasks: 2 executed, 14 up-to-date
+Exit status: 0
+Log: D:\code\mcmod\TinkersConstruct-1.21.1\.codex-artifacts\javelin-entity-data\modified-build.log
+
+ROLLBACK TEST
+Command: "C:\Program Files\Git\bin\bash.exe" "D:\code\mcmod\TinkersConstruct-1.21.1\.codex-artifacts\javelin-entity-data\ROLLBACK.sh"
+Input: a copy of the modified source at D:\code\mcmod\TinkersConstruct-1.21.1\.codex-artifacts\javelin-entity-data\rollback-test\ThrownTool.java.
+Literal output/result:
+  ROLLBACK_OK target=/d/code/mcmod/TinkersConstruct-1.21.1/.codex-artifacts/javelin-entity-data/rollback-test/ThrownTool.java sha256=a27eaef20e407dabc2aa9549e109d2465eebfa21064430250f8e666cadef4f22
+Exit status: 0
+Restored status: rollback copy SHA256 A27EAEF20E407DABC2AA9549E109D2465EEBFA21064430250F8E666CADEF4F22 matches baseline SHA256 A27EAEF20E407DABC2AA9549E109D2465EEBFA21064430250F8E666CADEF4F22. The working MODIFIED_FILE remains changed at SHA256 8E5B94F2A477769BB2164BC3E2BF1D3E7302C8DFF7E17F46DC26E828EA54236E.
+
+REGRESSION RESULT
+The oversized persistent-data fixture fails direct ITEM_STACK entity-metadata encoding before trimming and encodes successfully after getDisplayStack(ItemStack). The original source stack retains its 100000-character persistent value, while the display stack excludes that unbounded persistent data.
+

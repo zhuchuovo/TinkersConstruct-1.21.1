@@ -1,0 +1,644 @@
+Compiled from "Item.java"
+public class net.minecraft.world.item.Item implements net.minecraft.world.flag.FeatureElement,net.minecraft.world.level.ItemLike,net.neoforged.neoforge.common.extensions.IItemExtension {
+  private static final org.slf4j.Logger LOGGER;
+
+  public static final java.util.Map<net.minecraft.world.level.block.Block, net.minecraft.world.item.Item> BY_BLOCK;
+
+  public static final net.minecraft.resources.ResourceLocation BASE_ATTACK_DAMAGE_ID;
+
+  public static final net.minecraft.resources.ResourceLocation BASE_ATTACK_SPEED_ID;
+
+  public static final int DEFAULT_MAX_STACK_SIZE;
+
+  public static final int ABSOLUTE_MAX_STACK_SIZE;
+
+  public static final int MAX_BAR_WIDTH;
+
+  private final net.minecraft.core.Holder$Reference<net.minecraft.world.item.Item> builtInRegistryHolder;
+
+  private net.minecraft.core.component.DataComponentMap components;
+
+  private final net.minecraft.world.item.Item craftingRemainingItem;
+
+  private java.lang.String descriptionId;
+
+  private final net.minecraft.world.flag.FeatureFlagSet requiredFeatures;
+
+  protected final boolean canRepair;
+
+  public static int getId(net.minecraft.world.item.Item);
+    Code:
+       0: aload_0
+       1: ifnonnull     8
+       4: iconst_0
+       5: goto          17
+       8: getstatic     #1                  // Field net/minecraft/core/registries/BuiltInRegistries.ITEM:Lnet/minecraft/core/DefaultedRegistry;
+      11: aload_0
+      12: invokeinterface #7,  2            // InterfaceMethod net/minecraft/core/DefaultedRegistry.getId:(Ljava/lang/Object;)I
+      17: ireturn
+
+  public static net.minecraft.world.item.Item byId(int);
+    Code:
+       0: getstatic     #1                  // Field net/minecraft/core/registries/BuiltInRegistries.ITEM:Lnet/minecraft/core/DefaultedRegistry;
+       3: iload_0
+       4: invokeinterface #13,  2           // InterfaceMethod net/minecraft/core/DefaultedRegistry.byId:(I)Ljava/lang/Object;
+       9: checkcast     #17                 // class net/minecraft/world/item/Item
+      12: areturn
+
+  public static net.minecraft.world.item.Item byBlock(net.minecraft.world.level.block.Block);
+    Code:
+       0: getstatic     #19                 // Field BY_BLOCK:Ljava/util/Map;
+       3: aload_0
+       4: getstatic     #23                 // Field net/minecraft/world/item/Items.AIR:Lnet/minecraft/world/item/Item;
+       7: invokeinterface #29,  3           // InterfaceMethod java/util/Map.getOrDefault:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      12: checkcast     #17                 // class net/minecraft/world/item/Item
+      15: areturn
+
+  public net.minecraft.world.item.Item(net.minecraft.world.item.Item$Properties);
+    Code:
+       0: aload_0
+       1: invokespecial #35                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: getstatic     #1                  // Field net/minecraft/core/registries/BuiltInRegistries.ITEM:Lnet/minecraft/core/DefaultedRegistry;
+       8: aload_0
+       9: invokeinterface #41,  2           // InterfaceMethod net/minecraft/core/DefaultedRegistry.createIntrusiveHolder:(Ljava/lang/Object;)Lnet/minecraft/core/Holder$Reference;
+      14: putfield      #45                 // Field builtInRegistryHolder:Lnet/minecraft/core/Holder$Reference;
+      17: aload_0
+      18: aload_1
+      19: invokevirtual #49                 // Method net/minecraft/world/item/Item$Properties.buildAndValidateComponents:()Lnet/minecraft/core/component/DataComponentMap;
+      22: putfield      #55                 // Field components:Lnet/minecraft/core/component/DataComponentMap;
+      25: aload_0
+      26: aload_1
+      27: getfield      #59                 // Field net/minecraft/world/item/Item$Properties.craftingRemainingItem:Lnet/minecraft/world/item/Item;
+      30: putfield      #62                 // Field craftingRemainingItem:Lnet/minecraft/world/item/Item;
+      33: aload_0
+      34: aload_1
+      35: getfield      #63                 // Field net/minecraft/world/item/Item$Properties.requiredFeatures:Lnet/minecraft/world/flag/FeatureFlagSet;
+      38: putfield      #67                 // Field requiredFeatures:Lnet/minecraft/world/flag/FeatureFlagSet;
+      41: getstatic     #68                 // Field net/minecraft/SharedConstants.IS_RUNNING_IN_IDE:Z
+      44: ifeq          47
+      47: aload_0
+      48: aload_1
+      49: getfield      #74                 // Field net/minecraft/world/item/Item$Properties.canRepair:Z
+      52: putfield      #77                 // Field canRepair:Z
+      55: return
+
+  public net.minecraft.core.Holder$Reference<net.minecraft.world.item.Item> builtInRegistryHolder();
+    Code:
+       0: aload_0
+       1: getfield      #45                 // Field builtInRegistryHolder:Lnet/minecraft/core/Holder$Reference;
+       4: areturn
+
+  public net.minecraft.core.component.DataComponentMap components();
+    Code:
+       0: aload_0
+       1: getfield      #55                 // Field components:Lnet/minecraft/core/component/DataComponentMap;
+       4: areturn
+
+  public void modifyDefaultComponentsFrom(net.minecraft.core.component.DataComponentPatch);
+    Code:
+       0: invokestatic  #78                 // Method net/neoforged/neoforge/internal/RegistrationEvents.canModifyComponents:()Z
+       3: ifne          16
+       6: new           #84                 // class java/lang/IllegalStateException
+       9: dup
+      10: ldc           #86                 // String Default components cannot be modified now!
+      12: invokespecial #88                 // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+      15: athrow
+      16: invokestatic  #91                 // InterfaceMethod net/minecraft/core/component/DataComponentMap.builder:()Lnet/minecraft/core/component/DataComponentMap$Builder;
+      19: aload_0
+      20: getfield      #55                 // Field components:Lnet/minecraft/core/component/DataComponentMap;
+      23: invokevirtual #97                 // Method net/minecraft/core/component/DataComponentMap$Builder.addAll:(Lnet/minecraft/core/component/DataComponentMap;)Lnet/minecraft/core/component/DataComponentMap$Builder;
+      26: astore_2
+      27: aload_1
+      28: invokevirtual #103                // Method net/minecraft/core/component/DataComponentPatch.entrySet:()Ljava/util/Set;
+      31: aload_2
+      32: invokedynamic #109,  0            // InvokeDynamic #0:accept:(Lnet/minecraft/core/component/DataComponentMap$Builder;)Ljava/util/function/Consumer;
+      37: invokeinterface #113,  2          // InterfaceMethod java/util/Set.forEach:(Ljava/util/function/Consumer;)V
+      42: aload_0
+      43: getstatic     #119                // Field net/minecraft/world/item/Item$Properties.COMPONENT_INTERNER:Lcom/google/common/collect/Interner;
+      46: aload_2
+      47: invokevirtual #123                // Method net/minecraft/core/component/DataComponentMap$Builder.build:()Lnet/minecraft/core/component/DataComponentMap;
+      50: invokestatic  #126                // Method net/minecraft/world/item/Item$Properties.validateComponents:(Lnet/minecraft/core/component/DataComponentMap;)Lnet/minecraft/core/component/DataComponentMap;
+      53: invokeinterface #130,  2          // InterfaceMethod com/google/common/collect/Interner.intern:(Ljava/lang/Object;)Ljava/lang/Object;
+      58: checkcast     #92                 // class net/minecraft/core/component/DataComponentMap
+      61: putfield      #55                 // Field components:Lnet/minecraft/core/component/DataComponentMap;
+      64: return
+
+  public int getDefaultMaxStackSize();
+    Code:
+       0: aload_0
+       1: getfield      #55                 // Field components:Lnet/minecraft/core/component/DataComponentMap;
+       4: getstatic     #136                // Field net/minecraft/core/component/DataComponents.MAX_STACK_SIZE:Lnet/minecraft/core/component/DataComponentType;
+       7: iconst_1
+       8: invokestatic  #142                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      11: invokeinterface #148,  3          // InterfaceMethod net/minecraft/core/component/DataComponentMap.getOrDefault:(Lnet/minecraft/core/component/DataComponentType;Ljava/lang/Object;)Ljava/lang/Object;
+      16: checkcast     #143                // class java/lang/Integer
+      19: invokevirtual #151                // Method java/lang/Integer.intValue:()I
+      22: ireturn
+
+  public void onUseTick(net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, int);
+    Code:
+       0: return
+
+  public void onDestroyed(net.minecraft.world.entity.item.ItemEntity);
+    Code:
+       0: return
+
+  public void verifyComponentsAfterLoad(net.minecraft.world.item.ItemStack);
+    Code:
+       0: return
+
+  public boolean canAttackBlock(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.entity.player.Player);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public net.minecraft.world.item.Item asItem();
+    Code:
+       0: aload_0
+       1: areturn
+
+  public net.minecraft.world.InteractionResult useOn(net.minecraft.world.item.context.UseOnContext);
+    Code:
+       0: getstatic     #155                // Field net/minecraft/world/InteractionResult.PASS:Lnet/minecraft/world/InteractionResult;
+       3: areturn
+
+  public float getDestroySpeed(net.minecraft.world.item.ItemStack, net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_1
+       1: getstatic     #161                // Field net/minecraft/core/component/DataComponents.TOOL:Lnet/minecraft/core/component/DataComponentType;
+       4: invokevirtual #164                // Method net/minecraft/world/item/ItemStack.get:(Lnet/minecraft/core/component/DataComponentType;)Ljava/lang/Object;
+       7: checkcast     #170                // class net/minecraft/world/item/component/Tool
+      10: astore_3
+      11: aload_3
+      12: ifnull        23
+      15: aload_3
+      16: aload_2
+      17: invokevirtual #172                // Method net/minecraft/world/item/component/Tool.getMiningSpeed:(Lnet/minecraft/world/level/block/state/BlockState;)F
+      20: goto          24
+      23: fconst_1
+      24: freturn
+
+  public net.minecraft.world.InteractionResultHolder<net.minecraft.world.item.ItemStack> use(net.minecraft.world.level.Level, net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand);
+    Code:
+       0: aload_2
+       1: aload_3
+       2: invokevirtual #176                // Method net/minecraft/world/entity/player/Player.getItemInHand:(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;
+       5: astore        4
+       7: aload         4
+       9: aload_2
+      10: invokevirtual #182                // Method net/minecraft/world/item/ItemStack.getFoodProperties:(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/food/FoodProperties;
+      13: astore        5
+      15: aload         5
+      17: ifnull        49
+      20: aload_2
+      21: aload         5
+      23: invokevirtual #186                // Method net/minecraft/world/food/FoodProperties.canAlwaysEat:()Z
+      26: invokevirtual #191                // Method net/minecraft/world/entity/player/Player.canEat:(Z)Z
+      29: ifeq          43
+      32: aload_2
+      33: aload_3
+      34: invokevirtual #195                // Method net/minecraft/world/entity/player/Player.startUsingItem:(Lnet/minecraft/world/InteractionHand;)V
+      37: aload         4
+      39: invokestatic  #199                // Method net/minecraft/world/InteractionResultHolder.consume:(Ljava/lang/Object;)Lnet/minecraft/world/InteractionResultHolder;
+      42: areturn
+      43: aload         4
+      45: invokestatic  #205                // Method net/minecraft/world/InteractionResultHolder.fail:(Ljava/lang/Object;)Lnet/minecraft/world/InteractionResultHolder;
+      48: areturn
+      49: aload_2
+      50: aload_3
+      51: invokevirtual #176                // Method net/minecraft/world/entity/player/Player.getItemInHand:(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;
+      54: invokestatic  #208                // Method net/minecraft/world/InteractionResultHolder.pass:(Ljava/lang/Object;)Lnet/minecraft/world/InteractionResultHolder;
+      57: areturn
+
+  public net.minecraft.world.item.ItemStack finishUsingItem(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_1
+       1: aload_3
+       2: invokevirtual #182                // Method net/minecraft/world/item/ItemStack.getFoodProperties:(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/food/FoodProperties;
+       5: astore        4
+       7: aload         4
+       9: ifnull        23
+      12: aload_3
+      13: aload_2
+      14: aload_1
+      15: aload         4
+      17: invokevirtual #211                // Method net/minecraft/world/entity/LivingEntity.eat:(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/food/FoodProperties;)Lnet/minecraft/world/item/ItemStack;
+      20: goto          24
+      23: aload_1
+      24: areturn
+
+  public boolean isBarVisible(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_1
+       1: invokevirtual #217                // Method net/minecraft/world/item/ItemStack.isDamaged:()Z
+       4: ireturn
+
+  public int getBarWidth(net.minecraft.world.item.ItemStack);
+    Code:
+       0: ldc           #220                // float 13.0f
+       2: aload_1
+       3: invokevirtual #221                // Method net/minecraft/world/item/ItemStack.getDamageValue:()I
+       6: i2f
+       7: ldc           #220                // float 13.0f
+       9: fmul
+      10: aload_0
+      11: aload_1
+      12: invokevirtual #224                // Method getMaxDamage:(Lnet/minecraft/world/item/ItemStack;)I
+      15: i2f
+      16: fdiv
+      17: fsub
+      18: invokestatic  #228                // Method java/lang/Math.round:(F)I
+      21: ireturn
+
+  public int getBarColor(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_1
+       1: invokevirtual #234                // Method net/minecraft/world/item/ItemStack.getMaxDamage:()I
+       4: istore_2
+       5: aload_0
+       6: aload_1
+       7: invokevirtual #224                // Method getMaxDamage:(Lnet/minecraft/world/item/ItemStack;)I
+      10: i2f
+      11: fstore_3
+      12: fconst_0
+      13: fload_3
+      14: aload_1
+      15: invokevirtual #221                // Method net/minecraft/world/item/ItemStack.getDamageValue:()I
+      18: i2f
+      19: fsub
+      20: fload_3
+      21: fdiv
+      22: invokestatic  #236                // Method java/lang/Math.max:(FF)F
+      25: fstore        4
+      27: fload         4
+      29: ldc           #240                // float 3.0f
+      31: fdiv
+      32: fconst_1
+      33: fconst_1
+      34: invokestatic  #241                // Method net/minecraft/util/Mth.hsvToRgb:(FFF)I
+      37: ireturn
+
+  public boolean overrideStackedOnOther(net.minecraft.world.item.ItemStack, net.minecraft.world.inventory.Slot, net.minecraft.world.inventory.ClickAction, net.minecraft.world.entity.player.Player);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public boolean overrideOtherStackedOnMe(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, net.minecraft.world.inventory.Slot, net.minecraft.world.inventory.ClickAction, net.minecraft.world.entity.player.Player, net.minecraft.world.entity.SlotAccess);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public float getAttackDamageBonus(net.minecraft.world.entity.Entity, float, net.minecraft.world.damagesource.DamageSource);
+    Code:
+       0: fconst_0
+       1: freturn
+
+  public boolean hurtEnemy(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public void postHurtEnemy(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: return
+
+  public boolean mineBlock(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.level.block.state.BlockState, net.minecraft.core.BlockPos, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_1
+       1: getstatic     #161                // Field net/minecraft/core/component/DataComponents.TOOL:Lnet/minecraft/core/component/DataComponentType;
+       4: invokevirtual #164                // Method net/minecraft/world/item/ItemStack.get:(Lnet/minecraft/core/component/DataComponentType;)Ljava/lang/Object;
+       7: checkcast     #170                // class net/minecraft/world/item/component/Tool
+      10: astore        6
+      12: aload         6
+      14: ifnonnull     19
+      17: iconst_0
+      18: ireturn
+      19: aload_2
+      20: getfield      #247                // Field net/minecraft/world/level/Level.isClientSide:Z
+      23: ifne          60
+      26: aload_3
+      27: aload_2
+      28: aload         4
+      30: invokevirtual #252                // Method net/minecraft/world/level/block/state/BlockState.getDestroySpeed:(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)F
+      33: fconst_0
+      34: fcmpl
+      35: ifeq          60
+      38: aload         6
+      40: invokevirtual #258                // Method net/minecraft/world/item/component/Tool.damagePerBlock:()I
+      43: ifle          60
+      46: aload_1
+      47: aload         6
+      49: invokevirtual #258                // Method net/minecraft/world/item/component/Tool.damagePerBlock:()I
+      52: aload         5
+      54: getstatic     #261                // Field net/minecraft/world/entity/EquipmentSlot.MAINHAND:Lnet/minecraft/world/entity/EquipmentSlot;
+      57: invokevirtual #267                // Method net/minecraft/world/item/ItemStack.hurtAndBreak:(ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V
+      60: iconst_1
+      61: ireturn
+
+  public boolean isCorrectToolForDrops(net.minecraft.world.item.ItemStack, net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_1
+       1: getstatic     #161                // Field net/minecraft/core/component/DataComponents.TOOL:Lnet/minecraft/core/component/DataComponentType;
+       4: invokevirtual #164                // Method net/minecraft/world/item/ItemStack.get:(Lnet/minecraft/core/component/DataComponentType;)Ljava/lang/Object;
+       7: checkcast     #170                // class net/minecraft/world/item/component/Tool
+      10: astore_3
+      11: aload_3
+      12: ifnull        27
+      15: aload_3
+      16: aload_2
+      17: invokevirtual #271                // Method net/minecraft/world/item/component/Tool.isCorrectForDrops:(Lnet/minecraft/world/level/block/state/BlockState;)Z
+      20: ifeq          27
+      23: iconst_1
+      24: goto          28
+      27: iconst_0
+      28: ireturn
+
+  public net.minecraft.world.InteractionResult interactLivingEntity(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.player.Player, net.minecraft.world.entity.LivingEntity, net.minecraft.world.InteractionHand);
+    Code:
+       0: getstatic     #155                // Field net/minecraft/world/InteractionResult.PASS:Lnet/minecraft/world/InteractionResult;
+       3: areturn
+
+  public net.minecraft.network.chat.Component getDescription();
+    Code:
+       0: aload_0
+       1: invokevirtual #275                // Method getDescriptionId:()Ljava/lang/String;
+       4: invokestatic  #279                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+       7: areturn
+
+  public java.lang.String toString();
+    Code:
+       0: getstatic     #1                  // Field net/minecraft/core/registries/BuiltInRegistries.ITEM:Lnet/minecraft/core/DefaultedRegistry;
+       3: aload_0
+       4: invokeinterface #285,  2          // InterfaceMethod net/minecraft/core/DefaultedRegistry.wrapAsHolder:(Ljava/lang/Object;)Lnet/minecraft/core/Holder;
+       9: invokeinterface #289,  1          // InterfaceMethod net/minecraft/core/Holder.getRegisteredName:()Ljava/lang/String;
+      14: areturn
+
+  protected java.lang.String getOrCreateDescriptionId();
+    Code:
+       0: aload_0
+       1: getfield      #294                // Field descriptionId:Ljava/lang/String;
+       4: ifnonnull     26
+       7: aload_0
+       8: ldc_w         #298                // String item
+      11: getstatic     #1                  // Field net/minecraft/core/registries/BuiltInRegistries.ITEM:Lnet/minecraft/core/DefaultedRegistry;
+      14: aload_0
+      15: invokeinterface #300,  2          // InterfaceMethod net/minecraft/core/DefaultedRegistry.getKey:(Ljava/lang/Object;)Lnet/minecraft/resources/ResourceLocation;
+      20: invokestatic  #304                // Method net/minecraft/Util.makeDescriptionId:(Ljava/lang/String;Lnet/minecraft/resources/ResourceLocation;)Ljava/lang/String;
+      23: putfield      #294                // Field descriptionId:Ljava/lang/String;
+      26: aload_0
+      27: getfield      #294                // Field descriptionId:Ljava/lang/String;
+      30: areturn
+
+  public java.lang.String getDescriptionId();
+    Code:
+       0: aload_0
+       1: invokevirtual #310                // Method getOrCreateDescriptionId:()Ljava/lang/String;
+       4: areturn
+
+  public java.lang.String getDescriptionId(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: invokevirtual #275                // Method getDescriptionId:()Ljava/lang/String;
+       4: areturn
+
+  public final net.minecraft.world.item.Item getCraftingRemainingItem();
+    Code:
+       0: aload_0
+       1: getfield      #62                 // Field craftingRemainingItem:Lnet/minecraft/world/item/Item;
+       4: areturn
+
+  public boolean hasCraftingRemainingItem();
+    Code:
+       0: aload_0
+       1: getfield      #62                 // Field craftingRemainingItem:Lnet/minecraft/world/item/Item;
+       4: ifnull        11
+       7: iconst_1
+       8: goto          12
+      11: iconst_0
+      12: ireturn
+
+  public void inventoryTick(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.Entity, int, boolean);
+    Code:
+       0: return
+
+  public void onCraftedBy(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.player.Player);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokevirtual #313                // Method onCraftedPostProcess:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;)V
+       6: return
+
+  public void onCraftedPostProcess(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level);
+    Code:
+       0: return
+
+  public boolean isComplex();
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public net.minecraft.world.item.UseAnim getUseAnimation(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_1
+       1: getstatic     #317                // Field net/minecraft/core/component/DataComponents.FOOD:Lnet/minecraft/core/component/DataComponentType;
+       4: invokevirtual #320                // Method net/minecraft/world/item/ItemStack.has:(Lnet/minecraft/core/component/DataComponentType;)Z
+       7: ifeq          16
+      10: getstatic     #324                // Field net/minecraft/world/item/UseAnim.EAT:Lnet/minecraft/world/item/UseAnim;
+      13: goto          19
+      16: getstatic     #330                // Field net/minecraft/world/item/UseAnim.NONE:Lnet/minecraft/world/item/UseAnim;
+      19: areturn
+
+  public int getUseDuration(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_1
+       1: aconst_null
+       2: invokevirtual #182                // Method net/minecraft/world/item/ItemStack.getFoodProperties:(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/food/FoodProperties;
+       5: astore_3
+       6: aload_3
+       7: ifnull        17
+      10: aload_3
+      11: invokevirtual #333                // Method net/minecraft/world/food/FoodProperties.eatDurationTicks:()I
+      14: goto          18
+      17: iconst_0
+      18: ireturn
+
+  public void releaseUsing(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity, int);
+    Code:
+       0: return
+
+  public void appendHoverText(net.minecraft.world.item.ItemStack, net.minecraft.world.item.Item$TooltipContext, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: return
+
+  public java.util.Optional<net.minecraft.world.inventory.tooltip.TooltipComponent> getTooltipImage(net.minecraft.world.item.ItemStack);
+    Code:
+       0: invokestatic  #336                // Method java/util/Optional.empty:()Ljava/util/Optional;
+       3: areturn
+
+  public net.minecraft.network.chat.Component getName(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #342                // Method getDescriptionId:(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;
+       5: invokestatic  #279                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+       8: areturn
+
+  public boolean isFoil(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_1
+       1: invokevirtual #345                // Method net/minecraft/world/item/ItemStack.isEnchanted:()Z
+       4: ireturn
+
+  public boolean isEnchantable(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_1
+       1: invokevirtual #348                // Method net/minecraft/world/item/ItemStack.getMaxStackSize:()I
+       4: iconst_1
+       5: if_icmpne     22
+       8: aload_1
+       9: getstatic     #351                // Field net/minecraft/core/component/DataComponents.MAX_DAMAGE:Lnet/minecraft/core/component/DataComponentType;
+      12: invokevirtual #320                // Method net/minecraft/world/item/ItemStack.has:(Lnet/minecraft/core/component/DataComponentType;)Z
+      15: ifeq          22
+      18: iconst_1
+      19: goto          23
+      22: iconst_0
+      23: ireturn
+
+  public static net.minecraft.world.phys.BlockHitResult getPlayerPOVHitResult(net.minecraft.world.level.Level, net.minecraft.world.entity.player.Player, net.minecraft.world.level.ClipContext$Fluid);
+    Code:
+       0: aload_1
+       1: invokevirtual #354                // Method net/minecraft/world/entity/player/Player.getEyePosition:()Lnet/minecraft/world/phys/Vec3;
+       4: astore_3
+       5: aload_3
+       6: aload_1
+       7: aload_1
+       8: invokevirtual #358                // Method net/minecraft/world/entity/player/Player.getXRot:()F
+      11: aload_1
+      12: invokevirtual #362                // Method net/minecraft/world/entity/player/Player.getYRot:()F
+      15: invokevirtual #365                // Method net/minecraft/world/entity/player/Player.calculateViewVector:(FF)Lnet/minecraft/world/phys/Vec3;
+      18: aload_1
+      19: invokevirtual #369                // Method net/minecraft/world/entity/player/Player.blockInteractionRange:()D
+      22: invokevirtual #373                // Method net/minecraft/world/phys/Vec3.scale:(D)Lnet/minecraft/world/phys/Vec3;
+      25: invokevirtual #379                // Method net/minecraft/world/phys/Vec3.add:(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;
+      28: astore        4
+      30: aload_0
+      31: new           #383                // class net/minecraft/world/level/ClipContext
+      34: dup
+      35: aload_3
+      36: aload         4
+      38: getstatic     #385                // Field net/minecraft/world/level/ClipContext$Block.OUTLINE:Lnet/minecraft/world/level/ClipContext$Block;
+      41: aload_2
+      42: aload_1
+      43: invokespecial #391                // Method net/minecraft/world/level/ClipContext."<init>":(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/level/ClipContext$Block;Lnet/minecraft/world/level/ClipContext$Fluid;Lnet/minecraft/world/entity/Entity;)V
+      46: invokevirtual #394                // Method net/minecraft/world/level/Level.clip:(Lnet/minecraft/world/level/ClipContext;)Lnet/minecraft/world/phys/BlockHitResult;
+      49: areturn
+
+  public int getEnchantmentValue();
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public boolean isValidRepairItem(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public net.minecraft.world.item.component.ItemAttributeModifiers getDefaultAttributeModifiers();
+    Code:
+       0: getstatic     #398                // Field net/minecraft/world/item/component/ItemAttributeModifiers.EMPTY:Lnet/minecraft/world/item/component/ItemAttributeModifiers;
+       3: areturn
+
+  public boolean isRepairable(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getfield      #77                 // Field canRepair:Z
+       4: ifeq          19
+       7: aload_0
+       8: aload_1
+       9: invokevirtual #404                // Method isDamageable:(Lnet/minecraft/world/item/ItemStack;)Z
+      12: ifeq          19
+      15: iconst_1
+      16: goto          20
+      19: iconst_0
+      20: ireturn
+
+  public boolean useOnRelease(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_1
+       1: invokevirtual #408                // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+       4: getstatic     #412                // Field net/minecraft/world/item/Items.CROSSBOW:Lnet/minecraft/world/item/Item;
+       7: if_acmpne     14
+      10: iconst_1
+      11: goto          15
+      14: iconst_0
+      15: ireturn
+
+  public net.minecraft.world.item.ItemStack getDefaultInstance();
+    Code:
+       0: new           #165                // class net/minecraft/world/item/ItemStack
+       3: dup
+       4: aload_0
+       5: invokespecial #415                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+       8: areturn
+
+  public net.minecraft.sounds.SoundEvent getDrinkingSound();
+    Code:
+       0: getstatic     #418                // Field net/minecraft/sounds/SoundEvents.GENERIC_DRINK:Lnet/minecraft/sounds/SoundEvent;
+       3: areturn
+
+  public net.minecraft.sounds.SoundEvent getEatingSound();
+    Code:
+       0: getstatic     #424                // Field net/minecraft/sounds/SoundEvents.GENERIC_EAT:Lnet/minecraft/sounds/SoundEvent;
+       3: areturn
+
+  public net.minecraft.sounds.SoundEvent getBreakingSound();
+    Code:
+       0: getstatic     #427                // Field net/minecraft/sounds/SoundEvents.ITEM_BREAK:Lnet/minecraft/sounds/SoundEvent;
+       3: areturn
+
+  public boolean canFitInsideContainerItems();
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public net.minecraft.world.flag.FeatureFlagSet requiredFeatures();
+    Code:
+       0: aload_0
+       1: getfield      #67                 // Field requiredFeatures:Lnet/minecraft/world/flag/FeatureFlagSet;
+       4: areturn
+
+  public void initializeClient(java.util.function.Consumer<net.neoforged.neoforge.client.extensions.common.IClientItemExtensions>);
+    Code:
+       0: return
+
+  private static void lambda$modifyDefaultComponentsFrom$0(net.minecraft.core.component.DataComponentMap$Builder, java.util.Map$Entry);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokeinterface #430,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+       7: checkcast     #435                // class net/minecraft/core/component/DataComponentType
+      10: aload_1
+      11: invokeinterface #437,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      16: checkcast     #337                // class java/util/Optional
+      19: aconst_null
+      20: invokevirtual #440                // Method java/util/Optional.orElse:(Ljava/lang/Object;)Ljava/lang/Object;
+      23: invokevirtual #443                // Method net/minecraft/core/component/DataComponentMap$Builder.set:(Lnet/minecraft/core/component/DataComponentType;Ljava/lang/Object;)Lnet/minecraft/core/component/DataComponentMap$Builder;
+      26: pop
+      27: return
+
+  static {};
+    Code:
+       0: invokestatic  #447                // Method com/mojang/logging/LogUtils.getLogger:()Lorg/slf4j/Logger;
+       3: putstatic     #453                // Field LOGGER:Lorg/slf4j/Logger;
+       6: invokestatic  #457                // Method net/neoforged/neoforge/registries/GameData.getBlockItemMap:()Ljava/util/Map;
+       9: putstatic     #19                 // Field BY_BLOCK:Ljava/util/Map;
+      12: ldc_w         #463                // String base_attack_damage
+      15: invokestatic  #465                // Method net/minecraft/resources/ResourceLocation.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      18: putstatic     #471                // Field BASE_ATTACK_DAMAGE_ID:Lnet/minecraft/resources/ResourceLocation;
+      21: ldc_w         #475                // String base_attack_speed
+      24: invokestatic  #465                // Method net/minecraft/resources/ResourceLocation.withDefaultNamespace:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      27: putstatic     #477                // Field BASE_ATTACK_SPEED_ID:Lnet/minecraft/resources/ResourceLocation;
+      30: return
+}
