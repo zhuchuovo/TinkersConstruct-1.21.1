@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:melting",
   "ingredient": {
-    "tag": "c:obsidian"
+    "item": "minecraft:obsidian"
   },
   "result": {
     "amount": 1000,

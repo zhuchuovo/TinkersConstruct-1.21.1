@@ -1547,7 +1547,7 @@ public class SmelteryRecipeProvider extends BaseRecipeProvider implements ISmelt
                         .save(consumer, location(folder + "ender/pearl"));
 
     // obsidian
-    MeltingRecipeBuilder.melting(Ingredient.of(Tags.Items.OBSIDIAN), TinkerFluids.moltenObsidian, FluidValues.GLASS_BLOCK, 2.0f)
+    MeltingRecipeBuilder.melting(Ingredient.of(Blocks.OBSIDIAN), TinkerFluids.moltenObsidian, FluidValues.GLASS_BLOCK, 2.0f)
                         .save(consumer, location(folder + "obsidian/block"));
     MeltingRecipeBuilder.melting(Ingredient.of(TinkerCommons.obsidianPane), TinkerFluids.moltenObsidian, FluidValues.GLASS_PANE, 1.5f)
                         .save(consumer, location(folder + "obsidian/pane"));
@@ -2259,7 +2259,7 @@ public class SmelteryRecipeProvider extends BaseRecipeProvider implements ISmelt
     metal(consumer, TinkerFluids.moltenIron  ).ore(Byproduct.STEEL        ).metal().dust().plate().gear().coin().sheetmetal().geore().oreberry().minecraftTools().toolCostMelting(11, "tools_costing_11").common(HAMMER, FLAKES).rod();
     metal(consumer, TinkerFluids.moltenCobalt).ore(Byproduct.SMALL_DIAMOND).metal().dust()
       .melting(1/9f, "raw_nugget", 1/2f, false);
-    metal(consumer, TinkerFluids.moltenSteel ).metal().dust().plate().gear().coin().sheetmetal().common(SHOVEL_PLUS, SWORD, AXES, MEKANISM_SHIELD, FLAKES).common(ARMOR_PLUS).wire().rod().rawOre(Byproduct.IRON)
+    metal(consumer, TinkerFluids.moltenSteel ).metal().dust().plate().gear().coin().sheetmetal().common(SHOVEL_PLUS, SWORD, AXES, MEKANISM_SHIELD, FLAKES).common(ARMOR_PLUS).wire().rod().optional().rawOre(Byproduct.IRON)
       .toolItemMelting(11, "railcraft", "spike_maul")
       .melting(1/9f, "raw_nugget", 1/2f, false);
     // gold ore does non-standard byproduct handling, as it wants sparse gold ore to have a different byproduct, hence moving byproducts so we don't have ores for the metal call
