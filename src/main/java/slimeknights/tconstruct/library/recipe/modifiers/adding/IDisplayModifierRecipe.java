@@ -15,6 +15,7 @@ import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.SlotType.SlotCount;
 import slimeknights.tconstruct.library.tools.context.ToolRebuildContext;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import slimeknights.tconstruct.library.tools.nbt.MaterialNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -51,6 +52,23 @@ public interface IDisplayModifierRecipe extends IModifierRecipe {
 
   /** Gets the result tool with this modifier added */
   List<ItemStack> getToolWithModifier();
+
+  /**
+   * Gets a copy of the given tool with this recipe's display result applied.
+   * Unlike {@link #getToolWithModifier()}, this preserves the given tool's materials, modifiers and data,
+   * so JEI can show the tool the player focused on instead of the generic render tool.
+   * @param tool  Tool stack the player focused on
+   * @return  Copy of the tool with the display result applied
+   */
+  default ItemStack getToolWithModifier(ItemStack tool) {
+    ModifierEntry result = getDisplayResult();
+    if (result.getLevel() > 0 && tool.getItem() instanceof IModifiable) {
+      ToolStack toolStack = ToolStack.copyFrom(tool);
+      toolStack.addModifier(result.getId(), result.getLevel());
+      return toolStack.createStack(1);
+    }
+    return tool.copyWithCount(1);
+  }
 
   /** Gets the modifier output of this recipe */
   ModifierEntry getDisplayResult();

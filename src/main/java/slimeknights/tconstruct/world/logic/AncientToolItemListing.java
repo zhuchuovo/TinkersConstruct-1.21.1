@@ -17,6 +17,7 @@ import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.MaterialNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.utils.ItemStackUtil;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -50,7 +51,10 @@ public enum AncientToolItemListing implements ItemListing {
       }
       // formula is a cost of 6-8 emeralds per tier, meaning cost ranges from 6 (min tier 1) to 32 (max tier 4)
       int cost = Math.round(tier * 6) + random.nextInt(Math.round(2 * tier) + 1);
-      return new MerchantOffer(new ItemCost(Items.EMERALD, cost), tool.createStack(), 1, 15, 1);
+      ItemStack toolStack = tool.createStack();
+      // a tool whose data cannot be written into a packet disconnects every client that sees it, so keep it writable
+      ItemStackUtil.ensurePacketSafe(toolStack, trader.level().registryAccess());
+      return new MerchantOffer(new ItemCost(Items.EMERALD, cost), toolStack, 1, 15, 1);
     }
     return null;
   }

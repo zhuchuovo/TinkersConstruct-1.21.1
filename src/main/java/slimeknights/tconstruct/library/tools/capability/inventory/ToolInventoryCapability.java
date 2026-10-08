@@ -96,12 +96,15 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
   private final Supplier<? extends IToolStackView> tool;
   /** Cache of all stacks that have been parsed thus far */
   private ItemStack[] cachedStacks;
+  @Nullable
+  private CustomData cachedData;
 
   /** Cached slot count */
   private int slots = -1;
 
   @Override
   public int getSlots() {
+    checkCache();
     if (slots == -1) {
       slots = tool.get().getVolatileData().getInt(TOTAL_SLOTS);
     }
@@ -156,6 +159,15 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
 
   /* Item stack cache */
 
+  /** Another capability instance or a menu sync may have replaced the tool's data. */
+  private void checkCache() {
+    CustomData data = container.get(DataComponents.CUSTOM_DATA);
+    if (data != cachedData) {
+      cachedData = data;
+      clearCache();
+    }
+  }
+
   /** Clears all cached data in the capability */
   private void clearCache() {
     slots = -1;
@@ -178,6 +190,7 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
   /** Gets the stack cached in the given slot */
   @Nullable
   private ItemStack getCachedStack(int slot) {
+    checkCache();
     if (cachedStacks != null && slot >= 0 && slot < getSlots()) {
       return cachedStacks[slot];
     }
@@ -290,6 +303,9 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
     // nothing currently? place the item in
     int leftover;
     int slotLimit = inventory.getSlotLimit(tool, indexEntry, localSlot);
+    if (slotLimit <= 0) {
+      return stack;
+    }
     if (current.isEmpty()) {
       int canInsert = Math.min(stack.getCount(), Math.min(stack.getMaxStackSize(), slotLimit));
       leftover = stack.getCount() - canInsert;
@@ -299,17 +315,15 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
     } else {
       // space leftover? does it match?
       int limit = Math.min(current.getMaxStackSize(), slotLimit);
-      if (current.getCount() >= limit || !ItemStack.isSameItem(current, stack)) {
+      if (current.getCount() >= limit || !ItemStack.isSameItemSameComponents(current, stack)) {
         return stack;
       }
-      int maxSize = current.getCount() + stack.getCount();
-      int newSize = Math.min(maxSize, limit);
-      leftover = maxSize - newSize;
+      int canInsert = Math.min(stack.getCount(), limit - current.getCount());
+      int newSize = current.getCount() + canInsert;
+      leftover = stack.getCount() - canInsert;
       // store new stack
       if (!simulate) {
-        current.setCount(newSize);
-        inventory.setStack(prepareForMutation(), indexEntry, localSlot, current); // update stack in NBT
-        syncContainer();
+        setAndCache(inventory, localSlot, slot, current.copyWithCount(newSize));
       }
     }
 
@@ -350,9 +364,7 @@ public class ToolInventoryCapability extends InventoryModifierHookIterator<Modif
       if (amount == current.getCount()) {
         setAndCache(inventory, localSlot, slot, ItemStack.EMPTY);
       } else {
-        current.shrink(amount);
-        inventory.setStack(prepareForMutation(), indexEntry, localSlot, current); // update in NBT
-        syncContainer();
+        setAndCache(inventory, localSlot, slot, current.copyWithCount(current.getCount() - amount));
       }
     }
     return result;

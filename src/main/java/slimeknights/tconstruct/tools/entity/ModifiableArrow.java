@@ -23,6 +23,7 @@ import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.capability.EntityModifierCapability;
 import slimeknights.tconstruct.library.tools.capability.PersistentDataCapability;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
+import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -80,7 +81,8 @@ public class ModifiableArrow extends AbstractArrow implements ToolProjectile, Re
   /** Updates the stack on the arrow */
   private void setStack(ItemStack stack) {
     this.stack = stack;
-    this.entityData.set(STACK, stack);
+    // the synced copy may only drop data a packet cannot carry, see ToolDisplayStack
+    this.entityData.set(STACK, ToolDisplayStack.getDisplayStack(stack, level().registryAccess()));
     this.reclaim = ModifierUtil.checkVolatileFlag(stack, IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY);
   }
 
@@ -237,7 +239,10 @@ public class ModifiableArrow extends AbstractArrow implements ToolProjectile, Re
 
   @Override
   public ItemStack getDisplayTool() {
-    return this.entityData.get(STACK);
+    ItemStack display = this.entityData.get(STACK);
+    // the synchronized copy is emptied when its data cannot be written into a packet, see ToolDisplayStack, and it is
+    // still empty while a client has not received the entity data yet; both cases must not hide the arrow
+    return display.isEmpty() ? IModifiableDisplay.getDisplayStack(TinkerTools.arrow.get()) : display;
   }
 
   @Override

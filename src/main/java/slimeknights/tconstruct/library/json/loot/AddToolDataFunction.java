@@ -21,6 +21,7 @@ import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 import slimeknights.tconstruct.library.tools.definition.module.material.ToolMaterialHook;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.ItemStackUtil;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 import java.util.List;
@@ -70,6 +71,8 @@ public class AddToolDataFunction extends LootItemConditionalFunction {
       if (damage > 0) {
         tool.setDamage((int)(tool.getStats().get(ToolStats.DURABILITY) * damage));
       }
+      // a tool whose data cannot be written into a packet disconnects every client that sees it, so keep it writable
+      ItemStackUtil.ensurePacketSafe(stack, context.getLevel().registryAccess());
     }
     return stack;
   }

@@ -176,6 +176,7 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
     private final List<ItemStack> toolWithModifier;
     @Getter
     private final Component variant;
+    private final int tintColor;
     public DisplayRecipe(ResourceLocation recipeId, List<ItemStack> tools, DyeColor color) {
       this.recipeId = recipeId;
       this.toolWithoutModifier = tools;
@@ -183,7 +184,7 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
       this.variant = Component.translatable("color.minecraft." + color.getSerializedName());
 
       ResourceLocation modID = RESULT.getId();
-      int tintColor = Util.getColor(color);
+      this.tintColor = Util.getColor(color);
       List<ModifierEntry> results = List.of(RESULT);
       toolWithModifier = tools.stream().map(stack -> IDisplayModifierRecipe.withModifiers(stack, DEFAULT_TOOL_STACK_SIZE, results, data -> data.putInt(modID, tintColor))).toList();
     }
@@ -191,6 +192,13 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
     @Override
     public ModifierEntry getDisplayResult() {
       return RESULT;
+    }
+
+    @Override
+    public ItemStack getToolWithModifier(ItemStack tool) {
+      ToolStack toolStack = ToolStack.from(IDisplayModifierRecipe.super.getToolWithModifier(tool));
+      toolStack.getPersistentData().putInt(RESULT.getId(), tintColor);
+      return toolStack.createStack(1);
     }
 
     @Override

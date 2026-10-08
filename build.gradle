@@ -156,6 +156,15 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
+    // The java plugin does not carry main's compileOnly dependencies onto the test
+    // classpath, so the JEI-backed unit tests need their own declarations. The full
+    // NeoForge artifact also provides mezz.jei.library (Focus/TypedIngredient), which
+    // the fake focus and layout helpers use at compile and run time.
+    testCompileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    testCompileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+    testCompileOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    testRuntimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+
     compileOnly 'org.projectlombok:lombok:1.18.42'
     annotationProcessor 'org.projectlombok:lombok:1.18.42'
     testCompileOnly 'org.projectlombok:lombok:1.18.42'

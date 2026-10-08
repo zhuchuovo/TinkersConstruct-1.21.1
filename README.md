@@ -15,7 +15,7 @@
 - Mod ID：`tconstruct`
 - 游戏版本：`Minecraft 1.21.1`
 - 模组加载器：`NeoForge`
-- 当前模组版本：`3.12.8`
+- 当前模组版本：`3.13.1`
 - Java 版本：`JDK 21`
 - 必需依赖：`Mantle 1.12.6` 或兼容版本
 - 可选依赖：`JEI`

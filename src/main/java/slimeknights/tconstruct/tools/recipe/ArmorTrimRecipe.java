@@ -176,6 +176,8 @@ public class ArmorTrimRecipe implements ITinkerStationRecipe, IMultiRecipe<IDisp
     private final List<ItemStack> material;
     @Getter
     private final Component variant;
+    private final ResourceLocation materialKey;
+    private final String materialName;
 
     public DisplayRecipe(ResourceLocation id, List<ItemStack> tools, List<ItemStack> trim, Reference<TrimMaterial> holder) {
       this.recipeId = id;
@@ -185,11 +187,23 @@ public class ArmorTrimRecipe implements ITinkerStationRecipe, IMultiRecipe<IDisp
       this.material = List.of(new ItemStack(material.ingredient().value()));
       this.variant = material.description().plainCopy();
 
-      String materialName = holder.key().location().toString();
+      this.materialName = holder.key().location().toString();
       List<ModifierEntry> results = List.of(RESULT);
-      ResourceLocation key = TrimModule.materialKey(TinkerModifiers.trim.getId());
-      toolWithModifier = tools.stream().map(stack -> IDisplayModifierRecipe.withModifiers(stack, results, data -> data.putString(key, materialName))).toList();
+      this.materialKey = TrimModule.materialKey(TinkerModifiers.trim.getId());
+      toolWithModifier = tools.stream().map(stack -> IDisplayModifierRecipe.withModifiers(stack, results, data -> data.putString(materialKey, materialName))).toList();
 
+    }
+
+    @Override
+    public ModifierEntry getDisplayResult() {
+      return RESULT;
+    }
+
+    @Override
+    public ItemStack getToolWithModifier(ItemStack tool) {
+      ToolStack toolStack = ToolStack.from(IDisplayModifierRecipe.super.getToolWithModifier(tool));
+      toolStack.getPersistentData().putString(materialKey, materialName);
+      return toolStack.createStack(1);
     }
 
     @Override
@@ -204,11 +218,6 @@ public class ArmorTrimRecipe implements ITinkerStationRecipe, IMultiRecipe<IDisp
         case 1 -> material;
         default -> List.of();
       };
-    }
-
-    @Override
-    public ModifierEntry getDisplayResult() {
-      return RESULT;
     }
 
     @Override

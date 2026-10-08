@@ -170,6 +170,13 @@ public class OverslimeModifierRecipe implements ITinkerStationRecipe, IDisplayMo
   }
 
   @Override
+  public ItemStack getToolWithModifier(ItemStack tool) {
+    ToolStack toolStack = ToolStack.from(IDisplayModifierRecipe.super.getToolWithModifier(tool));
+    OverslimeModule.INSTANCE.setAmountRaw(toolStack.getPersistentData(), restoreAmount);
+    return toolStack.createStack(1);
+  }
+
+  @Override
   public ModifierEntry getDisplayResult() {
     return RESULT;
   }

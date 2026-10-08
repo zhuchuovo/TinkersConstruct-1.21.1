@@ -2,8 +2,6 @@ package slimeknights.tconstruct.library.tools.stat;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSyntaxException;
-import io.netty.handler.codec.DecoderException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -84,11 +82,8 @@ public class ToolTierStat implements IToolStat<Tier> {
   @Override
   public Tier deserialize(JsonElement json) {
     ResourceLocation id = JsonHelper.convertToResourceLocation(json, getName().toString());
-    Tier tier = HarvestTiers.byId(id);
-    if (tier != null) {
-      return tier;
-    }
-    throw new JsonSyntaxException("Unknown tool tier " + id);
+    // tiers from data packs may not be registered yet, so resolve to a placeholder rather than failing the load
+    return HarvestTiers.byIdOrPlaceholder(id);
   }
 
   @Override
@@ -98,12 +93,8 @@ public class ToolTierStat implements IToolStat<Tier> {
 
   @Override
   public Tier fromNetwork(FriendlyByteBuf buffer) {
-    ResourceLocation id = buffer.readResourceLocation();
-    Tier tier = HarvestTiers.byId(id);
-    if (tier != null) {
-      return tier;
-    }
-    throw new DecoderException("Unknown tool tier " + id);
+    // a tier may be missing on the client if its data failed to load, so do not fail the packet
+    return HarvestTiers.byIdOrPlaceholder(buffer.readResourceLocation());
   }
 
   @Override

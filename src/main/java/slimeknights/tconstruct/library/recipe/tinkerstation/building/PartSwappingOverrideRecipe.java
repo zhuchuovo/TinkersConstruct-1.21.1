@@ -135,6 +135,8 @@ public class PartSwappingOverrideRecipe extends MaterialSwappingRecipe {
 
   @Override
   public RecipeSerializer<?> getSerializer() {
-    return TinkerTables.fixedMaterialSwapping.get();
+    // must be this recipe's own serializer: the serializer casts to its own recipe class while encoding, so returning
+    // the sibling serializer (fixed_material_swapping) made every sync of this recipe fail with a class cast exception
+    return TinkerTables.partSwappingOverride.get();
   }
 }

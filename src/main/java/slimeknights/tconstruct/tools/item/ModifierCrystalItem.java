@@ -23,6 +23,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.ModifierManager;
 import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
 import slimeknights.tconstruct.library.recipe.modifiers.ModifierRecipeLookup;
+import slimeknights.tconstruct.library.recipe.modifiers.ModifierSalvage;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.utils.ItemStackUtil;
 import slimeknights.tconstruct.library.utils.Util;
@@ -135,6 +136,13 @@ public class ModifierCrystalItem extends Item {
           ModifierEntry entry = tool.getUpgrades().getEntry(modifier);
           if (entry.getLevel() <= 0) {
             return true;
+          }
+          // restore the slots the modifier consumed, mirroring the worktable removal path
+          ModifierSalvage salvage = ModifierRecipeLookup.getSalvage(toolItem, tool, modifier, entry.getLevel());
+          if (salvage != null) {
+            for (int i = 0; i < stack.getCount(); i++) {
+              salvage.updateTool(tool);
+            }
           }
           // call remove hook
           int newLevel = entry.getLevel() - stack.getCount();

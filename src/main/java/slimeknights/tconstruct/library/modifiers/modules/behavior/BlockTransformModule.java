@@ -8,7 +8,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.AreaOfEffectHighlightModifierHook;
@@ -23,6 +27,7 @@ import slimeknights.tconstruct.library.tools.helper.ToolDamageUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.utils.MutableUseOnContext;
 
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -130,4 +135,33 @@ public interface BlockTransformModule extends ModifierModule, BlockInteractionMo
 
   /** Applies this transformation */
   boolean transform(IToolStackView tool, UseOnContext context, BlockState original, boolean playSound);
+
+  /**
+   * Gets the state this transform will produce for the given position.
+   * <p>
+   * Mostly a call to {@link BlockState#getToolModifiedState(UseOnContext, net.neoforged.neoforge.common.ItemAbility, boolean)}, but tilling gets one extra case.
+   * Vanilla hoes refuse to till unless the block above is air, which means soil submerged in a fluid can never be tilled.
+   * As the block above a tilled block ends up replaced by the tool anyway, we treat any replaceable block or fluid above as "air" instead of giving up.
+   * @param context    Context for the interaction
+   * @param original   State being transformed
+   * @param originalPos Position of the block being transformed
+   * @param action     Action being performed
+   * @param simulate   If true, the world must not be modified
+   * @return  Transformed state, or null if the block cannot be transformed
+   */
+  @Nullable
+  static BlockState getTransformedState(UseOnContext context, BlockState original, BlockPos originalPos, ItemAbility action, boolean simulate) {
+    BlockState transformed = original.getToolModifiedState(context, action, simulate);
+    // tilling: allow replacing a fluid or plant above the block, so soil underwater can be tilled
+    if (transformed == null && action == ItemAbilities.HOE_TILL) {
+      Block block = original.getBlock();
+      if (block == Blocks.GRASS_BLOCK || block == Blocks.DIRT_PATH || block == Blocks.DIRT || block == Blocks.COARSE_DIRT) {
+        BlockState above = context.getLevel().getBlockState(originalPos.above());
+        if (above.canBeReplaced() || !above.getFluidState().isEmpty()) {
+          return block == Blocks.COARSE_DIRT ? Blocks.DIRT.defaultBlockState() : Blocks.FARMLAND.defaultBlockState();
+        }
+      }
+    }
+    return transformed;
+  }
 }

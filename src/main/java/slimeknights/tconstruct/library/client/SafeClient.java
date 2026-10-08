@@ -1,6 +1,8 @@
 package slimeknights.tconstruct.library.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -8,10 +10,18 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.fml.loading.FMLEnvironment;
 
+import javax.annotation.Nullable;
+
 /**
  * This class contains various methods that are safe to call on both sides, which internally call client only code.
  */
 public class SafeClient {
+  /** Returns the active connection's registries, including during a dimension transition. */
+  @Nullable
+  public static RegistryAccess getRegistryAccess() {
+    return FMLEnvironment.dist == Dist.CLIENT ? ClientOnly.getRegistryAccess() : null;
+  }
+
   /**
    * Triggers a model update if needed for this tank block
    * @param be          Block entity instance
@@ -27,6 +37,12 @@ public class SafeClient {
 
   /** This class is only ever loaded client side */
   private static class ClientOnly {
+    @Nullable
+    private static RegistryAccess getRegistryAccess() {
+      ClientPacketListener connection = Minecraft.getInstance().getConnection();
+      return connection != null ? connection.registryAccess() : null;
+    }
+
     /** @see SafeClient#updateFluidModel(BlockEntity, FluidTank, int, int)  */
     public static void updateFluidModel(BlockEntity be, FluidTank tank, int oldAmount, int newAmount) {
       Level level = be.getLevel();

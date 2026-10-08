@@ -3,7 +3,7 @@
   "input": "tconstruct:honey",
   "result": {
     "amount": 250,
-    "tag": "forge:honey"
+    "tag": "c:honey"
   },
   "temperature": 1
 }

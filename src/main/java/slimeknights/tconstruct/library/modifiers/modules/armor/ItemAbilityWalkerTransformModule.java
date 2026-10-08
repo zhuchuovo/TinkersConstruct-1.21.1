@@ -23,6 +23,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.ItemAbilityModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
+import slimeknights.tconstruct.library.modifiers.modules.behavior.BlockTransformModule;
 import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition.ConditionalModule;
 import slimeknights.tconstruct.library.modifiers.modules.util.ModuleBuilder;
@@ -91,7 +92,7 @@ public record ItemAbilityWalkerTransformModule(ItemAbility action, SoundEvent so
       context.setOffsetPos(mutable);
       // transform the block
       BlockState original = world.getBlockState(mutable);
-      BlockState transformed = original.getToolModifiedState(context, action, false);
+      BlockState transformed = BlockTransformModule.getTransformedState(context, original, mutable, action, false);
       if (transformed != null) {
         world.setBlock(mutable, transformed, Block.UPDATE_ALL_IMMEDIATE);
         world.destroyBlock(target, true);

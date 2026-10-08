@@ -17,6 +17,8 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.recipe.modifiers.ModifierRecipeLookup;
+import slimeknights.tconstruct.library.recipe.modifiers.ModifierSalvage;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.shared.command.HeldModifiableItemIterator;
 import slimeknights.tconstruct.shared.command.TConstructCommand;
@@ -101,6 +103,14 @@ public class ModifiersCommand {
         maxRemove.setValue(removeLevel);
       }
       ToolStack tool = original.copy();
+
+      // restore the slots the modifier consumed, mirroring the worktable removal path
+      ModifierSalvage salvage = ModifierRecipeLookup.getSalvage(stack, tool, modifier.getId(), currentLevel);
+      if (salvage != null) {
+        for (int i = 0; i < removeLevel; i++) {
+          salvage.updateTool(tool);
+        }
+      }
 
       // first remove hook, primarily for removing raw NBT which is highly discouraged using
       int newLevel = currentLevel - removeLevel;

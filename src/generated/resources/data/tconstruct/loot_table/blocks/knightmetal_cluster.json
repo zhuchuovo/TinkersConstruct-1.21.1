@@ -19,9 +19,7 @@
                                                                                                                                                               "levels":  {
                                                                                                                                                                              "min":  1
                                                                                                                                                                          },
-                                                                                                                                                              "predicates":  {
-                                                                                                                                                                                 "minecraft:enchantments":  "minecraft:silk_touch"
-                                                                                                                                                                             }
+                                                                                                                                                              "enchantments":  "minecraft:silk_touch"
                                                                                                                                                           }
                                                                                                                                                       ]
                                                                                                                        }
@@ -39,7 +37,7 @@
                                                                                                        {
                                                                                                            "condition":  "minecraft:match_tool",
                                                                                                            "predicate":  {
-                                                                                                                             "tag":  "minecraft:cluster_max_harvestables"
+                                                                                                                             "items":  "#minecraft:cluster_max_harvestables"
                                                                                                                          }
                                                                                                        }
                                                                                                    ],

@@ -76,7 +76,7 @@ public record ItemAbilityTransformModule(ItemAbility action, SoundEvent sound, b
 
     // normal action transform
     Player player = context.getPlayer();
-    BlockState transformed = original.getToolModifiedState(context, action, false);
+    BlockState transformed = BlockTransformModule.getTransformedState(context, original, pos, action, false);
     if (transformed != null) {
       if (playSound) {
         level.playSound(player, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);

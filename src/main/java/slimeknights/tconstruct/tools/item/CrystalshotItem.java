@@ -73,6 +73,8 @@ public class CrystalshotItem extends ArrowItem {
 
   public static class CrystalshotEntity extends AbstractArrow {
     private static final EntityDataAccessor<String> SYNC_VARIANT = SynchedEntityData.defineId(CrystalshotEntity.class, EntityDataSerializers.STRING);
+    /** Variant names are texture file names; anything longer than this cannot come from a valid variant */
+    private static final int MAX_VARIANT_LENGTH = 64;
 
     public CrystalshotEntity(EntityType<? extends CrystalshotEntity> type, Level level) {
       super(type, level);
@@ -108,7 +110,8 @@ public class CrystalshotItem extends ArrowItem {
 
     /** Sets the arrow's variant */
     public void setVariant(String variant) {
-      this.entityData.set(SYNC_VARIANT, variant);
+      // the variant is synced in entity metadata, so reject data the packet cannot carry; empty falls back to the default
+      this.entityData.set(SYNC_VARIANT, variant.length() <= MAX_VARIANT_LENGTH ? variant : "");
     }
 
     @Override

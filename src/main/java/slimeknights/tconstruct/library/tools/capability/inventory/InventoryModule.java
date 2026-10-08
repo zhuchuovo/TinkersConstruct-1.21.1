@@ -141,12 +141,12 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
   public ItemStack getStack(IToolStackView tool, ModifierEntry modifier, int slot) {
     IModDataView modData = tool.getPersistentData();
     ResourceLocation key = getKey(modifier.getModifier());
-    if (slot < getSlots(tool, modifier) && modData.contains(key, Tag.TAG_LIST)) {
+    if (slot >= 0 && slot < getSlots(tool, modifier) && modData.contains(key, Tag.TAG_LIST)) {
       ListTag list = tool.getPersistentData().get(key, GET_COMPOUND_LIST);
       for (int i = 0; i < list.size(); i++) {
         CompoundTag compound = list.getCompound(i);
         if (compound.getInt(TAG_SLOT) == slot) {
-          return ItemStack.parseOptional(RegistryAccessUtil.BUILTIN, compound);
+          return ItemStack.parseOptional(RegistryAccessUtil.get(), compound);
         }
       }
     }
@@ -155,7 +155,7 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
 
   @Override
   public void setStack(IToolStackView tool, ModifierEntry modifier, int slot, ItemStack stack) {
-    if (slot < getSlots(tool, modifier)) {
+    if (slot >= 0 && slot < getSlots(tool, modifier)) {
       ListTag list;
       ModDataNBT modData = tool.getPersistentData();
       // if the tag exists, fetch it
@@ -179,7 +179,6 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
                 modData.put(key, list);
               }
             } else {
-              compound.getAllKeys().clear();
               writeStack(stack, slot, compound);
               // Re-publish after mutating the existing list entry. This is
               // required for 1.21 custom-data components, whose old value may
@@ -197,7 +196,6 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
         return;
       } else {
         list = new ListTag();
-        modData.put(key, list);
       }
 
       // list did not contain the slot, so add it
@@ -237,11 +235,15 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
           BitSet freeSlots = new BitSet(maxSlots);
           freeSlots.set(0, maxSlots, true);
           for (int i = 0; i < listNBT.size(); i++) {
-            freeSlots.set(listNBT.getCompound(i).getInt(TAG_SLOT), false);
+            int slot = listNBT.getCompound(i).getInt(TAG_SLOT);
+            if (slot >= 0 && slot < maxSlots) {
+              freeSlots.clear(slot);
+            }
           }
           for (int i = 0; i < listNBT.size(); i++) {
             CompoundTag compoundNBT = listNBT.getCompound(i);
-            if (compoundNBT.getInt(TAG_SLOT) >= maxSlots) {
+            int slot = compoundNBT.getInt(TAG_SLOT);
+            if (slot < 0 || slot >= maxSlots) {
               int free = freeSlots.stream().findFirst().orElse(-1);
               if (free == -1) {
                 return HAS_ITEMS;
@@ -282,7 +284,11 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
    * @return Tag written to, same as {@code compound}.
    */
   public static CompoundTag writeStack(ItemStack stack, int slot, CompoundTag compound) {
-    stack.save(RegistryAccessUtil.BUILTIN, compound);
+    // Encode before changing the stored entry. A failed codec must not destroy the previous item,
+    // and encoding into the old tag would retain components absent from the replacement stack.
+    CompoundTag encoded = (CompoundTag)stack.save(RegistryAccessUtil.get());
+    compound.getAllKeys().clear();
+    compound.merge(encoded);
     compound.putInt(TAG_SLOT, slot);
     return compound;
   }
@@ -301,8 +307,8 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
           CompoundTag compound = slots.getCompound(i);
           // slot must be valid
           int slot = compound.getInt(TAG_SLOT);
-          if (slot < max) {
-            ItemStack stack = ItemStack.parseOptional(RegistryAccessUtil.BUILTIN, compound);
+          if (slot >= 0 && slot < max) {
+            ItemStack stack = ItemStack.parseOptional(RegistryAccessUtil.get(), compound);
             if (!stack.isEmpty() && predicate.test(stack)) {
               return new StackMatch(stack, slot);
             }
@@ -329,8 +335,8 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
           CompoundTag compound = list.getCompound(i);
           // slot must be valid
           int slot = compound.getInt(TAG_SLOT);
-          if (slot < max) {
-            parsed[slot] = ItemStack.parseOptional(RegistryAccessUtil.BUILTIN, compound);
+          if (slot >= 0 && slot < max) {
+            parsed[slot] = ItemStack.parseOptional(RegistryAccessUtil.get(), compound);
           }
         }
         // add stacks into the list

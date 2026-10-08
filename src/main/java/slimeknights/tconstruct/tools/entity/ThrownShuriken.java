@@ -93,7 +93,8 @@ public class ThrownShuriken extends Projectile implements ToolProjectile, Projec
    */
   private void setStack(ItemStack stack) {
     this.stack = stack;
-    this.entityData.set(STACK, stack);
+    // the synced copy may only drop data a packet cannot carry, see ToolDisplayStack
+    this.entityData.set(STACK, ToolDisplayStack.getDisplayStack(stack, level().registryAccess()));
     this.reclaim = ModifierUtil.checkVolatileFlag(stack, IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY);
   }
 

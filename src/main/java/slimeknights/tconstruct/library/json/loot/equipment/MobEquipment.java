@@ -35,6 +35,7 @@ import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 import slimeknights.tconstruct.library.tools.definition.module.material.ToolMaterialHook;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.utils.ItemStackUtil;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -122,6 +123,8 @@ public record MobEquipment(EquipmentSlot slot, IJsonPredicate<Item> match, ItemO
             }
           }
         }
+        // a tool whose data cannot be written into a packet disconnects every client that sees the mob, so keep it writable
+        ItemStackUtil.ensurePacketSafe(replacement, mob.level().registryAccess());
       }
       mob.setItemSlot(slot, replacement);
     }

@@ -76,7 +76,7 @@ public abstract class AbstractChestBlockEntity extends NameableBlockEntity {
 
   /** Compatibility overload for callers without direct registry access. */
   public void readInventory(CompoundTag tags) {
-    readInventory(tags, RegistryAccessUtil.BUILTIN);
+    readInventory(tags, level != null ? level.registryAccess() : RegistryAccessUtil.get());
   }
 
   @Override

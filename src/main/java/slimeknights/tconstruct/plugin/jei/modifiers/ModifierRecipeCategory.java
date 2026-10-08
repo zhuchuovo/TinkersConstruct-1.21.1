@@ -17,7 +17,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.ApiStatus.Internal;
@@ -204,18 +203,11 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     // thus, manually handle the focuses
     IFocus<ItemStack> focus = focuses.getFocuses(VanillaTypes.ITEM_STACK).filter(f -> f.getRole() == RecipeIngredientRole.CATALYST).findFirst().orElse(null);
     if (focus != null) {
-      Item item = focus.getTypedValue().getIngredient().getItem();
-      for (ItemStack stack : toolWithoutModifier) {
-        if (stack.is(item)) {
-          toolWithoutModifier = List.of(stack);
-          break;
-        }
-      }
-      for (ItemStack stack : toolWithModifier) {
-        if (stack.is(item)) {
-          toolWithModifier = List.of(stack);
-          break;
-        }
+      ItemStack focusedTool = focus.getTypedValue().getIngredient();
+      // show the tool the player looked up (e.g. the one in their hand) rather than the generic render tool
+      if (toolWithoutModifier.stream().anyMatch(stack -> stack.is(focusedTool.getItem()))) {
+        toolWithoutModifier = List.of(focusedTool.copyWithCount(1));
+        toolWithModifier = List.of(recipe.getToolWithModifier(focusedTool));
       }
     }
     builder.addSlot(RecipeIngredientRole.CATALYST,  25, 38).addItemStacks(toolWithoutModifier);

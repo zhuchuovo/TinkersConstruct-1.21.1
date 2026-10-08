@@ -26,6 +26,9 @@ public abstract class CompoundIndexHookIterator<H,I> {
   /** Gets the hook for the given tool and index */
   @Nullable
   protected H findHook(IToolStackView tool, int index) {
+    if (index < 0) {
+      return null;
+    }
     int start = 0;
     Iterator<I> iterator = getIterator(tool);
     while (iterator.hasNext()) {

@@ -162,11 +162,12 @@ public class BannerModifierRecipe implements ITinkerStationRecipe, IMultiRecipe<
     private final List<ItemStack> toolWithModifier;
     @Getter
     private final Component variant;
+    private final DyeColor dye;
     public DisplayRecipe(ResourceLocation recipeId, List<ItemStack> tools, BannerItem banner) {
       this.recipeId = recipeId;
       this.toolWithoutModifier = tools;
       this.banner = List.of(new ItemStack(banner));
-      DyeColor dye = banner.getColor();
+      this.dye = banner.getColor();
       this.variant = Component.translatable("color.minecraft." + dye.getSerializedName());
 
       ModifierId key = RESULT.getId();
@@ -178,6 +179,13 @@ public class BannerModifierRecipe implements ITinkerStationRecipe, IMultiRecipe<
     @Override
     public ModifierEntry getDisplayResult() {
       return RESULT;
+    }
+
+    @Override
+    public ItemStack getToolWithModifier(ItemStack tool) {
+      ToolStack toolStack = ToolStack.from(IDisplayModifierRecipe.super.getToolWithModifier(tool));
+      BannerModule.copyPatterns(toolStack.getPersistentData(), RESULT.getId(), dye, BannerPatternLayers.EMPTY);
+      return toolStack.createStack(1);
     }
 
     @Override

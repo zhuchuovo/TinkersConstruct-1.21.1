@@ -49,7 +49,6 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
-import slimeknights.tconstruct.library.utils.ItemStackUtil;
 import slimeknights.tconstruct.library.utils.Schedule;
 import slimeknights.tconstruct.shared.TinkerEffects;
 import slimeknights.tconstruct.tools.TinkerTools;
@@ -62,11 +61,6 @@ import javax.annotation.Nullable;
 public class ThrownTool extends ThrownTrident implements ToolProjectile {
   /** Key to sync the stack to the client */
   protected static final EntityDataAccessor<ItemStack> STACK = SynchedEntityData.defineId(ThrownTool.class, EntityDataSerializers.ITEM_STACK);
-  /**
-   * Custom data used only by server-side behavior must never be copied into entity metadata. In particular, tool
-   * inventories store complete nested ItemStacks and can make the clientbound set-entity-data packet unencodable.
-   */
-  private static final String DISPLAY_INVISIBLE_MODIFIERS = TConstruct.getResource("invisible_modifiers").toString();
   /** Movement speed in water */
   protected static final EntityDataAccessor<Float> WATER_INERTIA = SynchedEntityData.defineId(ThrownTool.class, EntityDataSerializers.FLOAT);
   /** Volatile integer key for the loyalty level */
@@ -125,45 +119,11 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
   }
 
   /**
-   * Builds the stack sent to clients for rendering. The server keeps the complete stack in the pickup item. Entity
-   * metadata only needs the material/modifier data used by the item model; copying the full custom-data component can
-   * include nested inventory ItemStacks or other arbitrary modifier state and fail to encode the packet.
+   * Builds the stack sent to clients for rendering. The server keeps the complete stack in the pickup item; the synced
+   * copy may only drop data a packet cannot carry, see {@link ToolDisplayStack}.
    */
-  static ItemStack getDisplayStack(ItemStack source) {
-    ItemStack display = source.copyWithCount(1);
-    CompoundTag sourceTag = ItemStackUtil.getTag(source);
-    if (sourceTag == null) {
-      return display;
-    }
-
-    CompoundTag displayTag = new CompoundTag();
-    copyDisplayTag(sourceTag, displayTag, ToolStack.TAG_MATERIALS);
-    copyDisplayTag(sourceTag, displayTag, ToolStack.TAG_UPGRADES);
-    copyDisplayTag(sourceTag, displayTag, ToolStack.TAG_MODIFIERS);
-    copyDisplayTag(sourceTag, displayTag, ToolStack.TAG_BROKEN);
-    copyDisplayTag(sourceTag, displayTag, "Damage");
-
-    // Preserve the one persistent value used by the client model, without sending the rest of persistent modifier data.
-    CompoundTag sourcePersistent = sourceTag.getCompound(ToolStack.TAG_PERSISTENT_MOD_DATA);
-    if (sourcePersistent.contains(DISPLAY_INVISIBLE_MODIFIERS, Tag.TAG_LIST)) {
-      CompoundTag displayPersistent = new CompoundTag();
-      copyDisplayTag(sourcePersistent, displayPersistent, DISPLAY_INVISIBLE_MODIFIERS);
-      displayTag.put(ToolStack.TAG_PERSISTENT_MOD_DATA, displayPersistent);
-    }
-
-    ItemStackUtil.setTag(display, displayTag.isEmpty() ? null : displayTag);
-    return display;
-  }
-
   private ItemStack getDisplayStack() {
-    return getDisplayStack(getThrownStack());
-  }
-
-  private static void copyDisplayTag(CompoundTag source, CompoundTag target, String key) {
-    Tag value = source.get(key);
-    if (value != null) {
-      target.put(key, value.copy());
-    }
+    return ToolDisplayStack.getDisplayStack(getThrownStack(), level().registryAccess());
   }
 
   /** Forces a stack update so durability and broken state changes remain visible client side. */

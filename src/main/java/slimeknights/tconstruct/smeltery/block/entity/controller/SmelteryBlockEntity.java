@@ -12,6 +12,7 @@ import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.block.controller.ControllerBlock;
+import slimeknights.tconstruct.smeltery.block.entity.module.ByproductMeltingModuleInventory;
 import slimeknights.tconstruct.smeltery.block.entity.module.MeltingModuleInventory;
 import slimeknights.tconstruct.smeltery.block.entity.module.alloying.MultiAlloyingModule;
 import slimeknights.tconstruct.smeltery.block.entity.module.alloying.SmelteryAlloyTank;
@@ -45,7 +46,8 @@ public class SmelteryBlockEntity extends HeatingStructureBlockEntity {
 
   @Override
   protected MeltingModuleInventory createMeltingInventory() {
-    return new MeltingModuleInventory(this, tank, Config.COMMON.smelteryOreRate);
+    // byproducts use the foundry rates regardless of the structure, matching the rates the recipes were balanced around
+    return new ByproductMeltingModuleInventory(this, tank, Config.COMMON.smelteryOreRate);
   }
 
   @Override

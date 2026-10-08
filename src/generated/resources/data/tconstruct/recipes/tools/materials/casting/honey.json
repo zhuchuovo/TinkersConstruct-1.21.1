@@ -2,7 +2,7 @@
   "type": "tconstruct:material_fluid",
   "fluid": {
     "amount": 250,
-    "tag": "forge:honey"
+    "tag": "c:honey"
   },
   "output": "tconstruct:honey",
   "temperature": 1

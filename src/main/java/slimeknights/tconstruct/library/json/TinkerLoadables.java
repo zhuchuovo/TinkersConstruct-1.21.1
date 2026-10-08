@@ -65,14 +65,8 @@ public class TinkerLoadables {
   public static final StringLoadable<SimpleParticleType> SIMPLE_PARTICLE = instance(Loadables.PARTICLE_TYPE, SimpleParticleType.class, "Expected particle type to be instance of SimpleParticleType");
   public static final StringLoadable<BlockItem> BLOCK_ITEM = instance(Loadables.ITEM, BlockItem.class, "Expected item to be instance of BlockItem");
 
-  /** Tier loadable supporting vanilla and optional integration registries. */
-  public static final StringLoadable<Tier> TIER = Loadables.RESOURCE_LOCATION.xmap((id, error) -> {
-    Tier tier = HarvestTiers.byId(id);
-    if (tier != null) {
-      return tier;
-    }
-    throw error.create("Unknown harvest tier " + id);
-  }, (tier, error) -> {
+  /** Tier loadable supporting vanilla and optional integration registries. Tiers that are not registered yet resolve to a placeholder instead of failing the load. */
+  public static final StringLoadable<Tier> TIER = Loadables.RESOURCE_LOCATION.xmap((id, error) -> HarvestTiers.byIdOrPlaceholder(id), (tier, error) -> {
     ResourceLocation id = HarvestTiers.getId(tier);
     if (id != null) {
       return id;
