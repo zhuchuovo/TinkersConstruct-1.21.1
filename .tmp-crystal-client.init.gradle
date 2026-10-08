@@ -1,6 +1,0 @@
-gradle.projectsEvaluated {
-  def clientTask = rootProject.tasks.named('runClient').get()
-  def isolatedRun = rootProject.file('.tmp-crystal-client-run')
-  isolatedRun.mkdirs()
-  clientTask.gameDirectory.set(isolatedRun)
-}

@@ -1,6 +1,0 @@
-{
-  "source": "attached screenshot",
-  "safeguard": "server pickup stack preserved; only display sync copy may change",
-  "requestedState": "prevent clientbound set_entity_data encoding failure after javelin throw",
-  "object": "ThrownTool"
-}

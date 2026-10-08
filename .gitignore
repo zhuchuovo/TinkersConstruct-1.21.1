@@ -1,6 +1,8 @@
 # Gradle caches and build output
 .gradle/
 **/build/
+# Source packages may legitimately be named "build"; those must stay tracked.
+!src/**/build/
 
 # Local Minecraft runtime and migration workspace
 /run/
@@ -21,6 +23,7 @@
 # Logs and crash output
 *.log
 *.log.gz
+logs/
 crash-reports/
 hs_err_pid*
 replay_pid*
@@ -45,3 +48,10 @@ Thumbs.db
 
 # Generated resource caches only; generated resources themselves are required
 **/.cache/
+
+# Agent / tooling scratch artifacts (must never be committed)
+.codex-artifacts/
+.tmp-*/
+.tmp-*
+.ref-*/
+codemcmod*.tmp-javac-out/
